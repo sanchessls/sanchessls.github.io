@@ -145,6 +145,7 @@ size {
         </bitcoin>                    
     </cards>
 	
+	
 <script>
 
 		var TOTValorComprado = 0.00;
@@ -344,6 +345,11 @@ function roundToTwo(num) {
 			
 			retorno += `<tr> </tr>`;	 		
 
+            
+			
+			var valorVendaNecessario = (TOTValorComprado / (1 - 2.5/100 ) )  / TOTBitcoinsTotal;
+			
+
 			
 				retorno += `     
 					<tr class="active-row">
@@ -358,7 +364,7 @@ function roundToTwo(num) {
 			<th>${formatter.format(TOTValorFinal)}</th>
 			<th>${formatter.format(TOTDiferenca)}</th>
 			<th>${formatterP.format(TOTDiferencaPercentual)}</th>                    
-			<th></th>                    
+			<th>${formatter.format(valorVendaNecessario)}</th>                    
             </tr>`;
 
 

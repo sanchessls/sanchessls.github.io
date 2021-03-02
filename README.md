@@ -1,2 +1,0 @@
-# sanchessls.github.io
-WebSite

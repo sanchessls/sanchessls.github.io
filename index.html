@@ -128,9 +128,16 @@ size {
 	</head>
 <body>
 
+
 <table id="mytable1" class="styled-table"> 
+
 <table id="mytable2" class="styled-table"> 
+
 <table id="mytable3" class="styled-table"> 
+
+<table id="mytable4" class="styled-table"> 
+<hr>
+Acoes, da STAG na eTORO
 
 </table>
 <hr>
@@ -199,6 +206,12 @@ let data = await response.json();
 return data;
 }
 
+  async function getStagValue() {
+let response = await fetch("https://financialmodelingprep.com/api/v3/profile/STAG?apikey=bf72a07f8c7d511933ea74e428347d10");
+let data = await response.json();
+return data;
+}
+
   async function getEuroXDollar() {
 let response = await fetch("https://api.exchangeratesapi.io/latest?base=USD");
 let data = await response.json();
@@ -242,6 +255,15 @@ function ZeraTotais(){
    function getFinancesETORO() {
      var myList = new Array();
 	 myList.push(JSON.parse('{"BitCoinsComprado":0.025355,"ValorComprado":1485.04,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":9.59E-06}'));
+	 				 				
+	 return myList;
+	 
+}
+
+
+   function getFinancesSTAG() {
+     var myList = new Array();
+	 myList.push(JSON.parse('{"BitCoinsComprado":6,"ValorComprado":206.22,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0}'));
 	 				 				
 	 return myList;
 	 
@@ -464,6 +486,153 @@ function roundToTwo(num) {
              
   }
   
+  function preencheAcoes(listCompras,valorAtual,tablename,exchangerate) {
+        
+		
+		
+		var onlyTotal = false;
+       //ZeraTotais();
+		
+		var objetoCompleto = CalculaTudo(listCompras,valorAtual);						
+		
+	    var retorno = ``;
+				
+
+		retorno += `<thead>
+        <tr>
+            <th>Valor Comprado</th>
+            <th>Bit coins Total</th>
+			<th>Percentual Taxa Venda</th>
+			<th>Valor Atual Bit Coin</th>
+			<th>Valor Quando Comprado</th>
+			<th>Valor Comprado + Tax</th>
+			<th>Valor Venda</th>
+			<th>Valor Taxa venda</th>
+			<th>Valor Final</th>
+			<th>Diferenca</th>
+			<th>Diferenca Percentual</th>
+			<th>Valor Equivalar</th>
+        </tr>
+        </thead>
+		    <tbody>`;
+			
+	        var partial = "";
+			
+			objetoCompleto.forEach(element => {
+			
+			
+			
+					partial += `     
+					<tr class="active-row">
+            <th>${formatter.format(element.ValorComprado)}</th>       
+ 			
+			<th>${element.BitcoinsTotal}</th>
+			
+			<th>${formatterP.format(element.PercentualTaxaVenda)}</th>
+			
+			<th>${formatter.format(element.ValorAtualBitCoin)}</th>
+			
+			<th>${formatter.format(element.ValorQuandoComprado)}</th>
+			
+			<th>${formatter.format(element.ValorQuandoCompradoTax)}</th>
+			
+			<th>${formatter.format(element.ValorVenda)}</th>
+			
+			<th>${formatter.format(element.ValorTaxavenda)}</th>
+			
+			<th>${formatter.format(element.ValorFinal)}</th>
+			
+			<th>${formatter.format(element.Diferenca)}</th>
+			
+			<th>${formatterP.format(element.DiferencaPercentual)}</th>                    
+			
+			<th>${formatter.format(element.ValorEquivalar)}</th>                    
+			
+                    </tr>`;
+					TOTValorComprado += element.ValorComprado;
+                    //TOTBitcoinsTotal += element.BitcoinsTotal;
+                    TOTPercentualTaxaVenda += element.PercentualTaxaVenda;
+                    TOTValorAtualBitCoin += element.ValorAtualBitCoin;
+                    TOTValorQuandoComprado += element.ValorQuandoComprado;
+                    TOTValorQuandoCompradoTax += element.ValorQuandoCompradoTax;
+                    TOTValorVenda += element.ValorVenda;
+                    TOTValorTaxavenda += element.ValorTaxavenda;
+                    TOTValorFinal += element.ValorFinal;
+                    TOTDiferenca += element.Diferenca;                    		
+			
+			});
+			
+			
+			TOTDiferencaPercentual += TOTValorFinal/TOTValorComprado - 1;
+			
+			partial += `<tr> </tr>`;	 		
+
+            
+			
+			var valorVendaNecessario = (TOTValorComprado / (1 - 2.5/100 ) )  / TOTBitcoinsTotal;
+			
+
+            if (!onlyTotal) 
+			{
+			   retorno += partial;
+			}
+
+			
+				retorno += `     
+					<tr class="active-row">
+            <th>${formatter.format(TOTValorComprado)}</th>            
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th>${formatter.format(TOTValorVenda)}</th>
+			<th>${formatter.format(TOTValorTaxavenda)}</th>
+			<th>${formatter.format(TOTValorFinal)}</th>
+			<th>${formatter.format(TOTDiferenca)}</th>
+			<th>${formatterP.format(TOTDiferencaPercentual)}</th>                    
+			<th>${formatter.format(valorVendaNecessario)}</th>                    
+            </tr>`;
+
+
+
+			
+			
+							retorno += `     
+					<tr class="active-row">
+            <th></th>            
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th>Euro:</th>
+			<th>${formatterEURO.format(TOTValorFinal*exchangerate)}</th>
+			<th>${formatterEURO.format(TOTDiferenca*exchangerate)}</th>
+			<th></th>                    
+			<th></th>                    
+            </tr>`;
+
+			
+			
+			
+			
+			
+			
+		
+			
+		retorno += `</tbody>`;
+		
+		
+      
+	           const mytable = document.querySelector("#" + tablename);
+                mytable.innerHTML = retorno;
+   
+             
+  }
+  
+  
   
   
 //  getBitCoinValue().then(data => {  preencheTabela(false,getFinancesRevolut(),data.USD.sell,"myTable") });
@@ -479,10 +648,26 @@ function roundToTwo(num) {
   getEuroXDollar().then( vlr => {
 
 
-  getBitCoinValue().then(data => {  preencheTabela(true,getFinancesETORO().concat(getFinancesNovo()),data.USD.sell,"myTable3",vlr.rates.EUR) });  
+      getBitCoinValue().then(data => {  preencheTabela(true,getFinancesETORO().concat(getFinancesNovo()),data.USD.sell,"myTable3",vlr.rates.EUR) });  
+	  
+	  
+	  //acoes
+	  
+	   getStagValue().then( vlr2 => {
+   
+console.log("aa11");
+   
+   preencheAcoes(getFinancesSTAG(),vlr2[0].price,"myTable4",vlr.rates.EUR);
+
+console.log("aa22");
+
+         });
+  
   
   });
   
+  
+
 
 
 
@@ -618,8 +803,6 @@ async function updateBitcoinPrice() {
 updateBitcoinPrice()
 printBtcChart()
 
-
-  
 </script>
 </body>
 </html>

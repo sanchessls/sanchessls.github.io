@@ -183,12 +183,26 @@ var formatter = new Intl.NumberFormat('en-US', {
   //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
 });
 
+var formatterEURO = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'EUR'
+
+  // These options are needed to round to whole numbers if that's what you want.
+  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+});
+
+
   async function getBitCoinValue() {
 let response = await fetch("https://blockchain.info/ticker");
 let data = await response.json();
 return data;
+}
 
-
+  async function getEuroXDollar() {
+let response = await fetch("https://api.exchangeratesapi.io/latest?base=USD");
+let data = await response.json();
+return data;
 }
 
 function ZeraTotais(){
@@ -305,7 +319,7 @@ function roundToTwo(num) {
    };
    
    
-  function preencheTabela(onlyTotal,finances,bitcoin,tablename) {
+  function preencheTabela(onlyTotal,finances,bitcoin,tablename,exchangerate) {
         ZeraTotais();
 		
 		var objetoCompleto = CalculaTudo(finances,bitcoin);		
@@ -414,6 +428,29 @@ function roundToTwo(num) {
 
 
 			
+			if (onlyTotal)
+			{
+							retorno += `     
+					<tr class="active-row">
+            <th></th>            
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th>Euro:</th>
+			<th>${formatterEURO.format(TOTValorFinal * exchangerate)}</th>
+			<th>${formatterEURO.format(TOTDiferenca* exchangerate)}</th>
+			<th></th>                    
+			<th></th>                    
+            </tr>`;
+
+			
+			
+			
+			}
+			
 			
 		
 			
@@ -438,7 +475,15 @@ function roundToTwo(num) {
   
   getBitCoinValue().then(data => {  preencheTabela(false,getFinancesETORO(),data.USD.sell,"myTable2") });
   
-  getBitCoinValue().then(data => {  preencheTabela(true,getFinancesETORO().concat(getFinancesNovo()),data.USD.sell,"myTable3") });
+  
+  getEuroXDollar().then( vlr => {
+
+
+  getBitCoinValue().then(data => {  preencheTabela(true,getFinancesETORO().concat(getFinancesNovo()),data.USD.sell,"myTable3",vlr.rates.EUR) });  
+  
+  });
+  
+
 
 
 ///  Calling API and modeling data for each chart ///
@@ -485,6 +530,7 @@ async function printBtcChart() {
   let btcChart = document.getElementById('btcChart').getContext('2d');
 
   let gradient = btcChart.createLinearGradient(0, 0, 0, 400);
+
 
   gradient.addColorStop(0, 'rgba(247,147,26,.5)');
   gradient.addColorStop(.425, 'rgba(255,193,119,0)');
@@ -563,8 +609,10 @@ async function printBtcChart() {
 async function updateBitcoinPrice() {
   let { times, prices } = await btcData()
   let currentPrice = prices[prices.length-1].toFixed(2);
+    
+  let exchange = await getEuroXDollar();  
 
-  document.getElementById("btcPrice").innerHTML = "€" + currentPrice;
+  document.getElementById("btcPrice").innerHTML = formatter.format(currentPrice) + " / " + formatterEURO.format(exchange.rates.EUR * currentPrice) ;
 }
 
 updateBitcoinPrice()

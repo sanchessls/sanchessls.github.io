@@ -128,7 +128,9 @@ size {
 	</head>
 <body>
 
+<table id="mytable1" class="styled-table"> 
 <table id="mytable2" class="styled-table"> 
+<table id="mytable3" class="styled-table"> 
 
 </table>
 <hr>
@@ -174,7 +176,7 @@ var formatterP = new Intl.NumberFormat('en-US', {
 
 var formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
-  currency: 'EUR'
+  currency: 'USD'
 
   // These options are needed to round to whole numbers if that's what you want.
   //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
@@ -216,7 +218,17 @@ function ZeraTotais(){
    function getFinancesNovo() {
      var myList = new Array();
 	 
-       myList.push(JSON.parse('{"BitCoinsComprado":0.00315700,"ValorComprado":150,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0.0000547213}'));;	 				 				
+       myList.push(JSON.parse('{"BitCoinsComprado":0.00315700,"ValorComprado":178.45,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0.0000547213}'));;	 				 				
+	 return myList;
+	 
+		 
+}
+
+
+   function getFinancesETORO() {
+     var myList = new Array();
+	 myList.push(JSON.parse('{"BitCoinsComprado":0.025355,"ValorComprado":1485.04,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":9.59E-06}'));
+	 				 				
 	 return myList;
 	 
 }
@@ -417,16 +429,21 @@ function roundToTwo(num) {
   
   
   
-//  getBitCoinValue().then(data => {  preencheTabela(false,getFinancesRevolut(),data.EUR.sell,"myTable") });
+//  getBitCoinValue().then(data => {  preencheTabela(false,getFinancesRevolut(),data.USD.sell,"myTable") });
   
-  getBitCoinValue().then(data => {  preencheTabela(false,getFinancesNovo(),data.EUR.sell,"myTable2") });
+
+
   
-//  getBitCoinValue().then(data => {  preencheTabela(true,getFinancesRevolut().concat(getFinancesNovo()),data.EUR.sell,"myTable3") });
+  getBitCoinValue().then(data => {  preencheTabela(false,getFinancesNovo(),data.USD.sell,"myTable1") });
+  
+  getBitCoinValue().then(data => {  preencheTabela(false,getFinancesETORO(),data.USD.sell,"myTable2") });
+  
+  getBitCoinValue().then(data => {  preencheTabela(true,getFinancesETORO().concat(getFinancesNovo()),data.USD.sell,"myTable3") });
 
 
 ///  Calling API and modeling data for each chart ///
 const btcData = async () => {
-  const response = await fetch('https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=EUR&limit=20&api_key=0646cc7b8a4d4b54926c74e0b20253b57fd4ee406df79b3d57d5439874960146');
+  const response = await fetch('https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=20&api_key=0646cc7b8a4d4b54926c74e0b20253b57fd4ee406df79b3d57d5439874960146');
   const json = await response.json();
   const data = json.Data.Data
 
@@ -435,9 +452,10 @@ const btcData = async () => {
   const times = data.map(obj => new Date(obj.time * 1000).getDate()  + "-" + (new Date(obj.time * 1000).getMonth()+1) + "-" + new Date(obj.time * 1000).getFullYear() + " " +
 new Date(obj.time * 1000).getHours() + ":" + new Date(obj.time * 1000).getMinutes())
   
+  const percrevolut = 1;
   
   
-  const prices = data.map(obj => (((TOTBitcoinsTotal * obj.close) - roundToTwo((TOTBitcoinsTotal * obj.close) * 2.5 / 100))  -TOTValorComprado ))
+  const prices = data.map(obj => (((TOTBitcoinsTotal * obj.close) - roundToTwo((TOTBitcoinsTotal * obj.close) * percrevolut / 100))  -TOTValorComprado ))
   //const prices = data.map(obj => obj.close  )
   return {
     times,

@@ -245,7 +245,8 @@ function ZeraTotais(){
    function getFinancesNovo() {
      var myList = new Array();
 	 
-       myList.push(JSON.parse('{"BitCoinsComprado":0.00315700,"ValorComprado":178.45,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0.0000547213}'));;	 				 				
+       //myList.push(JSON.parse('{"BitCoinsComprado":0.00315700,"ValorComprado":178.45,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0.0000547213}'));;	 				 				
+	   myList.push(JSON.parse('{"BitCoinsComprado":0.00315700,"ValorComprado":154.92,"PercentualRevolut":17,"ValuesToReturn":null,"BitCoinsFee":0.00}'));;	 				
 	 return myList;
 	 
 		 
@@ -441,8 +442,18 @@ function roundToTwo(num) {
 			<th></th>
 			<th>${formatter.format(TOTValorVenda)}</th>
 			<th>${formatter.format(TOTValorTaxavenda)}</th>
-			<th>${formatter.format(TOTValorFinal)}</th>
-			<th>${formatter.format(TOTDiferenca)}</th>
+			<th>${formatter.format(TOTValorFinal)}</th>`;
+			
+			if (TOTDiferenca > 0) 
+			{
+			retorno += ` <th><font color="blue">${formatter.format(TOTDiferenca)}</font></th> `; 
+			}
+			else 
+			{
+			retorno += ` <th><font color="red">${formatter.format(TOTDiferenca)}</font></th> `; 
+			}
+			
+			retorno += `			
 			<th>${formatterP.format(TOTDiferencaPercentual)}</th>                    
 			<th>${formatter.format(valorVendaNecessario)}</th>                    
             </tr>`;
@@ -461,9 +472,40 @@ function roundToTwo(num) {
 			<th></th>
 			<th></th>
 			<th></th>
-			<th>Euro:</th>
+			<th>Euro: </th>
 			<th>${formatterEURO.format(TOTValorFinal * exchangerate)}</th>
-			<th>${formatterEURO.format(TOTDiferenca* exchangerate)}</th>
+			
+			`;
+			
+			var value = TOTDiferenca* exchangerate;
+			
+			if (value > 0)
+			{
+						
+			retorno += `		
+			
+			<th><font color="blue">${formatterEURO.format(value)}</font></th>
+			
+			`;
+
+			}
+			else 
+			{
+			
+						
+			retorno += `		
+			
+			<th><font color="red">${formatterEURO.format(value)}</font></th>
+			
+			`;
+
+			}
+			
+			
+			
+			
+			
+			retorno += `
 			<th></th>                    
 			<th></th>                    
             </tr>`;
@@ -588,12 +630,21 @@ function roundToTwo(num) {
 			<th></th>
 			<th>${formatter.format(TOTValorVenda)}</th>
 			<th>${formatter.format(TOTValorTaxavenda)}</th>
-			<th>${formatter.format(TOTValorFinal)}</th>
-			<th>${formatter.format(TOTDiferenca)}</th>
+			<th>${formatter.format(TOTValorFinal)}</th>`;
+			
+			if (TOTDiferenca > 0) 
+			{
+			retorno += ` <th><font color="blue">${formatter.format(TOTDiferenca)}</font></th> `; 
+			}
+			else 
+			{
+			retorno += ` <th><font color="red">${formatter.format(TOTDiferenca)}</font></th> `; 
+			}
+			
+			retorno += `			
 			<th>${formatterP.format(TOTDiferencaPercentual)}</th>                    
 			<th>${formatter.format(valorVendaNecessario)}</th>                    
             </tr>`;
-
 
 
 			
@@ -607,9 +658,39 @@ function roundToTwo(num) {
 			<th></th>
 			<th></th>
 			<th></th>
-			<th>Euro:</th>
+			<th>Euro:</th> 
 			<th>${formatterEURO.format(TOTValorFinal*exchangerate)}</th>
-			<th>${formatterEURO.format(TOTDiferenca*exchangerate)}</th>
+			`;
+			
+			var value = TOTDiferenca* exchangerate;
+			
+			if (value > 0)
+			{
+						
+			retorno += `		
+			
+			<th><font color="blue">${formatterEURO.format(value)}</font></th>
+			
+			`;
+
+			}
+			else 
+			{
+			
+						
+			retorno += `		
+			
+			<th><font color="red">${formatterEURO.format(value)}</font></th>
+			
+			`;
+
+			}
+			
+			
+			
+			
+			
+			retorno += `						
 			<th></th>                    
 			<th></th>                    
             </tr>`;

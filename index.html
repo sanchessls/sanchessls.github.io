@@ -692,7 +692,7 @@ function roundToTwo(num) {
 			
 							retorno += `     
 					<tr class="active-row">
-            <th></th>            
+                 <th>${formatterEURO.format(TOTValorComprado*exchangerate)}</th>     
 			<th></th>
 			<th></th>
 			<th></th>
@@ -812,8 +812,8 @@ new Date(obj.time * 1000).getHours() + ":" + new Date(obj.time * 1000).getMinute
   const percrevolut = 1;
   
   
-  const prices = data.map(obj => (((TOTBitcoinsTotal * obj.close) - roundToTwo((TOTBitcoinsTotal * obj.close) * percrevolut / 100))  -TOTValorComprado ))
-  //const prices = data.map(obj => obj.close  )
+  //const prices = data.map(obj => (((TOTBitcoinsTotal * obj.close) - roundToTwo((TOTBitcoinsTotal * obj.close) * percrevolut / 100))  -TOTValorComprado ))
+  const prices = data.map(obj => obj.close  )
   return {
     times,
     prices

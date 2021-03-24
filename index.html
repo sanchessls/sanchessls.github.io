@@ -234,10 +234,10 @@ function ZeraTotais(){
 
    function getFinancesRevolut() {
      var myList = new Array();
-	 myList.push(JSON.parse('{"BitCoinsComprado":0.00036898,"ValorComprado":15.0,"PercentualRevolut":2.5,"ValuesToReturn":null,"BitCoinsFee":9.59E-06}'));
-	 myList.push(JSON.parse('{"BitCoinsComprado":0.00287298,"ValorComprado":116.61,"PercentualRevolut":2.5,"ValuesToReturn":null,"BitCoinsFee":7.375E-05}'));
-	 myList.push(JSON.parse('{"BitCoinsComprado":0.01079702,"ValorComprado":465.00,"PercentualRevolut":2.5,"ValuesToReturn":null,"BitCoinsFee":0.00027695}'));
-	 myList.push(JSON.parse('{"BitCoinsComprado":0.0127012,"ValorComprado":550.00,"PercentualRevolut":3,"ValuesToReturn":null,"BitCoinsFee":0.00034342}'));	 				 				
+	 //myList.push(JSON.parse('{"BitCoinsComprado":0.00036898,"ValorComprado":15.0,"PercentualRevolut":2.5,"ValuesToReturn":null,"BitCoinsFee":9.59E-06}'));
+	 //myList.push(JSON.parse('{"BitCoinsComprado":0.00287298,"ValorComprado":116.61,"PercentualRevolut":2.5,"ValuesToReturn":null,"BitCoinsFee":7.375E-05}'));
+//	 myList.push(JSON.parse('{"BitCoinsComprado":0.01079702,"ValorComprado":465.00,"PercentualRevolut":2.5,"ValuesToReturn":null,"BitCoinsFee":0.00027695}'));
+	 //myList.push(JSON.parse('{"BitCoinsComprado":0.0127012,"ValorComprado":550.00,"PercentualRevolut":3,"ValuesToReturn":null,"BitCoinsFee":0.00034342}'));	 				 				
 	 return myList;
 	 
 }
@@ -246,7 +246,7 @@ function ZeraTotais(){
      var myList = new Array();
 	 
        //myList.push(JSON.parse('{"BitCoinsComprado":0.00315700,"ValorComprado":178.45,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0.0000547213}'));;	 				 				
-	   myList.push(JSON.parse('{"BitCoinsComprado":0.00315700,"ValorComprado":154.92,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0.00,"valorbitcoin":49071.90}'));;	 				
+	   //myList.push(JSON.parse('{"BitCoinsComprado":0.00315700,"ValorComprado":154.92,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0.00,"valorbitcoin":49071.90}'));;	 				
 	 return myList;
 	 
 		 
@@ -256,6 +256,7 @@ function ZeraTotais(){
    function getFinancesETORO() {
      var myList = new Array();
 	 myList.push(JSON.parse('{"BitCoinsComprado":0.025355,"ValorComprado":1485.04,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":9.59E-06}'));
+	 myList.push(JSON.parse('{"BitCoinsComprado":0.003199,"ValorComprado":181.09,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":9.59E-06}'));
 	 				 				
 	 return myList;
 	 
@@ -756,7 +757,7 @@ function roundToTwo(num) {
   
   
   
-  getBitCoinValue().then(data => {  preencheTabela(false,getFinancesNovo(),49071.90,"myTable1") }).then(() => {
+  
   
       getBitCoinValue().then(data => {  preencheTabela(false,getFinancesETORO(),data.USD.sell,"myTable2") }).then(() => { 
 	  
@@ -778,7 +779,7 @@ function roundToTwo(num) {
 
          });
   
-  });  
+  
   });
   
 	    

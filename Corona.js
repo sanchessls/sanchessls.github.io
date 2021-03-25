@@ -20,12 +20,45 @@ async function F_TableCorona(){
 	
 	
 	objRetorno.forEach((element) => {
-		console.log("sanches sanches");
+		
+		
+		//retorno += "<div>CABECALHO<>";
+//		retorno += `<tr>
+            //<th>Valor teste 1</th>
+			//<th>Valor teste 2</th>
+        //</tr>
+        //</thead>
+		    //<tbody>
+//			
+			//<tr class="active-row">
+            //<th>teste 1</th>       
+			//<th>teste 2</th>    
+		//</tbody>
+//			`;
+		
+		
+		
 		
 	    retorno += `<div>` ;	
-        retorno += `Media Ultimos ${element.Dias} dias: ${element.Media} <br>`  ;
-	    retorno += `Data Final Media Ultimos ${element.Dias} dias: ${element.Data} <br>`  ;
-	
+		retorno += ` ******** total_vaccinations  *****************<br>`  ;		
+        retorno += `Media Ultimos ${element.Dias} dias: ${element.Media1} <br>`  ;
+	    retorno += `Data Final Media Ultimos ${element.Dias} dias: <font color="red">${element.Data1}</font> <br>`  ;
+
+		
+			    retorno += `<div>` ;	
+		retorno += ` ******** people_vaccinated  *****************<br>`  ;		
+        retorno += `Media Ultimos ${element.Dias} dias: ${element.Media2} <br>`  ;
+	    	    retorno += `Data Final Media Ultimos ${element.Dias} dias: <font color="blue">${element.Data2}</font> <br>`  ;
+		
+			    retorno += `<div>` ;	
+		retorno += ` ******** people_fully_vaccinated  *****************<br>`  ;	
+        retorno += `Media Ultimos ${element.Dias} dias: ${element.Media3} <br>`  ;
+	    retorno += `Data Final Media Ultimos ${element.Dias} dias: <font color="orange">${element.Data3}</font> <br>`  ;
+		
+		
+			
+		
+		retorno += `<br>`  ;
 	
 	retorno += `</div>` ;
 	});
@@ -38,18 +71,34 @@ async function F_TableCorona(){
 function ProcessaRetorono(data)
 {
 	  
-	  var diasRodar = [ 2,3, 5, 10, 30 ];
+	  var diasRodar = [ 1, 2,3, 5, 10, 30 ,40 , 50 ];
+	  
+	  //var diasRodar = [ 10 ];
 	  
 	  var jsonObj = [];
-	
-	  var populacao = 5000000;
+		  
 	
       diasRodar.forEach((element) => {
 		  
 		var obj = {};	   	 	  	
 	  obj.Dias = element;
-	  obj.Media = f_get_media(obj.Dias,data);
-	  obj.Data = f_get_data(obj.Media,populacao*2);
+	  
+	  obj.Valor1 = 0;
+	  obj.Valor2 = 0;
+	  obj.Valor3 = 0;
+	  
+	  obj.Media1 = f_get_media(obj.Dias,data,1,obj);
+	  
+	  
+	  
+	  obj.Media2 = f_get_media(obj.Dias,data,2,obj);
+	  obj.Media3 = f_get_media(obj.Dias,data,3,obj);
+	  
+	  console.log(obj);
+	  
+	  obj.Data1 = f_get_data(obj.Media1,10000000- obj.Valor1);
+	  obj.Data2 = f_get_data(obj.Media2,10000000- obj.Valor2);
+	  obj.Data3 = f_get_data(obj.Media3, 5000000- obj.Valor3);
 	  
 	  jsonObj.push(obj);  
 	  })
@@ -61,8 +110,12 @@ function ProcessaRetorono(data)
 
 function f_get_data(media,total)
 {
+	console.log(total);
+	
+	
+	
 	var teste = total/media;
-	console.log("dias: " + teste);
+	
 	var dateFinal = new Date();
 	
 	
@@ -78,7 +131,7 @@ function addDays(date, days) {
   return result;
 }
 
-function f_get_media(dias,data)
+function f_get_media(dias,data, type,objvalor)
 {
 	
 	var objeto =  JSON.parse(data);
@@ -91,23 +144,47 @@ function f_get_media(dias,data)
 	var UltimoSelecao = objeto[total-dias];
 	var UltimoSelecaoMenos1 = objeto[total-dias-1];
 	
-	var valor = (UltimoObjeto.total_vaccinations) - (UltimoSelecaoMenos1.total_vaccinations);
+	var ValorParaUltimoObjeto;
+	var ValorParaUltimoSelecaoMenos1;
+	var ValorParaUltimoSelecao;
 	
 	
-	console.log("Ultimo objeto para " + dias +" dias");
 	
-	console.log("data: " + UltimoObjeto.date);
-	console.log("total vac: " + UltimoObjeto.total_vaccinations);
 	
-	console.log("Ultimo objeto Menos um para " + dias +" dias");
+	if (type == 1) {
+		
+		ValorParaUltimoObjeto = UltimoObjeto.total_vaccinations;
+		ValorParaUltimoSelecaoMenos1 = UltimoSelecaoMenos1.total_vaccinations;
+		ValorParaUltimoSelecao = UltimoSelecao.total_vaccinations;
+		objvalor.Valor1 = ValorParaUltimoObjeto;
+				
+	}
+	if (type == 2) {
+				ValorParaUltimoObjeto = UltimoObjeto.people_vaccinated;
+		ValorParaUltimoSelecaoMenos1 = UltimoSelecaoMenos1.people_vaccinated;
+		ValorParaUltimoSelecao = UltimoSelecao.people_vaccinated;
+		objvalor.Valor2 = ValorParaUltimoObjeto;
+
+	}
+	if (type == 3) {
+		
+		ValorParaUltimoObjeto = UltimoObjeto.people_fully_vaccinated;
+		ValorParaUltimoSelecaoMenos1 = UltimoSelecaoMenos1.people_fully_vaccinated;
+		ValorParaUltimoSelecao = UltimoSelecao.people_fully_vaccinated;
+		objvalor.Valor3 = ValorParaUltimoObjeto;
+
+	}
 	
-    console.log("data: " + UltimoSelecaoMenos1.date);
-	console.log("total vac: " + UltimoSelecaoMenos1.total_vaccinations);
+		
 	
-    console.log("Recente objeto para " + dias +" dias");
+	var valor = (ValorParaUltimoObjeto) - (ValorParaUltimoSelecaoMenos1);
 	
-	console.log("data: " + UltimoSelecao.date);
-	console.log("total vac: " + UltimoSelecao.total_vaccinations);
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -139,13 +216,13 @@ var arr = String(data).split('\n');
 var jsonObj = [];
 var headers = arr[0].split(',');
 
-console.log("bb");
-console.log(headers);
+
+
 for(var i = 1; i < arr.length; i++) {
   var data2 = arr[i].split(',');
-  console.log("bb2");
   
-  console.log(data2);
+  
+  
   var obj = {};
   for(var j = 0; j < data2.length; j++) {
      obj[headers[j].trim()] = data2[j].trim();

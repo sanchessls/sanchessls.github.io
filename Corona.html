@@ -5,12 +5,133 @@
     <title> "First Page" </title>     
     <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script> 
 	<script src= "Corona.js"> </script> 
-	
+	<style type="text/css">
+    .title {
+        color: blue;
+        text-decoration: bold;
+        text-size: 1em;
+    }
+
+    .author {
+        color: gray;
+    }
+	.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    border-bottom: 20px solid #009879;
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-child {
+    background-color: lightblue;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+///  Fonts  ///
+h1 {
+    font-size: 1.5em;
+}
+
+h2 {
+    font-size: 1.25em;
+}
+
+h1, 
+h2, 
+p {
+    font-family: 'Red Hat Text', sans-serif;
+    color: #303030;
+}
+
+/// Card Container ///
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+
+/// Cards ///
+cards {
+    width: 90%;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.btc {
+    display: grid;
+    //max-width: 600px;
+    min-width: 250px;	
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(50px, 60px) 1fr;
+    grid-template: 
+        "info"
+        "chart";
+    border-radius: 30px;
+}
+
+.btc {
+    box-shadow: 10px 10px 20px 1px rgba(247,147,26,.15);
+}
+
+.asset-info {
+    grid-area: info;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5% 0 5%;
+	max-height:100px;
+}
+
+.title {
+    display: inline-flex;
+}
+
+card h1 {
+    margin-left: 10px;
+}
+
+size {
+	max-height: 800px;
+	max-width:1750px;
+}
+
+
+/// Charts ///
+#btcChart {
+    grid-area: chart;
+    border-radius: 0px 0px 30px 30px;
+    margin-top: auto;
+
+}
+
+
+    </style>
 </head> 
 
 <body> 
 
-<div id="test"></div>
+<table id="test" class="styled-table"> 
     
 <script> 
 

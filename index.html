@@ -255,8 +255,12 @@ function ZeraTotais(){
 
    function getFinancesETORO() {
      var myList = new Array();
-	 myList.push(JSON.parse('{"BitCoinsComprado":0.025355,"ValorComprado":1485.04,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":9.59E-06}'));
-	 myList.push(JSON.parse('{"BitCoinsComprado":0.003199,"ValorComprado":181.09,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":9.59E-06}'));
+	 
+	 //Binance one
+	 myList.push(JSON.parse('{"BitCoinsComprado":0.003454,"ValorComprado":181.99,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0}'));
+	 
+	 myList.push(JSON.parse('{"BitCoinsComprado":0.025355,"ValorComprado":1485.04,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0}'));
+	 myList.push(JSON.parse('{"BitCoinsComprado":0.003199,"ValorComprado":181.09,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0}'));
 	 				 				
 	 return myList;
 	 
@@ -271,8 +275,8 @@ function ZeraTotais(){
 	 
 }
 
-function roundToTwo(num) {    
-    return +(Math.round(num + "e+2")  + "e-2");
+function roundTo(num,num2) {    
+    return +(Math.round(num + "e+"+num2)  + "e-" + num2);
 }
 
 
@@ -313,7 +317,7 @@ function roundToTwo(num) {
 		  var valorfinalTU = valorvendaTU - valortaxa;
 		    
 		  var valorPreciso1 = e.ValorComprado/e.BitCoinsComprado;
-		  var taxafinal = roundToTwo((e.ValorComprado * e.PercentualRevolut / 100),2); //aqui q vai ter q colocar
+		  var taxafinal = roundTo((e.ValorComprado * e.PercentualRevolut / 100),2,2); //aqui q vai ter q colocar
 		  
 		  
 		  
@@ -471,7 +475,7 @@ function roundToTwo(num) {
 				retorno += `     
 					<tr class="active-row">
             <th>${formatter.format(TOTValorComprado)}</th>            
-			<th>${TOTBitcoinsTotal}</th>
+			<th>${ roundTo(TOTBitcoinsTotal,6,6)}</th>
 			<th></th>
 			<th></th>
 			<th></th>
@@ -813,7 +817,7 @@ new Date(obj.time * 1000).getHours() + ":" + new Date(obj.time * 1000).getMinute
   const percrevolut = 1;
   
   
-  //const prices = data.map(obj => (((TOTBitcoinsTotal * obj.close) - roundToTwo((TOTBitcoinsTotal * obj.close) * percrevolut / 100))  -TOTValorComprado ))
+  //const prices = data.map(obj => (((TOTBitcoinsTotal * obj.close) - roundTo(((TOTBitcoinsTotal * obj.close) * percrevolut / 100) ,2 ))  -TOTValorComprado ))
   const prices = data.map(obj => obj.close  )
   return {
     times,

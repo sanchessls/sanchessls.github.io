@@ -1,0 +1,29 @@
+<!DOCTYPE HTML> 
+<html> 
+
+<head> 
+    <title> "First Page" </title>     
+    <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script> 
+	<script src= "Corona.js"> </script> 
+	
+</head> 
+
+<body> 
+
+<div id="test"></div>
+    
+<script> 
+
+
+     F_TableCorona().then((data) => {
+	
+    const mytable = document.querySelector("#test");
+	//console.log(mytable);
+    mytable.innerHTML = data;
+	
+	})
+
+</script> 
+</body> 
+
+</html> 

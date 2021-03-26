@@ -8,6 +8,7 @@
 	<script src= "Cidadania.js"> </script> 
 	<link rel="stylesheet" href="base.css">
 	<style type="text/css">
+
 	.content{
       width: 100%;
 }
@@ -31,10 +32,17 @@
 
 <script> 	
 
+     setInterval(function(){ 
+	 
+	 atualiza();
+	 
+	 }, 300);
+
+    function atualiza(){
 	var w = $(window).width();
-	const mytable = document.querySelector("#test");
-	
+	const mytable = document.querySelector("#test");			
 	P_ATUALIZA(mytable,w-30,500);
+	}
 
 
 	 

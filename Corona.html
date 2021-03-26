@@ -131,16 +131,30 @@ size {
 
 <body> 
 
+
 <table id="test" class="styled-table"> 
     
 <script> 
 
+     let objmelhordata = {};
+	 
+	 objmelhordata.MelhorData = new Date(2050, 11, 24, 10, 33, 30);	 
+	 
+	 console.log(objmelhordata);
+	 
+     F_TableCorona(objmelhordata).then((data) => {
 
-     F_TableCorona().then((data) => {
-	
     const mytable = document.querySelector("#test");
 	//console.log(mytable);
     mytable.innerHTML = data;
+	
+	
+	
+    document.title = objmelhordata.MelhorData.toLocaleString();
+	
+	
+		
+
 	
 	})
 

@@ -10,15 +10,17 @@ async function F_RETORNA_DADOS(){
 
 
 
-async function F_TableCorona(){
+async function F_TableCorona(objMelhorData){
+		
+	 
+	 console.log(objMelhorData);		 
 	
 	let data = await getCoronaData();
 	
 	let objRetorno = ProcessaRetorono(data);
 	
 	var retorno = "";
-	
-	
+			
 	objRetorno.forEach((element) => {
 		
 		
@@ -34,7 +36,28 @@ async function F_TableCorona(){
             //<th>teste 1</th>       
 			//<th>teste 2</th>    
 		//</tbody>
-//			`;
+//			`;		
+		
+		
+		if (new Date(element.Data1) < objMelhorData.MelhorData) 
+		{			
+			objMelhorData.MelhorData = element.Data1;
+		}
+
+		
+		if (new Date(element.Data2) < objMelhorData.MelhorData) 
+		{			
+			
+			objMelhorData.MelhorData = element.Data2;
+		}
+		
+		if (new Date(element.Data3) < objMelhorData.MelhorData) 
+		{
+		
+			objMelhorData.MelhorData = element.Data3;
+		}
+
+		
 		
 		
 		
@@ -42,18 +65,18 @@ async function F_TableCorona(){
 	    retorno += `<div>` ;	
 		retorno += ` ******** total_vaccinations  *****************<br>`  ;		
         retorno += `Media Ultimos ${element.Dias} dias: ${element.Media1} <br>`  ;
-	    retorno += `Data Final Media Ultimos ${element.Dias} dias: <font color="red">${element.Data1}</font> <br>`  ;
+	    retorno += `Data Final Media Ultimos ${element.Dias} dias: <font color="red">${element.Data1.toLocaleString()}</font> <br>`  ;
 
 		
 			    retorno += `<div>` ;	
 		retorno += ` ******** people_vaccinated  *****************<br>`  ;		
         retorno += `Media Ultimos ${element.Dias} dias: ${element.Media2} <br>`  ;
-	    	    retorno += `Data Final Media Ultimos ${element.Dias} dias: <font color="blue">${element.Data2}</font> <br>`  ;
+	    	    retorno += `Data Final Media Ultimos ${element.Dias} dias: <font color="blue">${element.Data2.toLocaleString()}</font> <br>`  ;
 		
 			    retorno += `<div>` ;	
 		retorno += ` ******** people_fully_vaccinated  *****************<br>`  ;	
         retorno += `Media Ultimos ${element.Dias} dias: ${element.Media3} <br>`  ;
-	    retorno += `Data Final Media Ultimos ${element.Dias} dias: <font color="orange">${element.Data3}</font> <br>`  ;
+	    retorno += `Data Final Media Ultimos ${element.Dias} dias: <font color="orange">${element.Data3.toLocaleString()}</font> <br>`  ;
 		
 		
 			
@@ -63,15 +86,15 @@ async function F_TableCorona(){
 	retorno += `</div>` ;
 	});
 	
-
-	
+   
+	console.log("FINAL" + objMelhorData.MelhorData);	
 	return retorno;
 }
 
 function ProcessaRetorono(data)
 {
 	  
-	  var diasRodar = [ 1, 2,3, 5, 10, 30 ,40 , 50 ];
+	  var diasRodar = [ 2,5, 10, 30 ];
 	  
 	  //var diasRodar = [ 10 ];
 	  
@@ -119,7 +142,7 @@ function f_get_data(media,total)
 	var dateFinal = new Date();
 	
 	
-	return addDays(dateFinal,teste).toLocaleString();
+	return addDays(dateFinal,teste);
 	
 	
 	

@@ -131,7 +131,7 @@ size {
 
 <body> 
 
-
+<table id="test2" class="styled-table"> 
 <table id="test" class="styled-table"> 
     
 <script> 
@@ -149,8 +149,14 @@ size {
     mytable.innerHTML = data;
 	
 	
+	    const mytable2 = document.querySelector("#test2");
 	
-    document.title = objmelhordata.MelhorData.toLocaleString();
+       mytable2.innerHTML = objmelhordata.Resumo;
+    
+	document.title = objmelhordata.MelhorData.toLocaleString();
+	
+	
+	
 	
 	
 		

@@ -23,20 +23,7 @@ async function F_TableCorona(objMelhorData){
 			
 	objRetorno.forEach((element) => {
 		
-		
-		//retorno += "<div>CABECALHO<>";
-//		retorno += `<tr>
-            //<th>Valor teste 1</th>
-			//<th>Valor teste 2</th>
-        //</tr>
-        //</thead>
-		    //<tbody>
-//			
-			//<tr class="active-row">
-            //<th>teste 1</th>       
-			//<th>teste 2</th>    
-		//</tbody>
-//			`;		
+	
 		
 		
 		if (new Date(element.Data1) < objMelhorData.MelhorData) 
@@ -86,6 +73,39 @@ async function F_TableCorona(objMelhorData){
 	retorno += `</div>` ;
 	});
 	
+		
+		var newresumo = "";
+		
+		
+		var objeto =  JSON.parse(data);
+	var objetinho = objeto[objeto.length-1];
+				
+		newresumo += `<tr>
+            <th>Data</th>
+			<th>total_vaccinations</th>
+			<th>people_vaccinated</th>
+			<th>people_fully_vaccinated</th>
+			<th>Data Final Menor Estimada</th>
+        </tr>
+        </thead>
+		    <tbody>
+			
+			<tr class="active-row">
+            <th>${new Date(objetinho.date).toLocaleString()}</th>       
+			<th>${objetinho.total_vaccinations}</th>       
+			<th>${objetinho.people_vaccinated}</th>       
+			<th>${objetinho.people_fully_vaccinated}</th>       
+			<th>${objMelhorData.MelhorData.toLocaleString()}</th>       
+	</tbody>	`;	
+	
+	
+	
+	
+	
+		
+	
+   objMelhorData.Resumo = newresumo;
+   
    
 	console.log("FINAL" + objMelhorData.MelhorData);	
 	return retorno;

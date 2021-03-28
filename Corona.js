@@ -114,7 +114,7 @@ async function F_TableCorona(objMelhorData){
 function ProcessaRetorono(data)
 {
 	  
-	  var diasRodar = [ 2,5, 10, 30 ];
+	  var diasRodar = [ 1, 2,5, 10, 30 ];
 	  
 	  //var diasRodar = [ 10 ];
 	  

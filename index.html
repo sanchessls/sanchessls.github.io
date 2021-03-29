@@ -214,6 +214,13 @@ let data = await response.json();
 return data;
 }
 
+  async function getOValue() {
+let response = await fetch("https://financialmodelingprep.com/api/v3/profile/O?apikey=bf72a07f8c7d511933ea74e428347d10");
+let data = await response.json();
+return data;
+}
+
+
   async function getEuroXDollar() {
 let response = await fetch("https://api.exchangeratesapi.io/latest?base=USD");
 let data = await response.json();
@@ -269,9 +276,15 @@ function ZeraTotais(){
 }
 
 
-   function getFinancesSTAG() {
+   function getFinancesSTAG(valorstag,valorO) {
+   console.log("sanches 001");
+   
+   console.log(valorstag);
+   console.log(valorO);
+   
      var myList = new Array();
-	 myList.push(JSON.parse('{"BitCoinsComprado":6,"ValorComprado":206.22,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0}'));
+	 myList.push(JSON.parse('{"BitCoinsComprado":6,"ValorComprado":206.22,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+valorstag[0].price+'}'));
+	 myList.push(JSON.parse('{"BitCoinsComprado":4.85,"ValorComprado":312,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+valorO[0].price+'}'));
 	 				 				
 	 return myList;
 	 
@@ -765,7 +778,10 @@ function roundTo(num,num2) {
   
   
   
-      getBitCoinValue().then(data => {  preencheTabela(false,getFinancesETORO(),data.USD.sell,"myTable2") }).then(() => { 
+    getBitCoinValue().then(data => 
+	    {  
+	        preencheTabela(false,getFinancesETORO(),data.USD.sell,"myTable2") 
+		}).then(() => { 
 	  
 	  
 	        
@@ -777,13 +793,19 @@ function roundTo(num,num2) {
 	  
 	  //acoes
 	  
-	   getStagValue().then( vlr2 => {
+	   getStagValue().then( AcaoStag => {
+	    
+	      getOValue().then( AcaoO => {
+	   
+	   
    
    
-   preencheAcoes(getFinancesSTAG(),vlr2[0].price,"myTable4",vlr.rates.EUR);
+                 preencheAcoes(getFinancesSTAG(AcaoStag,AcaoO),0,"myTable4",vlr.rates.EUR);
+				 
+				 });
 
 
-         });
+                               });
   
   
   });

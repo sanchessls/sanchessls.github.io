@@ -13,7 +13,7 @@ async function F_RETORNA_DADOS(){
 async function F_TableCorona(objMelhorData){
 		
 	 
-	 console.log(objMelhorData);		 
+	 
 	
 	let data = await getCoronaData();
 	
@@ -107,7 +107,7 @@ async function F_TableCorona(objMelhorData){
    objMelhorData.Resumo = newresumo;
    
    
-	console.log("FINAL" + objMelhorData.MelhorData);	
+	
 	return retorno;
 }
 
@@ -134,7 +134,7 @@ function ProcessaRetorono(data)
 	  obj.Media2 = f_get_media(obj.Dias,data,2,obj);
 	  obj.Media3 = f_get_media(obj.Dias,data,3,obj);
 	  
-	  console.log(obj);
+	  
 	  
 	  var perc = percentualParametro();
 	  
@@ -155,7 +155,7 @@ function percentualParametro()
   {
 	
     var parameters = location.search.substring(1).split("&");
-	console.log(parameters);
+	
 
     var temp = parameters[0].split("=");
 	
@@ -168,7 +168,7 @@ function percentualParametro()
 
 function f_get_data(media,total)
 {
-	console.log(total);
+	
 	
 	
 	

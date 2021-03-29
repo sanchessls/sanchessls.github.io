@@ -132,7 +132,8 @@ size {
 <div class="topnav">
   <a class="active" href="index.html">Financias</a>
   <a href="Cidadania.html">Cidadania</a>
-  <a href="Corona.html?percentual=100">Corona</a>  
+    <a class="active" href="Corona.html?percentual=100">Corona 100</a>  
+  <a class="active" href="Corona.html?percentual=60">Corona 60</a>  
 </div>
 
 <table id="mytable1" class="styled-table"> 
@@ -277,10 +278,10 @@ function ZeraTotais(){
 
 
    function getFinancesSTAG(valorstag,valorO) {
-   console.log("sanches 001");
    
-   console.log(valorstag);
-   console.log(valorO);
+   
+   
+   
    
      var myList = new Array();
 	 myList.push(JSON.parse('{"BitCoinsComprado":6,"ValorComprado":206.22,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+valorstag[0].price+'}'));
@@ -324,8 +325,8 @@ function roundTo(num,num2) {
 		   ValorBitCoinUsarCalculo = e.valorbitcoin;
 		  }
 
-          console.log("no calculo");
-		  console.log(ValorBitCoinUsarCalculo);
+          
+		  
 		
 		  var valorvendaTU = (e.BitCoinsComprado * ValorBitCoinUsarCalculo);
 		  var valortaxa = ((valorvendaTU * e.PercentualRevolut) / 100);
@@ -449,7 +450,7 @@ function roundTo(num,num2) {
 			
                     </tr>`;
 					
-					console.log("TOTValorFinal BEGIN: " + TOTValorFinal);
+					
 					
 					TOTValorComprado += element.ValorComprado;
                     TOTBitcoinsTotal += element.BitcoinsTotal;
@@ -463,9 +464,9 @@ function roundTo(num,num2) {
                     TOTDiferenca += element.Diferenca;                    		
 					
 					
-			console.log("ValorComprado: " + element.ValorComprado);
-			console.log("Somando Valor Final: " + element.ValorFinal);
-			console.log("TOTValorFinal END: " + TOTValorFinal);
+			
+			
+
 					
 			
 			});

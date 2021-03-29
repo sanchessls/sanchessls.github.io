@@ -114,12 +114,9 @@ async function F_TableCorona(objMelhorData){
 function ProcessaRetorono(data)
 {
 	  
-	  var diasRodar = [ 1, 2,5, 10, 30 ];
-	  
-	  //var diasRodar = [ 10 ];
-	  
-	  var jsonObj = [];
-		  
+	  var diasRodar = [ 1, 2, 3, 4, 5 , 6 , 7 , 8 ,9, 10, 15  ,30 , 35 ,40 ,45,50,55  ];
+	    
+	  var jsonObj = [];		  
 	
       diasRodar.forEach((element) => {
 		  
@@ -139,9 +136,11 @@ function ProcessaRetorono(data)
 	  
 	  console.log(obj);
 	  
-	  obj.Data1 = f_get_data(obj.Media1,10000000- obj.Valor1);
-	  obj.Data2 = f_get_data(obj.Media2,10000000- obj.Valor2);
-	  obj.Data3 = f_get_data(obj.Media3, 5000000- obj.Valor3);
+	  var perc = percentualParametro();
+	  
+	  obj.Data1 = f_get_data(obj.Media1,(10000000*perc/100) - obj.Valor1);
+	  obj.Data2 = f_get_data(obj.Media2,(10000000*perc/100)- obj.Valor2);
+	  obj.Data3 = f_get_data(obj.Media3, (5000000*perc/100)- obj.Valor3);
 	  
 	  jsonObj.push(obj);  
 	  })
@@ -150,6 +149,22 @@ function ProcessaRetorono(data)
 	  return jsonObj;
 	
 }
+
+
+function percentualParametro()
+  {
+	
+    var parameters = location.search.substring(1).split("&");
+	console.log(parameters);
+
+    var temp = parameters[0].split("=");
+	
+    l = unescape(temp[1]);
+	
+    
+	return l;
+
+  }
 
 function f_get_data(media,total)
 {

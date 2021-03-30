@@ -1,6 +1,8 @@
 
+
+
 async function getCoronaData2() {
-let response = await fetch("https://covid19ireland-geohive.hub.arcgis.com/");
+let response = await fetch("http://cors.io/?https://covid19ireland-geohive.hub.arcgis.com/");
 let data = await response.text();
 
 console.log(data);

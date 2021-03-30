@@ -221,6 +221,13 @@ let data = await response.json();
 return data;
 }
 
+  async function getTeslaValue() {
+let response = await fetch("https://financialmodelingprep.com/api/v3/profile/TSLA?apikey=bf72a07f8c7d511933ea74e428347d10");
+let data = await response.json();
+return data;
+}
+
+
 
   async function getEuroXDollar() {
 let response = await fetch("https://api.exchangeratesapi.io/latest?base=USD");
@@ -267,29 +274,35 @@ function ZeraTotais(){
      var myList = new Array();
 	 
 	 //Binance one
-	 myList.push(JSON.parse('{"BitCoinsComprado":0.003454,"ValorComprado":181.99,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0}'));
+	 //myList.push(JSON.parse('{"BitCoinsComprado":0.003454,"ValorComprado":181.99,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0}'));
 	 
-	 myList.push(JSON.parse('{"BitCoinsComprado":0.025355,"ValorComprado":1485.04,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0}'));
-	 myList.push(JSON.parse('{"BitCoinsComprado":0.003199,"ValorComprado":181.09,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0}'));
+	 myList.push(JSON.parse('{"Nome":"BTC eToro","BitCoinsComprado":0.025355,"ValorComprado":1485.04,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0}'));
+
+	 myList.push(JSON.parse('{"Nome":"BTC eToro","BitCoinsComprado":0.003199,"ValorComprado":181.09,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0}'));
+	 
+	 myList.push(JSON.parse('{"Nome":"BTC eToro","BitCoinsComprado":0.000464,"ValorComprado":27.35,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0}'));
 	 				 				
 	 return myList;
 	 
 }
 
 
-   function getFinancesSTAG(valorstag,valorO) {
+   function getFinancesSTAG(valorstag,valorO,valorTesla) {
    
    
    
    
    
      var myList = new Array();
-	 myList.push(JSON.parse('{"BitCoinsComprado":6,"ValorComprado":206.22,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+valorstag[0].price+'}'));
-	 myList.push(JSON.parse('{"BitCoinsComprado":4.85,"ValorComprado":312,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+valorO[0].price+'}'));
+	 myList.push(JSON.parse('{"Nome":"STAG","BitCoinsComprado":6,"ValorComprado":206.22,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+valorstag[0].price+'}'));
+	 myList.push(JSON.parse('{"Nome":"O-Reit","BitCoinsComprado":4.85,"ValorComprado":312,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+valorO[0].price+'}'));
+   myList.push(JSON.parse('{"Nome":"Tesla","BitCoinsComprado":0.27914,"ValorComprado":173,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+valorTesla[0].price+'}'));	 
 	 				 				
 	 return myList;
 	 
 }
+
+
 
 function roundTo(num,num2) {    
     return +(Math.round(num + "e+"+num2)  + "e-" + num2);
@@ -348,6 +361,7 @@ function roundTo(num,num2) {
 		  
 	
 		  var objetoNovo = {  
+		    Nome: e.Nome,
             ValorComprado: e.ValorComprado,
             BitcoinsTotal: e.BitCoinsComprado,			
 			PercentualTaxaVenda: e.PercentualRevolut/100,
@@ -389,7 +403,8 @@ function roundTo(num,num2) {
 
 		retorno += `<thead>
         <tr>
-            <th>Valor Comprado</th>
+            <th>Nome</th>
+			<th>Valor Comprado</th>
             <th>Bit coins Total</th>
 			<th>Percentual Taxa Venda</th>
 			<th>Valor Atual Bit Coin</th>
@@ -409,10 +424,12 @@ function roundTo(num,num2) {
 			objetoCompleto.forEach(element => {
 			
 			
-			
+			console.log(element);
 					partial += `     
 					<tr class="active-row">
-            <th>${formatter.format(element.ValorComprado)}</th>       
+            <th>${element.Nome}</th>       
+			
+			<th>${formatter.format(element.ValorComprado)}</th>       
  			
 			<th>${element.BitcoinsTotal}</th>
 			
@@ -490,7 +507,8 @@ function roundTo(num,num2) {
 			
 				retorno += `     
 					<tr class="active-row">
-            <th>${formatter.format(TOTValorComprado)}</th>            
+            <th>Total Dollar</th>            
+			<th>${formatter.format(TOTValorComprado)}</th>            
 			<th>${ roundTo(TOTBitcoinsTotal,6,6)}</th>
 			<th></th>
 			<th></th>
@@ -520,7 +538,8 @@ function roundTo(num,num2) {
 			{
 							retorno += `     
 					<tr class="active-row">
-            <th></th>            
+            <th>Total Euro:</th>            
+			<th></th>            
 			<th></th>
 			<th></th>
 			<th></th>
@@ -598,8 +617,9 @@ function roundTo(num,num2) {
 
 		retorno += `<thead>
         <tr>
+		    <th>Nome</th>
             <th>Valor Comprado</th>
-            <th>Bit coins Total</th>
+            <th>Acoes no Total</th>
 			<th>Percentual Taxa Venda</th>
 			<th>Valor Atual Bit Coin</th>
 			<th>Valor Quando Comprado</th>			
@@ -621,7 +641,9 @@ function roundTo(num,num2) {
 			
 					partial += `     
 					<tr class="active-row">
-            <th>${formatter.format(element.ValorComprado)}</th>       
+            <th>${element.Nome}</th>       
+			
+			<th>${formatter.format(element.ValorComprado)}</th>       
  			
 			<th>${element.BitcoinsTotal}</th>
 			
@@ -685,7 +707,8 @@ function roundTo(num,num2) {
 			
 				retorno += `     
 					<tr class="active-row">
-            <th>${formatter.format(TOTValorComprado)}</th>            
+            <th>Total Dollar</th>            
+			<th>${formatter.format(TOTValorComprado)}</th>            
 			<th></th>
 			<th></th>
 			<th></th>
@@ -713,6 +736,7 @@ function roundTo(num,num2) {
 			
 							retorno += `     
 					<tr class="active-row">
+					<th>Total Euro:</th>            
                  <th>${formatterEURO.format(TOTValorComprado*exchangerate)}</th>     
 			<th></th>
 			<th></th>
@@ -799,13 +823,15 @@ function roundTo(num,num2) {
 	      getOValue().then( AcaoO => {
 	   
 	   
+   	    
+	      getTeslaValue().then( AcaoTesla => {
+	   
    
-   
-                 preencheAcoes(getFinancesSTAG(AcaoStag,AcaoO),0,"myTable4",vlr.rates.EUR);
+                 preencheAcoes(getFinancesSTAG(AcaoStag,AcaoO,AcaoTesla),0,"myTable4",vlr.rates.EUR);
 				 
 				 });
 
-
+ });
                                });
   
   

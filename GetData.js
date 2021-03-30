@@ -4,7 +4,7 @@
 async function getCoronaData2() {
 	
 	
-var obj = jQuery.get("https://covid19ireland-geohive.hub.arcgis.com/");
+var obj = jQuery.get("https://www.etoro.com/markets/btc");
 
 let data = await obj;
 

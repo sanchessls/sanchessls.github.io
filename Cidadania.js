@@ -1,6 +1,25 @@
-function F_CIDADANIA(width,height){
+function F_CIDADANIA(width,height,sizePerc,newDataInicial,newDataFinal){
 	var datainciial = new Date(2020,5,9);		
 	var dataFinal = new Date(2025,5,9);
+	
+    console.log("Chegou dos parametros");
+	console.log(newDataInicial);
+	console.log(newDataFinal);
+	if (newDataInicial != null)
+	{
+		console.log("entrou");
+		datainciial = newDataInicial;
+	}
+	
+	if (newDataFinal != null)
+	{
+		console.log("entrou2");
+		dataFinal = newDataFinal;
+	}
+	
+	
+	
+	
 	var Today = new Date();
 
     var totaldias = DayDiff(datainciial,dataFinal);
@@ -24,17 +43,42 @@ function F_CIDADANIA(width,height){
     hours %= 24;
     minutes %= 60;
     seconds %= 60;
-
-
+	
+	var stringCompleta = "";
+	
+	if (years > 0)
+	{
+		stringCompleta =  stringCompleta + years + " Year(s) ";
+	}
+	
+	if (days > 0)
+	{
+		stringCompleta =  stringCompleta + days + " Day(s) ";
+	}
+	
+    if (hours > 0)
+	{
+		stringCompleta =  stringCompleta + hours + " Hour(s) ";
+	}
+	
+	if (minutes > 0)
+	{
+		stringCompleta =  stringCompleta + minutes + " Minute(s) ";
+	}
+	
+	if (seconds > 0)
+	{
+		stringCompleta =  stringCompleta + seconds + " Second(s) ";
+	}
 
 	
-	return `<span Style="font-size: 500%;">${ String(roundTo(percentual,7,7)).lpad("0",10)} %</span><br>
-	       <span Style="font-size: 500%;">${years} Years :${days} Days : ${hours} Hours : ${minutes} Minutes : ${seconds} Seconds</span>
+	return `<span Style="font-size: ${sizePerc}%;">${ String(roundTo(percentual,7,7)).lpad("0",10)} %</span><br>
+	       <span Style="font-size: ${sizePerc}%;">${stringCompleta}</span>
 	       <progress id="file" value="${percentual}" max="100" style="width: ${width}px;height: ${height}px;" > ${percentual} </progress>` ;
 }
 
-function P_ATUALIZA(componente,width,height){
-	  componente.innerHTML = F_CIDADANIA(width,height);
+function P_ATUALIZA(componente,width,height,sizePerc,data1,data2){
+	  componente.innerHTML = F_CIDADANIA(width,height,sizePerc,data1,data2);
 }
 
 

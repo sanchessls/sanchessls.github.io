@@ -5,6 +5,7 @@
     <title> "First Page" </title>     
     <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script> 
 	<script src= "Corona.js"> </script> 
+	<script src= "Cidadania.js"> </script> 
 	 <link rel="stylesheet" href="base.css">
 	<style type="text/css">
     .title {
@@ -136,11 +137,14 @@ size {
   <a href="index.html">Financias</a>
   <a href="Cidadania.html">Cidadania</a>
   <a class="active" href="Corona.html?percentual=100">Corona 100</a>  
-  <a class="active" href="Corona.html?percentual=60">Corona 60</a>  
+  <a href="Corona.html?percentual=60">Corona 60</a>  
 </div>
 
 
 <table id="test2" class="styled-table"> 
+
+<div id="testClock"</div>
+
 <table id="test" class="styled-table"> 
     
 <script> 
@@ -148,13 +152,12 @@ size {
      let objmelhordata = {};
 	 
 	 objmelhordata.MelhorData = new Date(2070, 11, 24, 10, 33, 30);	 
-	 
-	 console.log(objmelhordata);
+	 	 
 	 
      F_TableCorona(objmelhordata).then((data) => {
 
     const mytable = document.querySelector("#test");
-	//console.log(mytable);
+	
     mytable.innerHTML = data;
 	
 	
@@ -165,13 +168,28 @@ size {
 	document.title = objmelhordata.MelhorData.toLocaleString();
 	
 	
+	  //bar
+	 setInterval(function(){ 
+	 
+	 atualiza();
+	 
+	 }, 300);
+
+    function atualiza(){
+	var w = $(window).width();
+	const mytable = document.querySelector("#testClock");			
 	
+	console.log("tudo novo");
+	console.log(objmelhordata.MelhorData);
+	P_ATUALIZA(mytable,w-30,50,200,new Date(2021,00,01),objmelhordata.MelhorData);
+	}
 	
 	
 		
 
 	
 	})
+	
 
 </script> 
 </body> 

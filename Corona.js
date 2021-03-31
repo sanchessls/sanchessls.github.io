@@ -10,11 +10,9 @@ async function F_RETORNA_DADOS(){
 
 
 
-async function F_TableCorona(objMelhorData){
-		
-	 
-	 
-	
+async function F_TableCorona(objMelhorData)
+{
+			 	
 	let data = await getCoronaData();
 	
 	let objRetorno = ProcessaRetorono(data);

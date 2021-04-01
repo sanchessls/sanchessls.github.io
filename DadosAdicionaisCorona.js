@@ -1,6 +1,6 @@
   function f_TrataLista(data)
   {	 	 	 	  
-    console.log("andre sanches iniciou tratamento");
+    
     
 	var myList = new Array();
 	  
@@ -22,11 +22,11 @@
 		 
 		 if (found)
 		 {
-			 console.log("FOUND");
+			 console.log("MANUAL , POREM JA VEIO NO AUTOMATICO " + element.date);
 		 }
 		 else 
 		 {
-			 console.log("NOT FOUND");
+			 console.log("ADICIONADO MANUALMENTE : " + element.date);
 			 objeto.push(element);
 		 }
 		 

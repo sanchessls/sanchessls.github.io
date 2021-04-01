@@ -13,9 +13,11 @@ async function F_RETORNA_DADOS(){
 async function F_TableCorona(objMelhorData)
 {
 			 	
-	let data = await getCoronaData();
+	let data33 = await getCoronaData();
 	
-	let objRetorno = ProcessaRetorono(data);
+	var data2 = f_TrataLista(data33);
+	
+	let objRetorno = ProcessaRetorono(data2);
 	
 	var retorno = "";
 			
@@ -75,7 +77,7 @@ async function F_TableCorona(objMelhorData)
 		var newresumo = "";
 		
 		
-		var objeto =  JSON.parse(data);
+		var objeto =  JSON.parse(data2);
 	var objetinho = objeto[objeto.length-1];
 				
 		newresumo += `<tr>
@@ -109,15 +111,27 @@ async function F_TableCorona(objMelhorData)
 	return retorno;
 }
 
-function ProcessaRetorono(dataNaoTratada)
+function GetDiaPesquisa(data) 
+{ 	 
+	  var objeto =  JSON.parse(data);	 	
+	  	  	 
+	  var objetinho = objeto[objeto.length-1];
+	  
+	  return objetinho.date;
+}
+
+function ProcessaRetorono(data)
 {
   
-	  var data = f_TrataLista(dataNaoTratada);
+	  
 	    
 	  
 	  var diasRodar = [ 1, 2, 3, 4, 5 , 6 , 7 , 8 ,9, 10, 15  ,30 , 35 ,40 ,45,50,55  ];
 	    
 	  var jsonObj = [];		  
+	  
+	  var DiaPesquisa = GetDiaPesquisa(data);
+	  
 	
       diasRodar.forEach((element) => {
 		  
@@ -140,9 +154,9 @@ function ProcessaRetorono(dataNaoTratada)
 	  
 	  var perc = percentualParametro();
 	  
-	  obj.Data1 = f_get_data(obj.Media1,(10000000*perc/100) - obj.Valor1);
-	  obj.Data2 = f_get_data(obj.Media2,(10000000*perc/100)- obj.Valor2);
-	  obj.Data3 = f_get_data(obj.Media3, (5000000*perc/100)- obj.Valor3);
+	  obj.Data1 = f_get_data(obj.Media1,(10000000*perc/100) - obj.Valor1,DiaPesquisa);
+	  obj.Data2 = f_get_data(obj.Media2,(10000000*perc/100)- obj.Valor2,DiaPesquisa);
+	  obj.Data3 = f_get_data(obj.Media3, (5000000*perc/100)- obj.Valor3,DiaPesquisa);
 	  
 	  jsonObj.push(obj);  
 	  })
@@ -168,11 +182,11 @@ function percentualParametro()
 
   }
 
-function f_get_data(media,total)
+function f_get_data(media,total,DiaPesquisa)
 {	
 	var teste = total/media;
 	
-	var dateFinal = new Date();
+	var dateFinal = DiaPesquisa;
 	
 	return addDays(dateFinal,teste);
 }

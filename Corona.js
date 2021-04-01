@@ -109,14 +109,18 @@ async function F_TableCorona(objMelhorData)
 	return retorno;
 }
 
-function ProcessaRetorono(data)
+function ProcessaRetorono(dataNaoTratada)
 {
+  
+	  var data = f_TrataLista(dataNaoTratada);
+	    
 	  
 	  var diasRodar = [ 1, 2, 3, 4, 5 , 6 , 7 , 8 ,9, 10, 15  ,30 , 35 ,40 ,45,50,55  ];
 	    
 	  var jsonObj = [];		  
 	
       diasRodar.forEach((element) => {
+		  
 		  
 		var obj = {};	   	 	  	
 	  obj.Dias = element;
@@ -165,20 +169,12 @@ function percentualParametro()
   }
 
 function f_get_data(media,total)
-{
-	
-	
-	
-	
+{	
 	var teste = total/media;
 	
 	var dateFinal = new Date();
 	
-	
 	return addDays(dateFinal,teste);
-	
-	
-	
 }
 
 function addDays(date, days) {
@@ -192,13 +188,17 @@ function f_get_media(dias,data, type,objvalor)
 	
 	var objeto =  JSON.parse(data);
 	
-	var total = objeto.length;
+	
+	
+	var total = objeto.length;	
 	
 	
 	var UltimoObjeto = objeto[total-1];
 	
+
 	var UltimoSelecao = objeto[total-dias];
-	var UltimoSelecaoMenos1 = objeto[total-dias-1];
+	
+	var UltimoSelecaoMenos1 = objeto[total-dias-1];	
 	
 	var ValorParaUltimoObjeto;
 	var ValorParaUltimoSelecaoMenos1;
@@ -216,7 +216,7 @@ function f_get_media(dias,data, type,objvalor)
 				
 	}
 	if (type == 2) {
-				ValorParaUltimoObjeto = UltimoObjeto.people_vaccinated;
+		ValorParaUltimoObjeto = UltimoObjeto.people_vaccinated;
 		ValorParaUltimoSelecaoMenos1 = UltimoSelecaoMenos1.people_vaccinated;
 		ValorParaUltimoSelecao = UltimoSelecao.people_vaccinated;
 		objvalor.Valor2 = ValorParaUltimoObjeto;
@@ -248,7 +248,6 @@ function f_get_media(dias,data, type,objvalor)
 	
 	
 	
-
 	
 	
 

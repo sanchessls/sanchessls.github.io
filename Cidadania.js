@@ -2,18 +2,15 @@ function F_CIDADANIA(width,height,sizePerc,newDataInicial,newDataFinal){
 	var datainciial = new Date(2020,5,9,1,0,0);		
 	var dataFinal = new Date(2025,5,9,1,0,0);
 	
-    console.log("Chegou dos parametros");
-	console.log(newDataInicial);
-	console.log(newDataFinal);
+
 	if (newDataInicial != null)
 	{
-		console.log("entrou");
+		
 		datainciial = newDataInicial;
 	}
 	
 	if (newDataFinal != null)
-	{
-		console.log("entrou2");
+	{		
 		dataFinal = newDataFinal;
 	}
 	
@@ -26,12 +23,7 @@ function F_CIDADANIA(width,height,sizePerc,newDataInicial,newDataFinal){
 	
 	var difference = dataFinal.getTime() - Today.getTime();
 	
-	console.log("DIFERENCE");
-	console.log(difference);
-	
-	console.log(Today.getTime());
-	console.log(dataFinal.getTime());
-	
+
 	var totaldiasFaltando = DayDiff(Today,dataFinal);
 	
 	var diasPassados = totaldias - totaldiasFaltando;

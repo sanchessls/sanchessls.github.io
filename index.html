@@ -232,9 +232,11 @@ return data;
 }
 
   async function getBitCoinValue() {
-let response = await fetch("https://blockchain.info/ticker");
-let data = await response.json();
-return data;
+//let response = await fetch("https://blockchain.info/ticker");
+//let data = await response.json();
+//return data;
+   return getFromURL("https://financialmodelingprep.com/api/v3/quote/BTCUSD?apikey=");
+
 }
 
 async function getStagValue() {
@@ -253,9 +255,7 @@ async function getStagValue() {
 
 
   async function getEuroXDollar() {
-let response = await fetch("https://api.exchangeratesapi.io/latest?base=USD");
-let data = await response.json();
-return data;
+   return getFromURL("https://financialmodelingprep.com/api/v3/quote/USDEUR?apikey=");
 }
 
 function ZeraTotais(){
@@ -823,20 +823,19 @@ function roundTo(num,num2) {
   }
   
   
-  
-  
+ 
   
     getBitCoinValue().then(data => 
 	    {  
-	        preencheTabela(false,getFinancesETORO(),data.USD.sell,"myTable2") 
+		
+	        preencheTabela(false,getFinancesETORO(),data[0].price,"myTable2") 
 		}).then(() => { 
 	  
 	  
 	        
   getEuroXDollar().then( vlr => {
-
-
-      getBitCoinValue().then(data => {  preencheTabela(true,getFinancesETORO().concat(getFinancesNovo()),data.USD.sell,"myTable3",vlr.rates.EUR) }).then(() => {
+     
+      getBitCoinValue().then(data => {  preencheTabela(true,getFinancesETORO().concat(getFinancesNovo()),data[0].price,"myTable3",vlr[0].price) }).then(() => {
 	  
 	  
 	  //acoes
@@ -850,11 +849,16 @@ function roundTo(num,num2) {
 	      getTeslaValue().then( AcaoTesla => {
 	   
    
-                 preencheAcoes(getFinancesSTAG(AcaoStag,AcaoO,AcaoTesla),0,"myTable4",vlr.rates.EUR);
+                 preencheAcoes(getFinancesSTAG(AcaoStag,AcaoO,AcaoTesla),0,"myTable4",vlr[0].price);
+				 
+				 updateBitcoinPrice(vlr[0].price)
+                 printBtcChart()
+				 
+				 
 				 
 				 });
 
- });
+                          });
                                });
   
   
@@ -997,17 +1001,16 @@ async function printBtcChart() {
   });
 }
 
-async function updateBitcoinPrice() {
+async function updateBitcoinPrice(dolarDiff) {
   let { times, prices } = await btcData()
   let currentPrice = prices[prices.length-1].toFixed(2);
     
-  let exchange = await getEuroXDollar();  
+  let exchange = dolarDiff;  
 
-  document.getElementById("btcPrice").innerHTML = formatter.format(currentPrice) + " / " + formatterEURO.format(exchange.rates.EUR * currentPrice) ;
+  document.getElementById("btcPrice").innerHTML = formatter.format(currentPrice) + " / " + formatterEURO.format(exchange * currentPrice) ;
 }
 
-updateBitcoinPrice()
-printBtcChart()
+
 
 </script>
 </body>

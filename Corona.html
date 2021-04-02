@@ -148,7 +148,7 @@ size {
 <div id="testClock"</div>
 
 <table id="test" class="styled-table"> 
-    
+
 <script> 
 
      let objmelhordata = {};
@@ -180,12 +180,12 @@ size {
     function atualiza(){
 	var w = $(window).width();
 	const mytable = document.querySelector("#testClock");			
-	
-	
-	
+		
 	P_ATUALIZA(mytable,w-30,50,200,new Date(2021,00,01,01,00,00),objmelhordata.MelhorData);
 	}
 	
+	    
+    sortTable(mytable, 'desc', 1);
 	
 		
 

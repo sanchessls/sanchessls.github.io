@@ -20,6 +20,21 @@ async function F_TableCorona(objMelhorData)
 	let objRetorno = ProcessaRetorono(data2);
 	
 	var retorno = "";
+	
+			
+		
+		retorno += `<tr>
+            <th>Tipo</th>
+			<th>total_vaccinations</th>
+			<th>Data Final Estimada</th>
+			<th>people_vaccinated</th>
+			<th>Data Final Estimada</th>
+			<th>people_fully_vaccinated</th>
+			<th>Data Final Estimada</th>
+        </tr>
+        </thead>
+	    <tbody>
+			`;
 			
 	objRetorno.forEach((element) => {
 		
@@ -44,11 +59,21 @@ async function F_TableCorona(objMelhorData)
 			objMelhorData.MelhorData = element.Data3;
 		}
 
+         retorno += `
+			<tr class="active-row">
+            <td>Media Ultimos ${element.Dias} dias</td>       
+			<td>${element.Media1}</td>       
+			<td>${element.Data1.toLocaleString()}</td>       
+			<td>${element.Media2}</td>       
+			<td>${element.Data2.toLocaleString()}</td>       
+			<td>${element.Media3}</td>       
+			<td>${element.Data3.toLocaleString()}</td>       
+	    </td>   </tr>`
+
 		
 		
 		
-		
-		
+		/*
 	    retorno += `<div>` ;	
 		retorno += ` ******** total_vaccinations  *****************<br>`  ;		
         retorno += `Media Ultimos ${element.Dias} dias: ${element.Media1} <br>`  ;
@@ -71,14 +96,16 @@ async function F_TableCorona(objMelhorData)
 		retorno += `<br>`  ;
 	
 	retorno += `</div>` ;
+	
+	*/
 	});
 	
-		
+				  retorno += `</tbody>	`;
 		var newresumo = "";
 		
 		
 		var objeto =  JSON.parse(data2);
-	var objetinho = objeto[objeto.length-1];
+     	var objetinho = objeto[objeto.length-1];
 				
 		newresumo += `<tr>
             <th>Data</th>
@@ -88,7 +115,7 @@ async function F_TableCorona(objMelhorData)
 			<th>Data Final Menor Estimada</th>
         </tr>
         </thead>
-		    <tbody>
+	    <tbody>
 			
 			<tr class="active-row">
             <th>${new Date(objetinho.date).toLocaleString()}</th>       
@@ -96,7 +123,8 @@ async function F_TableCorona(objMelhorData)
 			<th>${objetinho.people_vaccinated}</th>       
 			<th>${objetinho.people_fully_vaccinated}</th>       
 			<th>${objMelhorData.MelhorData.toLocaleString()}</th>       
-	</tbody>	`;	
+	    </tr>
+	   </tbody>	`;	
 	
 	
 	
@@ -177,7 +205,10 @@ function percentualParametro()
 	
     l = unescape(temp[1]);
 	
-    
+	if (l == "undefined") {
+      return 100;
+	}
+	
 	return l;
 
   }
@@ -301,4 +332,58 @@ for(var i = 1; i < arr.length; i++) {
 return JSON.stringify(jsonObj);
 
 
+}
+
+
+function sortTable(table, dir, n) {
+  var rows, switching, i, x, y, shouldSwitch, switchcount = 0;
+  switching = true;
+  /*Faça um loop que continuará até
+   nenhuma troca foi feita:*/
+  while (switching) {
+    //comece dizendo: nenhuma troca é feita:
+    switching = false;
+    rows = table.rows;
+    /*Faça um loop por todas as linhas da tabela (exceto o
+     primeiro, que contém cabeçalhos da tabela):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //comece dizendo que não deve haver alternância:
+      shouldSwitch = false;
+      /*Obtenha os dois elementos que você deseja comparar,
+       um da linha atual e o outro da próxima:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /*verifique se as duas linhas devem mudar de lugar,
+       com base na direção, asc ou desc:*/
+      if (dir == "asc") {
+		  
+        if (parseFloat(x.innerHTML) > parseFloat(y.innerHTML)) {
+          //Nesse caso, marque como uma opção e interrompa o loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (parseFloat(x.innerHTML) < parseFloat(y.innerHTML)) {
+          //Nesse caso, marque como uma opção e interrompa o loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*Se um interruptor foi marcado, faça-o
+       e marque que uma troca foi feita:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Cada vez que uma troca for concluída, aumente essa contagem em 1:
+      switchcount++;
+    } else {
+      /*Se nenhuma mudança foi feita E a direção for "asc",
+       defina a direção para "desc" e execute o loop while novamente.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
 }

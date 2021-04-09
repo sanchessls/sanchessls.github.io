@@ -12,10 +12,8 @@
 	 
 	 
 	 
-	 //INICIO AUTOMATICOS
-
-     
- myList.push(JSON.parse('{"location":"Ireland","date":2021-04-06,"vaccine":"","source_url":"","total_vaccinations":679844,"people_vaccinated":282043,"people_fully_vaccinated":961887}'));	 
+//INICIO AUTOMATICOS     
+ 
 //FIM AUTOMATICOS	  	 
 	 
 	 

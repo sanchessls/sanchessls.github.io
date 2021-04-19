@@ -17,7 +17,7 @@ async function F_TableCorona(objMelhorData)
 	
 	var data2 = f_TrataLista(data33);
 	
-	let objRetorno = ProcessaRetorono(data2);
+	let objRetorno = ProcessaRetorono(data2)
 	
 	var retorno = "";
 	

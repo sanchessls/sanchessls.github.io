@@ -62,8 +62,9 @@
 		 
 		 
 	 });
-	 
-	 
-	 return JSON.stringify(objeto);
+	 	 
+	 var listaFinal = objeto.sort((a, b) => a.date.localeCompare(b.date));
+	  
+	 return JSON.stringify(listaFinal);
 	 
   }

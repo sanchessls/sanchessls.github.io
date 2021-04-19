@@ -33,6 +33,8 @@
  myList.push(JSON.parse('{"location":"Ireland","date":"2021-04-15","vaccine":"","source_url":"","total_vaccinations":1155599,"people_vaccinated":814470,"people_fully_vaccinated":341129}'));	 
 
  myList.push(JSON.parse('{"location":"Ireland","date":"2021-04-16","vaccine":"","source_url":"","total_vaccinations":1188354,"people_vaccinated":838644,"people_fully_vaccinated":349710}'));	 
+
+ myList.push(JSON.parse('{"location":"Ireland","date":"2021-04-17","vaccine":"","source_url":"","total_vaccinations":1204063,"people_vaccinated":852189,"people_fully_vaccinated":351874}'));	 
 //FIM AUTOMATICOS	  	 
 	 
 	 

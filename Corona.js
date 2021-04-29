@@ -10,14 +10,15 @@ async function F_RETORNA_DADOS(){
 
 
 
-async function F_TableCorona(objMelhorData,PopulationFinal)
+async function F_TableCorona(objMelhorData,PopulationFinal,CoronaCountry)
 {
 			 	
 				console.log("chegou");
 				console.log(PopulationFinal);
-	let data33 = await getCoronaData();
+				
+	let data33 = await getCoronaData(CoronaCountry);
 	
-	var data2 = f_TrataLista(data33);
+	var data2 = f_TrataLista(data33,CoronaCountry);
 	
 	let objRetorno = ProcessaRetorono(data2,PopulationFinal)
 	
@@ -302,10 +303,11 @@ function f_get_media(dias,data, type,objvalor)
 	return valor;
 }
 
-async function getCoronaData() {
-let response = await fetch("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/country_data/Ireland.csv");
+async function getCoronaData(CoronaCountry) {
+let response = await fetch("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/country_data/"+CoronaCountry+".csv");
 let data = await response.text();
 
+console.log(data);
 
 data = String(data).replaceAll("Oxford/AstraZeneca, ", "Oxford/AstraZeneca");
 data = String(data).replaceAll("Moderna, ", "Moderna");
@@ -331,6 +333,9 @@ for(var i = 1; i < arr.length; i++) {
   }
   if (obj.location != "") {  jsonObj.push(obj); }
 }
+
+
+console.log(jsonObj);
 return JSON.stringify(jsonObj);
 
 

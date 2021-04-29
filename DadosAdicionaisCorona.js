@@ -39,6 +39,14 @@
  myList.push(JSON.parse('{"location":"Ireland","date":"2021-04-17","vaccine":"","source_url":"","total_vaccinations":1204063,"people_vaccinated":852189,"people_fully_vaccinated":351874}'));	 
 
  myList.push(JSON.parse('{"location":"Ireland","date":"2021-04-18","vaccine":"","source_url":"","total_vaccinations":1208459,"people_vaccinated":855512,"people_fully_vaccinated":352947}'));	 
+
+ myList.push(JSON.parse('{"location":"Ireland","date":"2021-04-19","vaccine":"","source_url":"","total_vaccinations":1219487,"people_vaccinated":863958,"people_fully_vaccinated":355529}'));	 
+
+ myList.push(JSON.parse('{"location":"Ireland","date":"2021-04-23","vaccine":"","source_url":"","total_vaccinations":1359921,"people_vaccinated":966611,"people_fully_vaccinated":393310}'));	 
+
+ myList.push(JSON.parse('{"location":"Ireland","date":"2021-04-25","vaccine":"","source_url":"","total_vaccinations":1398061,"people_vaccinated":998134,"people_fully_vaccinated":399927}'));	 
+
+ myList.push(JSON.parse('{"location":"Ireland","date":"2021-04-26","vaccine":"","source_url":"","total_vaccinations":1417942,"people_vaccinated":1014640,"people_fully_vaccinated":403302}'));	 
 //FIM AUTOMATICOS	  	 
 	 
 	}

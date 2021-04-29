@@ -10,14 +10,16 @@ async function F_RETORNA_DADOS(){
 
 
 
-async function F_TableCorona(objMelhorData)
+async function F_TableCorona(objMelhorData,PopulationFinal)
 {
 			 	
+				console.log("chegou");
+				console.log(PopulationFinal);
 	let data33 = await getCoronaData();
 	
 	var data2 = f_TrataLista(data33);
 	
-	let objRetorno = ProcessaRetorono(data2)
+	let objRetorno = ProcessaRetorono(data2,PopulationFinal)
 	
 	var retorno = "";
 	
@@ -148,7 +150,7 @@ function GetDiaPesquisa(data)
 	  return objetinho.date;
 }
 
-function ProcessaRetorono(data)
+function ProcessaRetorono(data,PopulationFinal)
 {
   
 	  
@@ -182,9 +184,9 @@ function ProcessaRetorono(data)
 	  
 	  var perc = percentualParametro();
 	  
-	  obj.Data1 = f_get_data(obj.Media1,(10000000*perc/100) - obj.Valor1,DiaPesquisa);
-	  obj.Data2 = f_get_data(obj.Media2,(10000000*perc/100)- obj.Valor2,DiaPesquisa);
-	  obj.Data3 = f_get_data(obj.Media3, (5000000*perc/100)- obj.Valor3,DiaPesquisa);
+	  obj.Data1 = f_get_data(obj.Media1,((PopulationFinal*2)*perc/100) - obj.Valor1,DiaPesquisa);
+	  obj.Data2 = f_get_data(obj.Media2,((PopulationFinal*2)*perc/100)- obj.Valor2,DiaPesquisa);
+	  obj.Data3 = f_get_data(obj.Media3, (PopulationFinal*perc/100)- obj.Valor3,DiaPesquisa);
 	  
 	  jsonObj.push(obj);  
 	  })

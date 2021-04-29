@@ -7,6 +7,7 @@
 	<script src= "Corona.js"> </script> 
 	<script src= "Cidadania.js"> </script> 
     <script src= "DadosAdicionaisCorona.js"> </script> 	
+	<script src= "population.js"> </script> 	
 	
 	 <link rel="stylesheet" href="base.css">
 	<style type="text/css">
@@ -151,12 +152,19 @@ size {
 
 <script> 
 
+
      let objmelhordata = {};
 	 
 	 objmelhordata.MelhorData = new Date(2070, 11, 24, 10, 33, 30);	 
-	 	 
 	 
-     F_TableCorona(objmelhordata).then((data) => {
+	 
+	 populacao("Ireland").then((dataP) => {
+	 
+	 console.log(dataP);
+
+     var objetop =  JSON.parse(dataP);	 
+	 
+     F_TableCorona(objmelhordata,objetop.body.population).then((data) => {
 
     const mytable = document.querySelector("#test");
 	
@@ -192,6 +200,9 @@ size {
 	
 	})
 	
+	
+	
+	});
 
 </script> 
 </body> 

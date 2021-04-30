@@ -224,6 +224,41 @@ return data;
 
 }
 
+var API1CC = "0646cc7b8a4d4b54926c74e0b20253b57fd4ee406df79b3d57d5439874960146";
+var API2CC = "b79df96143451f55a5c9e1dbbc270fd57508c41148e7794dd98f7a7c7ea18b88";
+
+
+
+async function getFromURLCryptoCompare(url)
+{
+
+let response = await fetch(url+API1CC);
+let data = await response.json();
+
+console.log("reposssstaaaa");
+
+console.log(data);
+
+var a = JSON.stringify(data);
+
+var b = a.search("Limit Reach");
+
+if (b > -1) 
+{
+
+  response = await fetch(url+API2CC);
+  data = await response.json();  
+}
+
+
+
+
+return data;
+
+
+}
+
+
   async function getBitCoinValue() {
 //let response = await fetch("https://blockchain.info/ticker");
 //let data = await response.json();
@@ -245,11 +280,43 @@ async function getStagValue() {
 
 }
 
+  async function getMCDValue() {
+  return getFromURL("https://financialmodelingprep.com/api/v3/profile/MCD?apikey=");
 
+}
+
+
+  async function getPetroValue() {
+  return getFromURL("https://financialmodelingprep.com/api/v3/profile/PBR?apikey=");
+
+}
 
   async function getEuroXDollar() {
    return getFromURL("https://financialmodelingprep.com/api/v3/quote/USDEUR?apikey=");
 }
+
+  async function getEteriumValue() {
+  return getFromURL("https://financialmodelingprep.com/api/v3/quote/ETHUSD?apikey=");
+
+}
+
+
+  async function getMIOTAValue() {
+  
+  
+let response = await fetch("https://min-api.cryptocompare.com/data/price?fsym=MIOTA&tsyms=BTC,USD");
+let data = await response.json();
+
+console.log("resposta atual");
+console.log(data);
+
+return data;
+  
+  //return getFromURLCryptoCompare("https://min-api.cryptocompare.com/data/v2/histoday?fsym=MIOTA&tsym=USD&limit=20&api_key=");
+
+}
+
+
 
 function ZeraTotais(){
 	        TOTValorComprado = 0.00;
@@ -303,7 +370,7 @@ function ZeraTotais(){
 }
 
 
-   function getFinancesSTAG(valorstag,valorO,valorTesla,valorbtc) {
+   function getFinancesSTAG(valorstag,valorO,valorTesla,valorbtc,ValorEterium,Miota,McDonalds,petro) {
    
    
    
@@ -322,6 +389,22 @@ function ZeraTotais(){
 	 myList.push(JSON.parse('{"Nome":"STAG","BitCoinsComprado":6,"ValorComprado":206.22,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+valorstag[0].price+'}'));
 	 myList.push(JSON.parse('{"Nome":"O-Reit","BitCoinsComprado":4.85,"ValorComprado":312,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+valorO[0].price+'}'));
    myList.push(JSON.parse('{"Nome":"Tesla","BitCoinsComprado":0.27914,"ValorComprado":173,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+valorTesla[0].price+'}'));	 
+   
+   //new ones
+   
+      myList.push(JSON.parse('{"Nome":"Ethereum","BitCoinsComprado":0.057533,"ValorComprado":160,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+ValorEterium[0].price+'}'));	 
+   
+   
+      myList.push(JSON.parse('{"Nome":"MIOTA","BitCoinsComprado":124.170209,"ValorComprado":260,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+Miota.USD+'}'));
+	  
+	  
+	       myList.push(JSON.parse('{"Nome":"MC Donalds","BitCoinsComprado":1,"ValorComprado":234.50,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+McDonalds[0].price+'}'));
+		   
+	  
+	       myList.push(JSON.parse('{"Nome":"Petrobras","BitCoinsComprado":19.618992,"ValorComprado":167.35,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+petro[0].price+'}'));
+		   
+		   
+	  
    
    
    
@@ -756,7 +839,7 @@ function roundTo(num,num2) {
 			
 			retorno += `			
 			<th>${formatterP.format(TOTDiferencaPercentual)}</th>                    
-			<th>${formatter.format(valorVendaNecessario)}</th>                    
+			<th></th>                    
             </tr>`;
 
 
@@ -854,12 +937,25 @@ function roundTo(num,num2) {
 				{
 	   	      	   
 	                getTeslaValue().then( AcaoTesla => 
-				    {	    
-                        preencheAcoes(getFinancesSTAG(AcaoStag,AcaoO,AcaoTesla,btPrice),0,"myTable4",vlr[0].price);
+				    {	
+                        getEteriumValue().then( Eterium => 
+				        {	
+						
+					        getMIOTAValue().then( Miota => 
+				            {	
+							    getMCDValue().then( MCD => 
+				                {	
+								   getPetroValue().then( petro => 
+				                   {	
+                                      preencheAcoes(getFinancesSTAG(AcaoStag,AcaoO,AcaoTesla,btPrice,Eterium,Miota,MCD,petro),0,"myTable4",vlr[0].price);
 				 
-				        updateBitcoinPrice(vlr[0].price);
+				                      updateBitcoinPrice(vlr[0].price);
                  
-				        printBtcChart();
+				                      printBtcChart();
+									});
+							    });
+							});
+					    });
 				 
 				    });
 

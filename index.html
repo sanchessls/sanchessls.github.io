@@ -302,18 +302,8 @@ async function getStagValue() {
 
 
   async function getMIOTAValue() {
-  
-  
-let response = await fetch("https://min-api.cryptocompare.com/data/price?fsym=MIOTA&tsyms=BTC,USD");
-let data = await response.json();
-
-console.log("resposta atual");
-console.log(data);
-
-return data;
-  
-  //return getFromURLCryptoCompare("https://min-api.cryptocompare.com/data/v2/histoday?fsym=MIOTA&tsym=USD&limit=20&api_key=");
-
+	  console.log("newVersion");
+   return getFromURL("https://fmpcloud.io/v4/cryptolast/IOTAUSD?apikey="); 
 }
 
 
@@ -395,7 +385,7 @@ function ZeraTotais(){
       myList.push(JSON.parse('{"Nome":"Ethereum","BitCoinsComprado":0.057533,"ValorComprado":160,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+ValorEterium[0].price+'}'));	 
    
    
-      myList.push(JSON.parse('{"Nome":"MIOTA","BitCoinsComprado":124.170209,"ValorComprado":260,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+Miota.USD+'}'));
+      myList.push(JSON.parse('{"Nome":"MIOTA","BitCoinsComprado":124.170209,"ValorComprado":260,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+Miota[0].price+'}'));
 	  
 	  
 	       myList.push(JSON.parse('{"Nome":"MC Donalds","BitCoinsComprado":1,"ValorComprado":234.50,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+McDonalds[0].price+'}'));

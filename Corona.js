@@ -157,7 +157,7 @@ function ProcessaRetorono(data,PopulationFinal)
 	  
 	    
 	  
-	  var diasRodar = [ 1, 2, 3, 4, 5 , 6 , 7 , 8 ,9, 10, 15  ,30 , 35 ,40 ,45,50,55  ];
+	  var diasRodar = [ 1, 2, 3, 4, 5 , 6 , 7 , 8 ,9, 10, 15,30 ];
 	    
 	  var jsonObj = [];		  
 	  

@@ -513,7 +513,8 @@ function roundTo(num,num2) {
 		})
 	   
 	   
-	   return myList2;
+	   
+	   return myList2.sort((a, b) => (a.DiferencaPercentual < b.DiferencaPercentual) ? 1 : -1 );
 	  
 	  
    };

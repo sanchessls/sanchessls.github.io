@@ -312,6 +312,7 @@ console.log(data);
 data = String(data).replaceAll("Oxford/AstraZeneca, ", "Oxford/AstraZeneca");
 data = String(data).replaceAll("Moderna, ", "Moderna");
 data = String(data).replaceAll("Pfizer/BioNTech, ", "Pfizer/BioNTech");
+data = String(data).replaceAll("Johnson&Johnson, ", "Johnson&Johnson");
 
 
 
@@ -321,11 +322,14 @@ var jsonObj = [];
 var headers = arr[0].split(',');
 
 
+console.log(arr);
 
+console.log("sanches");
 for(var i = 1; i < arr.length; i++) {
-  var data2 = arr[i].split(',');
-  
-  
+
+  var data2 = arr[i].split(',');  
+
+  console.log(data2);
   
   var obj = {};
   for(var j = 0; j < data2.length; j++) {

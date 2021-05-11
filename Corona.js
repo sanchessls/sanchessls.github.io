@@ -314,7 +314,6 @@ data = String(data).replaceAll("Moderna, ", "Moderna");
 data = String(data).replaceAll("Pfizer/BioNTech, ", "Pfizer/BioNTech");
 
 
-
 var arr = String(data).split('\n');
 
 var jsonObj = [];
@@ -329,6 +328,8 @@ for(var i = 1; i < arr.length; i++) {
   
   var obj = {};
   for(var j = 0; j < data2.length; j++) {
+	  console.log(arr[i]);
+	  console.log(data2);
      obj[headers[j].trim()] = data2[j].trim();
   }
   if (obj.location != "") {  jsonObj.push(obj); }

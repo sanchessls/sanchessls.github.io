@@ -9,6 +9,7 @@
     <script src= "DadosAdicionaisCorona.js"> </script> 	
 	<script src= "population.js"> </script> 	
 	<script src= "GeneralCases.js"> </script> 	
+	<script src= "General.js"> </script> 	
 	
 	 <link rel="stylesheet" href="base.css">
 	<style type="text/css">
@@ -144,6 +145,7 @@ size {
   <a href="Corona.html?percentual=60">Corona 60</a>  
 </div>
 
+<div id="loading"></div>
 
 <table id="test2" class="styled-table"> 
 
@@ -152,12 +154,20 @@ size {
 <table id="test" class="styled-table"> 
 
 <script> 
+    const load = document.querySelector("#loading");
+	
+    
+
+
+     SetLoading(load,true).then(() => {
+	 
 
      
      let CoronaCountry = "Ireland";
 	 let PopulationCountry = "Ireland";
 	 
-	 GetGenralCases(CoronaCountry);
+	 GetGenralCases(CoronaCountry,GetMaxDias()).then((GeneralCasesObj) => 
+	 {
 	 
 	 //let CoronaCountry = "Brazil";
 	 //let PopulationCountry = "Brazil";
@@ -170,11 +180,11 @@ size {
 	 
 	 populacao(PopulationCountry).then((dataP) => {
 	 
-	 console.log(dataP);
+	 
 
      var objetop =  JSON.parse(dataP);	 
 	 
-     F_TableCorona(objmelhordata,objetop.body.population,CoronaCountry).then((data) => {
+     F_TableCorona(objmelhordata,objetop.body.population,CoronaCountry,GeneralCasesObj).then((data) => {
 
     const mytable = document.querySelector("#test");
 	
@@ -186,6 +196,8 @@ size {
        mytable2.innerHTML = objmelhordata.Resumo;
     
 	document.title = objmelhordata.MelhorData.toLocaleString();
+	
+	SetLoading(load,false);
 	
 	
 	  //bar
@@ -213,6 +225,14 @@ size {
 	
 	
 	});
+	
+	});
+	
+	
+	
+	});
+
+
 
 </script> 
 </body> 

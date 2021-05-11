@@ -1,5 +1,20 @@
+var formatterNumber = new Intl.NumberFormat('en-UK', {
+  //style: 'currency',
+  //currency: 'EUR'
 
+  // These options are needed to round to whole numbers if that's what you want.
+  minimumFractionDigits: 2, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+  maximumFractionDigits: 2, // (causes 2500.99 to be printed as $2,501)
+});
 
+//Dias Rodar
+var diasRodar = [ 1,2,3,4,5,6,7,10,20,30];
+
+function GetMaxDias()
+{
+	console.log("Dias Rodar" + diasRodar[diasRodar.length-1]);
+	return diasRodar[diasRodar.length-1];
+}
 
 
 async function F_RETORNA_DADOS(){
@@ -10,17 +25,15 @@ async function F_RETORNA_DADOS(){
 
 
 
-async function F_TableCorona(objMelhorData,PopulationFinal,CoronaCountry)
+async function F_TableCorona(objMelhorData,PopulationFinal,CoronaCountry,GeneralObjectList)
 {
-			 	
-				console.log("chegou");
-				console.log(PopulationFinal);
+			 	   			
 				
 	let data33 = await getCoronaData(CoronaCountry);
 	
 	var data2 = f_TrataLista(data33,CoronaCountry);
 	
-	let objRetorno = ProcessaRetorono(data2,PopulationFinal)
+	let objRetorno = ProcessaRetorono(data2,PopulationFinal,GeneralObjectList)
 	
 	var retorno = "";
 	
@@ -34,6 +47,7 @@ async function F_TableCorona(objMelhorData,PopulationFinal,CoronaCountry)
 			<th>Data Final Estimada</th>
 			<th>people_fully_vaccinated</th>
 			<th>Data Final Estimada</th>
+			<th>Media de Novos Casos</th>
         </tr>
         </thead>
 	    <tbody>
@@ -65,12 +79,14 @@ async function F_TableCorona(objMelhorData,PopulationFinal,CoronaCountry)
          retorno += `
 			<tr class="active-row">
             <td>Media Ultimos ${element.Dias} dias</td>       
-			<td>${element.Media1}</td>       
+			<td>${formatterNumber.format(element.Media1)}</td>       
 			<td>${element.Data1.toLocaleString()}</td>       
-			<td>${element.Media2}</td>       
+			<td>${formatterNumber.format(element.Media2)}</td>       
 			<td>${element.Data2.toLocaleString()}</td>       
-			<td>${element.Media3}</td>       
+			<td>${formatterNumber.format(element.Media3)}</td>       
 			<td>${element.Data3.toLocaleString()}</td>       
+			<td>${formatterNumber.format(element.MediaNovosCasos)}</td>       
+			
 	    </td>   </tr>`
 
 		
@@ -109,6 +125,9 @@ async function F_TableCorona(objMelhorData,PopulationFinal,CoronaCountry)
 		
 		var objeto =  JSON.parse(data2);
      	var objetinho = objeto[objeto.length-1];
+		var perc1 = objetinho.total_vaccinations / (PopulationFinal*2) * 100;
+		var perc2 = objetinho.people_vaccinated / (PopulationFinal*2) * 100;
+		var perc3 = objetinho.people_fully_vaccinated / (PopulationFinal) * 100;
 				
 		newresumo += `<tr>
             <th>Data</th>
@@ -122,9 +141,9 @@ async function F_TableCorona(objMelhorData,PopulationFinal,CoronaCountry)
 			
 			<tr class="active-row">
             <th>${new Date(objetinho.date).toLocaleString()}</th>       
-			<th>${objetinho.total_vaccinations}</th>       
-			<th>${objetinho.people_vaccinated}</th>       
-			<th>${objetinho.people_fully_vaccinated}</th>       
+			<th>${formatterNumber.format(objetinho.total_vaccinations)} From ${formatterNumber.format(PopulationFinal*2)} (${formatterNumber.format(perc1)}%)</th>       
+			<th>${formatterNumber.format(objetinho.people_vaccinated)} From ${formatterNumber.format(PopulationFinal*2)} (${formatterNumber.format(perc2)}%)</th>       
+			<th>${formatterNumber.format(objetinho.people_fully_vaccinated)} From ${formatterNumber.format(PopulationFinal)} (${formatterNumber.format(perc3)}%)</th>       
 			<th>${objMelhorData.MelhorData.toLocaleString()}</th>       
 	    </tr>
 	   </tbody>	`;	
@@ -151,21 +170,15 @@ function GetDiaPesquisa(data)
 	  return objetinho.date;
 }
 
-function ProcessaRetorono(data,PopulationFinal)
-{
-  
-	  
-	    
-	  
-	  var diasRodar = [ 1, 2, 3, 4, 5 , 6 , 7 , 8 ,9, 10, 15,30 ];
-	    
+function ProcessaRetorono(data,PopulationFinal,GeneralObjectList)
+{  	   	   
 	  var jsonObj = [];		  
 	  
 	  var DiaPesquisa = GetDiaPesquisa(data);
 	  
 	
       diasRodar.forEach((element) => {
-		  
+		  console.log("etCasesDay");
 		  
 		var obj = {};	   	 	  	
 	  obj.Dias = element;
@@ -174,13 +187,10 @@ function ProcessaRetorono(data,PopulationFinal)
 	  obj.Valor2 = 0;
 	  obj.Valor3 = 0;
 	  
-	  obj.Media1 = f_get_media(obj.Dias,data,1,obj);
-	  
-	  
-	  
+	  obj.Media1 = f_get_media(obj.Dias,data,1,obj,GeneralObjectList); 	  	  
 	  obj.Media2 = f_get_media(obj.Dias,data,2,obj);
 	  obj.Media3 = f_get_media(obj.Dias,data,3,obj);
-	  
+	    
 	  
 	  
 	  var perc = percentualParametro();
@@ -231,7 +241,7 @@ function addDays(date, days) {
   return result;
 }
 
-function f_get_media(dias,data, type,objvalor)
+function f_get_media(dias,data, type,objvalor,GeneralObjectList)
 {
 	
 	var objeto =  JSON.parse(data);
@@ -261,6 +271,46 @@ function f_get_media(dias,data, type,objvalor)
 		ValorParaUltimoSelecaoMenos1 = UltimoSelecaoMenos1.total_vaccinations;
 		ValorParaUltimoSelecao = UltimoSelecao.total_vaccinations;
 		objvalor.Valor1 = ValorParaUltimoObjeto;
+		
+	   
+		var UltimoObj = total;
+		
+		console.log("UltimoObj");
+		
+		console.log(UltimoObj);
+		
+		var UltimoObjPegar = total-dias;
+		
+				
+	    var indexTotal = 0;
+		var totalCases = 0.0;
+		
+		//outra coisa
+		for	(i=UltimoObj;i > UltimoObjPegar;i--)
+		{	
+            var	casosnodia = GetCasesDay(objeto[i-1],GeneralObjectList);
+			
+			console.log("casosnodia  " + objeto[i-1].date);
+			console.log(casosnodia);
+			
+			totalCases += parseFloat(casosnodia);
+			
+			console.log("TotalFinal");
+			console.log(totalCases);
+			
+			indexTotal ++ ;		
+		}		
+		
+		
+		var median = totalCases / indexTotal;		
+		
+		console.log("Median");
+		
+		console.log(median);
+		
+		objvalor.MediaNovosCasos = median;
+		
+		
 				
 	}
 	if (type == 2) {
@@ -307,7 +357,6 @@ async function getCoronaData(CoronaCountry) {
 let response = await fetch("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/country_data/"+CoronaCountry+".csv");
 let data = await response.text();
 
-console.log(data);
 
 data = String(data).replaceAll("Oxford/AstraZeneca, ", "Oxford/AstraZeneca");
 data = String(data).replaceAll("Moderna, ", "Moderna");
@@ -321,26 +370,22 @@ var jsonObj = [];
 var headers = arr[0].split(',');
 
 
-console.log(arr);
 
-console.log("sanches");
 for(var i = 1; i < arr.length; i++) {
 
   var data2 = arr[i].split(',');  
 
-  console.log(data2);
-  
+    
   var obj = {};
   for(var j = 0; j < data2.length; j++) {
-	  console.log(arr[i]);
-	  console.log(data2);
+	  
      obj[headers[j].trim()] = data2[j].trim();
   }
   if (obj.location != "") {  jsonObj.push(obj); }
 }
 
 
-console.log(jsonObj);
+
 return JSON.stringify(jsonObj);
 
 

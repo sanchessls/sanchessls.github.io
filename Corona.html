@@ -138,9 +138,7 @@ size {
 
 <body> 
 
-<div class="topnav">
-  <a href="index.html">Financias</a>
-  <a href="Cidadania.html">Cidadania</a>
+<div class="topnav">    
   <a class="active" href="Corona.html?percentual=100">Corona 100</a>  
   <a href="Corona.html?percentual=60">Corona 60</a>  
 </div>
@@ -199,6 +197,8 @@ size {
 	
 	SetLoading(load,false);
 	
+	let DataInicial = new Date(2020,02,11,00,00,00);	
+	
 	
 	  //bar
 	 setInterval(function(){ 
@@ -206,12 +206,12 @@ size {
 	 atualiza();
 	 
 	 }, 300);
+	 	 	 
 
     function atualiza(){
 	var w = $(window).width();
-	const mytable = document.querySelector("#testClock");			
-		
-    	P_ATUALIZA(mytable,w-30,50,200,new Date(2021,00,01,01,00,00),objmelhordata.MelhorData);
+	const mytable = document.querySelector("#testClock");					
+    	P_ATUALIZA(mytable,w-30,50,200,DataInicial,objmelhordata.MelhorData,"<br> From "+DataInicial.toLocaleString()+"(Pandemic Starting day)     To     " + objmelhordata.MelhorData.toLocaleString());
 	}
 	
 	    

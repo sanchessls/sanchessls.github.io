@@ -1,4 +1,4 @@
-function F_CIDADANIA(width,height,sizePerc,newDataInicial,newDataFinal){
+function F_CIDADANIA(width,height,sizePerc,newDataInicial,newDataFinal,AditionalText){
 	var datainciial = new Date(2020,5,9,1,0,0);		
 	var dataFinal = new Date(2025,5,9,1,0,0);
 	
@@ -70,13 +70,13 @@ function F_CIDADANIA(width,height,sizePerc,newDataInicial,newDataFinal){
 	}
 
 	
-	return `<span Style="font-size: ${sizePerc}%;">${ String(roundTo(percentual,7,7)).lpad("0",10)} %</span><br>
+	return `<span Style="font-size: ${sizePerc}%;">${ String(roundTo(percentual,7,7)).lpad("0",10)} % ${AditionalText}</span><br>
 	       <span Style="font-size: ${sizePerc}%;">${stringCompleta}</span>
 	       <progress id="file" value="${percentual}" max="100" style="width: ${width}px;height: ${height}px;" > ${percentual} </progress>` ;
 }
 
-function P_ATUALIZA(componente,width,height,sizePerc,data1,data2){
-	  componente.innerHTML = F_CIDADANIA(width,height,sizePerc,data1,data2);
+function P_ATUALIZA(componente,width,height,sizePerc,data1,data2,AditionalText){
+	  componente.innerHTML = F_CIDADANIA(width,height,sizePerc,data1,data2,AditionalText);
 }
 
 

@@ -27,8 +27,11 @@
    
    //new ones
    
-      myList.push(JSON.parse('{"Nome":"Ethereum","BitCoinsComprado":0.057533,"ValorComprado":160,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+ValorEterium[0].price+'}'));	 
-      myList.push(JSON.parse('{"Nome":"Ethereum","BitCoinsComprado":0.110298,"ValorComprado":455.59,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+ValorEterium[0].price+'}'));	 
+      //Juntando em uma so  para facilitar 12/05/2021
+//      myList.push(JSON.parse('{"Nome":"Ethereum","BitCoinsComprado":0.057533,"ValorComprado":160,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+ValorEterium[0].price+'}'));	 
+//      myList.push(JSON.parse('{"Nome":"Ethereum","BitCoinsComprado":0.110298,"ValorComprado":455.59,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+ValorEterium[0].price+'}'));	 
+
+      myList.push(JSON.parse('{"Nome":"Ethereum","BitCoinsComprado":0.167831,"ValorComprado":615.59,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+ValorEterium[0].price+'}'));	 
    
    
       myList.push(JSON.parse('{"Nome":"MIOTA","BitCoinsComprado":124.170209,"ValorComprado":260,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+Miota.USD+'}'));

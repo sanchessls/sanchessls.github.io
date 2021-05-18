@@ -60,7 +60,7 @@
 	  
    
    
-   myList.push(JSON.parse('{"Nome":"Cash Flow","BitCoinsComprado":1,"ValorComprado":0,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":0}'));
+   //myList.push(JSON.parse('{"Nome":"Cash Flow","BitCoinsComprado":1,"ValorComprado":0,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":0}'));
 	 				 				
 	 return myList;
 	 

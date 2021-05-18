@@ -22,7 +22,9 @@
  	  	   
 		
 	 myList.push(JSON.parse('{"Nome":"STAG","BitCoinsComprado":6,"ValorComprado":206.22,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+valorstag[0].price+'}'));
-	 myList.push(JSON.parse('{"Nome":"O-Reit","BitCoinsComprado":4.85,"ValorComprado":312,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+valorO[0].price+'}'));
+	 //myList.push(JSON.parse('{"Nome":"O-Reit","BitCoinsComprado":4.85,"ValorComprado":312,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+valorO[0].price+'}'));
+	 myList.push(JSON.parse('{"Nome":"O-Reit","BitCoinsComprado":7.791896,"ValorComprado":505.58,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+valorO[0].price+'}'));
+	 
    myList.push(JSON.parse('{"Nome":"Tesla","BitCoinsComprado":0.27914,"ValorComprado":173,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+valorTesla[0].price+'}'));	 
    
    //new ones
@@ -58,7 +60,7 @@
 	  
    
    
-   myList.push(JSON.parse('{"Nome":"Cash Flow","BitCoinsComprado":1,"ValorComprado":193.58,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":193.58}'));
+   myList.push(JSON.parse('{"Nome":"Cash Flow","BitCoinsComprado":1,"ValorComprado":0,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":0}'));
 	 				 				
 	 return myList;
 	 

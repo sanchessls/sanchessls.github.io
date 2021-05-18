@@ -40,7 +40,8 @@
 	       myList.push(JSON.parse('{"Nome":"MC Donalds","BitCoinsComprado":1,"ValorComprado":234.50,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+McDonalds[0].price+'}'));
 		   
 	  
-	       myList.push(JSON.parse('{"Nome":"Petrobras","BitCoinsComprado":19.618992,"ValorComprado":167.35,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+petro[0].price+'}'));
+	       //myList.push(JSON.parse('{"Nome":"Petrobras","BitCoinsComprado":19.618992,"ValorComprado":167.35,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+petro[0].price+'}'));
+		   //Vendido em 18/05/2021
 		   
 	   
 		//Partifoilio 1   
@@ -57,7 +58,7 @@
 	  
    
    
-   myList.push(JSON.parse('{"Nome":"Cash Flow","BitCoinsComprado":1,"ValorComprado":1.31,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":1.31}'));
+   myList.push(JSON.parse('{"Nome":"Cash Flow","BitCoinsComprado":1,"ValorComprado":193.58,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":193.58}'));
 	 				 				
 	 return myList;
 	 

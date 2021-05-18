@@ -12,6 +12,7 @@
 	<script src= "General.js"> </script> 	
 	
 	 <link rel="stylesheet" href="base.css">
+	 <link rel="stylesheet" href="dropdownmenu.css">
 	<style type="text/css">
     .title {
         color: blue;
@@ -139,8 +140,20 @@ size {
 <body> 
 
 <div class="topnav">    
-  <a class="active" href="Corona.html?percentual=100">Corona 100</a>  
-  <a href="Corona.html?percentual=60">Corona 60</a>  
+  <a class="active" href="Corona.html?percentual=100&Country=Ireland">Corona 100</a>  
+  <a href="Corona.html?percentual=60&Country=Ireland">Corona 60</a>  
+</div>
+
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Country Selection</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="Corona.html?percentual=100&Country=Ireland">Ireland</a>
+    <a href="Corona.html?percentual=100&Country=Brazil">Brazil</a>
+	<a href="Corona.html?percentual=100&Country=Israel">Israel</a>
+	<a href="Corona.html?percentual=100&Country=United Kingdom">United Kingdom</a>
+	<a href="Corona.html?percentual=100&Country=United States">United States</a>
+	<a href="Corona.html?percentual=100&Country=Australia">Australia</a>	
+  </div>
 </div>
 
 <div id="loading"></div>
@@ -152,6 +165,28 @@ size {
 <table id="test" class="styled-table"> 
 
 <script> 
+
+     //dropdown menu/
+	 /* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+	 //
     const load = document.querySelector("#loading");
 	
     
@@ -161,8 +196,11 @@ size {
 	 
 
      
-     let CoronaCountry = "Ireland";
-	 let PopulationCountry = "Ireland";
+     let CoronaCountry = NomePaisParametro();
+	 let PopulationCountry = CoronaCountry;
+	 
+	 console.log("selected Country: ");
+	 console.log(CoronaCountry);
 	 
 	 GetGenralCases(CoronaCountry,GetMaxDias()).then((GeneralCasesObj) => 
 	 {

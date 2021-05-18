@@ -6,7 +6,6 @@ async function GetGenralCases(cidade,maxDias)
  //allowing 10 days ahead cuz date is always at least 3 days behind today
  dataFixa.setDate(dataFixa.getDate()-(maxDias +10));
 
-console.log("Data Fixa " + dataFixa);
 
 let response =  await fetch("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/jhu/full_data.csv");
 
@@ -17,7 +16,6 @@ var arr = String(data).split('\n');
 var jsonObj = [];
 var headers = arr[0].split(',');
 
-console.log("count gigante? : " + arr.length)
 
 for(var i = (arr.length-1); i > 0; i--) 
 {	   
@@ -26,14 +24,14 @@ for(var i = (arr.length-1); i > 0; i--)
 	
 	if (data2[1] == cidade)
 	{	
-       console.log(data2);
+       
 		
 	   let dataNew =  new Date(data2[0]);
-	   console.log("dataNew "  + dataNew);
+	   
 	   
 	   
 	   if (dataNew >= dataFixa) {
-	       console.log("dataNew Entrou");
+	       
           var obj = {};
           
 	      for(var j = 0; j < data2.length; j++) 
@@ -47,15 +45,15 @@ for(var i = (arr.length-1); i > 0; i--)
 	   }
 	   else 
 	   {
-		   console.log("dataNew NAO Entrou");
-		   console.log("testaBreak");
+		   
+		   
 		   break;
 	   }
     }
    
 }
 
-console.log("testaBreak ??");
+
 
 
 return jsonObj;
@@ -72,24 +70,17 @@ function GetCasesDay(objData,GeneralObjectList)
 	{
 		if (result <= 0 ) {
 	   let data = new Date(element.date);
-	   
-	   console.log("");	
-	   console.log(DataToFind);	
-	   console.log(data);	
-	   console.log("");	
-	   
+	   	   	 
 	   if (CheckData(DataToFind,data)) 
-	   {
-		   console.log("AQUI RETORNOU VERDADEIRO?");
-		   
-		   console.log(element);
+	   {		   
+		  		  
 		  result = element.new_cases;          		  
 	   }
 	   
 		}
 	});	
 	
-	console.log("Valor que vai retornar : " + result);
+	
 	return result;
 
 }
@@ -101,11 +92,11 @@ function dateTimeless(datess)
 function CheckData(d1,d2) 
 {
 	if (dateTimeless(d1) === dateTimeless(d2)) {
-		console.log("Igual")	;
+		
 		return true;
 		}
 	else {
-		console.log("Diferente")	;
+		
 		return false;
 	}
 	

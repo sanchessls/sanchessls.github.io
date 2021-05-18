@@ -49,12 +49,15 @@
 	   //Partifoilio 2
 	   myList.push(JSON.parse('{"Nome":"P - Spark Liang","BitCoinsComprado":1,"ValorComprado":746.04,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":'+valorPSparkLiang+'}'));
 	   
+	   
+	   
+	   
 		   
 		   
 	  
    
    
-   
+   myList.push(JSON.parse('{"Nome":"Cash Flow","BitCoinsComprado":1,"ValorComprado":1.31,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0,"valorbitcoin":1.31}'));
 	 				 				
 	 return myList;
 	 

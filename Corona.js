@@ -12,7 +12,6 @@ var diasRodar = [ 1,2,3,4,5,6,7,10,20,30];
 
 function GetMaxDias()
 {
-	console.log("Dias Rodar" + diasRodar[diasRodar.length-1]);
 	return diasRodar[diasRodar.length-1];
 }
 
@@ -178,7 +177,7 @@ function ProcessaRetorono(data,PopulationFinal,GeneralObjectList)
 	  
 	
       diasRodar.forEach((element) => {
-		  console.log("etCasesDay");
+		  
 		  
 		var obj = {};	   	 	  	
 	  obj.Dias = element;
@@ -207,7 +206,35 @@ function ProcessaRetorono(data,PopulationFinal,GeneralObjectList)
 	
 }
 
+function NomePaisParametro()
+  {
+	var cDefault = "Ireland";
+	  
+	try {
+   var parameters = location.search.substring(1).split("&");
+	console.log("params");
 
+    console.log(parameters);
+    var temp = parameters[1].split("=");
+	
+	console.log(temp);
+	
+    l = unescape(temp[1]);
+	
+	console.log(l);
+	
+	if (l == "undefined") {
+      return "Ireland";
+	}
+	
+	return l;
+}
+catch(err) {
+  return "Ireland";
+}
+ 
+
+  }  
 function percentualParametro()
   {
 	
@@ -271,13 +298,8 @@ function f_get_media(dias,data, type,objvalor,GeneralObjectList)
 		ValorParaUltimoSelecaoMenos1 = UltimoSelecaoMenos1.total_vaccinations;
 		ValorParaUltimoSelecao = UltimoSelecao.total_vaccinations;
 		objvalor.Valor1 = ValorParaUltimoObjeto;
-		
-	   
-		var UltimoObj = total;
-		
-		console.log("UltimoObj");
-		
-		console.log(UltimoObj);
+			   
+		var UltimoObj = total;		
 		
 		var UltimoObjPegar = total-dias;
 		
@@ -288,30 +310,17 @@ function f_get_media(dias,data, type,objvalor,GeneralObjectList)
 		//outra coisa
 		for	(i=UltimoObj;i > UltimoObjPegar;i--)
 		{	
-            var	casosnodia = GetCasesDay(objeto[i-1],GeneralObjectList);
-			
-			console.log("casosnodia  " + objeto[i-1].date);
-			console.log(casosnodia);
+            var	casosnodia = GetCasesDay(objeto[i-1],GeneralObjectList);								
 			
 			totalCases += parseFloat(casosnodia);
-			
-			console.log("TotalFinal");
-			console.log(totalCases);
 			
 			indexTotal ++ ;		
 		}		
 		
 		
 		var median = totalCases / indexTotal;		
-		
-		console.log("Median");
-		
-		console.log(median);
-		
-		objvalor.MediaNovosCasos = median;
-		
-		
-				
+
+		objvalor.MediaNovosCasos = median;						
 	}
 	if (type == 2) {
 		ValorParaUltimoObjeto = UltimoObjeto.people_vaccinated;

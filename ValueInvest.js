@@ -8,5 +8,11 @@
 
    //08/05/2021
 
-   var valorPRichard = 500.58;
-   var valorPSparkLiang = 736.52;
+   //var valorPRichard = 500.58;
+   //var valorPSparkLiang = 736.52;
+   
+   //18/05/2021
+   var valorPRichard = 496.33;
+   var valorPSparkLiang = 714.20;
+   
+   

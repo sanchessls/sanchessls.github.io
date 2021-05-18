@@ -13,148 +13,35 @@
 	
 	 <link rel="stylesheet" href="base.css">
 	 <link rel="stylesheet" href="dropdownmenu.css">
-	<style type="text/css">
-    .title {
-        color: blue;
-        text-decoration: bold;
-        text-size: 1em;
-    }
 
-    .author {
-        color: gray;
-    }
-	.styled-table thead tr {
-    background-color: #009879;
-    color: #ffffff;
-    text-align: left;
-}
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
-.styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-    border-bottom: 20px solid #009879;
-    background-color: #f3f3f3;
-}
-
-.styled-table tbody tr:last-child {
-    background-color: lightblue;
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
-}
-.styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: #009879;
-}
-///  Fonts  ///
-h1 {
-    font-size: 1.5em;
-}
-
-h2 {
-    font-size: 1.25em;
-}
-
-h1, 
-h2, 
-p {
-    font-family: 'Red Hat Text', sans-serif;
-    color: #303030;
-}
-
-/// Card Container ///
-.container {
-    display: flex;
-    justify-content: center;
-}
-
-
-/// Cards ///
-cards {
-    width: 90%;
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-
-.btc {
-    display: grid;
-    //max-width: 600px;
-    min-width: 250px;	
-    grid-template-columns: 1fr;
-    grid-template-rows: minmax(50px, 60px) 1fr;
-    grid-template: 
-        "info"
-        "chart";
-    border-radius: 30px;
-}
-
-.btc {
-    box-shadow: 10px 10px 20px 1px rgba(247,147,26,.15);
-}
-
-.asset-info {
-    grid-area: info;
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 5% 0 5%;
-	max-height:100px;
-}
-
-.title {
-    display: inline-flex;
-}
-
-card h1 {
-    margin-left: 10px;
-}
-
-size {
-	max-height: 800px;
-	max-width:1750px;
-}
-
-
-/// Charts ///
-#btcChart {
-    grid-area: chart;
-    border-radius: 0px 0px 30px 30px;
-    margin-top: auto;
-
-}
-
-
-    </style>
 </head> 
 
 <body> 
 
 <div class="topnav">    
-  <a class="active" href="Corona.html?percentual=100&Country=Ireland">Corona 100</a>  
-  <a href="Corona.html?percentual=60&Country=Ireland">Corona 60</a>  
+  <a class="active" href="Corona.html">Corona Data</a>    
 </div>
 
 <div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">Country Selection</button>
+  <button id="bt1" onclick="myFunction()" class="dropbtn">Country Selection</button>
   <div id="myDropdown" class="dropdown-content">
-    <a href="Corona.html?percentual=100&Country=Ireland">Ireland</a>
-    <a href="Corona.html?percentual=100&Country=Brazil">Brazil</a>
-	<a href="Corona.html?percentual=100&Country=Israel">Israel</a>
-	<a href="Corona.html?percentual=100&Country=United Kingdom">United Kingdom</a>
-	<a href="Corona.html?percentual=100&Country=United States">United States</a>
-	<a href="Corona.html?percentual=100&Country=Australia">Australia</a>	
+    <a onclick='SelectCountry("Ireland")'>Ireland</a>
+	<a onclick='SelectCountry("Brazil")'>Brazil</a>
+	<a onclick='SelectCountry("Israel")'>Israel</a>
+	<a onclick='SelectCountry("United Kingdom")'>United Kingdom</a>
+	<a onclick='SelectCountry("United States")'>United States</a>
+	<a onclick='SelectCountry("Australia")'>Australia</a>
   </div>
 </div>
+
+<div class="dropdown">
+  <button id="bt2" onclick="myFunction2()" class="dropbtn">Percentual Selection</button>
+  <div id="myDropdown2" class="dropdown-content">
+    <a onclick='SelectPerc("60")'>60%</a>
+	<a onclick='SelectPerc("100")'>100%</a>	
+  </div>
+</div>
+
 
 <div id="loading"></div>
 
@@ -173,31 +60,76 @@ function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
 
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
+  
+	function myFunction2() {
+  document.getElementById("myDropdown2").classList.toggle("show");
 }
-	 //
-    const load = document.querySelector("#loading");
-	
-    
 
+function P_SET_LABEL(countryS,percS){
+    
+	document.getElementById("myDropdown").classList.remove("show");
+	document.getElementById("myDropdown2").classList.remove("show");
+	
+	document.getElementById("myDropdown").classList.toggle("hide");
+	document.getElementById("myDropdown2").classList.toggle("hide");
+	
+	
+	document.getElementById("bt1").innerHTML  = "Country Selection ("+countryS+")";
+	document.getElementById("bt2").innerHTML  = "Percentual Selection ("+percS+")";
+
+    //const mytable = document.querySelector("#countryLabel");
+	
+    //mytable.innerHTML = "<div class='announcment'>Country: "+countryS+" Percentage: "+percS+"%</div>";
+	
+}
+
+
+
+	var IntervalAtualToStop = null;
+         
+	
+    var SelectedCountry = "Ireland";
+	var PercentSelected = 100;
+	 
+	 
+	 function SelectCountry(c)
+	 {
+	   SelectedCountry = c;
+	   P_CARREGA_TELA();
+	 }
+	 
+	  function SelectPerc(c)
+	 {
+	   PercentSelected = c;
+	   P_CARREGA_TELA();
+	 }
+	 
+	 
+	 
+    P_CARREGA_TELA();
+
+	
+	function P_CARREGA_TELA()
+	{
+	    let contryy = SelectedCountry;
+		let TotalPerc = PercentSelected;
+		
+		P_SET_LABEL(contryy,TotalPerc);
+		
+	
+	    console.log("P_CARREGA_TELA " + contryy + " + " + TotalPerc);
+		
+		clearInterval(IntervalAtualToStop);
+		
+	    let CoronaCountry = contryy;
+	    let PopulationCountry = CoronaCountry;
+	
+	    //
+    const load = document.querySelector("#loading");  
 
      SetLoading(load,true).then(() => {
 	 
-
-     
-     let CoronaCountry = NomePaisParametro();
-	 let PopulationCountry = CoronaCountry;
+    
 	 
 	 console.log("selected Country: ");
 	 console.log(CoronaCountry);
@@ -220,7 +152,7 @@ window.onclick = function(event) {
 
      var objetop =  JSON.parse(dataP);	 
 	 
-     F_TableCorona(objmelhordata,objetop.body.population,CoronaCountry,GeneralCasesObj).then((data) => {
+     F_TableCorona(objmelhordata,objetop.body.population,CoronaCountry,GeneralCasesObj,TotalPerc).then((data) => {
 
     const mytable = document.querySelector("#test");
 	
@@ -239,11 +171,13 @@ window.onclick = function(event) {
 	
 	
 	  //bar
-	 setInterval(function(){ 
+	 var intervalatual = setInterval(function(){ 
 	 
 	 atualiza();
 	 
 	 }, 300);
+	 
+	 IntervalAtualToStop = intervalatual;
 	 	 	 
 
     function atualiza(){
@@ -269,6 +203,13 @@ window.onclick = function(event) {
 	
 	
 	});
+	
+	
+	}
+	
+
+
+	
 
 
 

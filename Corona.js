@@ -24,7 +24,7 @@ async function F_RETORNA_DADOS(){
 
 
 
-async function F_TableCorona(objMelhorData,PopulationFinal,CoronaCountry,GeneralObjectList)
+async function F_TableCorona(objMelhorData,PopulationFinal,CoronaCountry,GeneralObjectList,TotalPerc)
 {
 			 	   			
 				
@@ -32,7 +32,7 @@ async function F_TableCorona(objMelhorData,PopulationFinal,CoronaCountry,General
 	
 	var data2 = f_TrataLista(data33,CoronaCountry);
 	
-	let objRetorno = ProcessaRetorono(data2,PopulationFinal,GeneralObjectList)
+	let objRetorno = ProcessaRetorono(data2,PopulationFinal,GeneralObjectList,TotalPerc)
 	
 	var retorno = "";
 	
@@ -169,7 +169,7 @@ function GetDiaPesquisa(data)
 	  return objetinho.date;
 }
 
-function ProcessaRetorono(data,PopulationFinal,GeneralObjectList)
+function ProcessaRetorono(data,PopulationFinal,GeneralObjectList,TotalPerc)
 {  	   	   
 	  var jsonObj = [];		  
 	  
@@ -192,7 +192,7 @@ function ProcessaRetorono(data,PopulationFinal,GeneralObjectList)
 	    
 	  
 	  
-	  var perc = percentualParametro();
+	  var perc = TotalPerc;
 	  
 	  obj.Data1 = f_get_data(obj.Media1,((PopulationFinal*2)*perc/100) - obj.Valor1,DiaPesquisa);
 	  obj.Data2 = f_get_data(obj.Media2,((PopulationFinal*2)*perc/100)- obj.Valor2,DiaPesquisa);
@@ -206,52 +206,6 @@ function ProcessaRetorono(data,PopulationFinal,GeneralObjectList)
 	
 }
 
-function NomePaisParametro()
-  {
-	var cDefault = "Ireland";
-	  
-	try {
-   var parameters = location.search.substring(1).split("&");
-	console.log("params");
-
-    console.log(parameters);
-    var temp = parameters[1].split("=");
-	
-	console.log(temp);
-	
-    l = unescape(temp[1]);
-	
-	console.log(l);
-	
-	if (l == "undefined") {
-      return "Ireland";
-	}
-	
-	return l;
-}
-catch(err) {
-  return "Ireland";
-}
- 
-
-  }  
-function percentualParametro()
-  {
-	
-    var parameters = location.search.substring(1).split("&");
-	
-
-    var temp = parameters[0].split("=");
-	
-    l = unescape(temp[1]);
-	
-	if (l == "undefined") {
-      return 100;
-	}
-	
-	return l;
-
-  }
 
 function f_get_data(media,total,DiaPesquisa)
 {	

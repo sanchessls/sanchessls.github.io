@@ -325,6 +325,10 @@ data = String(data).replaceAll("Oxford/AstraZeneca, ", "Oxford/AstraZeneca");
 data = String(data).replaceAll("Moderna, ", "Moderna");
 data = String(data).replaceAll("Pfizer/BioNTech, ", "Pfizer/BioNTech");
 data = String(data).replaceAll("Johnson&Johnson, ", "Johnson&Johnson");
+data = String(data).replaceAll("Beijing, ", "Beijing");
+data = String(data).replaceAll("Sinopharm, ", "Sinopharm");
+data = String(data).replaceAll("Oxford, ", "Oxford");
+data = String(data).replaceAll("AstraZeneca, ", "AstraZeneca");
 
 
 var arr = String(data).split('\n');
@@ -338,6 +342,8 @@ for(var i = 1; i < arr.length; i++) {
 
   var data2 = arr[i].split(',');  
 
+  console.log(arr[i]);
+  console.log(data2);
     
   var obj = {};
   for(var j = 0; j < data2.length; j++) {

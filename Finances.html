@@ -1,0 +1,1072 @@
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Red+Hat+Text:400,500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="64x64" href="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/btc.svg">
+    <link rel="stylesheet" href="base.css">	
+<script src= "ValueInvest.js"> </script> 	
+<script src= "InvestimentsDatbase.js"> </script> 	
+ <style type="text/css">
+    .title {
+        color: blue;
+        text-decoration: bold;
+        text-size: 1em;
+    }
+
+    .author {
+        color: gray;
+    }
+	.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    border-bottom: 20px solid #009879;
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-child {
+    background-color: lightblue;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+///  Fonts  ///
+h1 {
+    font-size: 1.5em;
+}
+
+h2 {
+    font-size: 1.25em;
+}
+
+h1, 
+h2, 
+p {
+    font-family: 'Red Hat Text', sans-serif;
+    color: #303030;
+}
+
+/// Card Container ///
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+
+/// Cards ///
+cards {
+    width: 90%;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.btc {
+    display: grid;
+    //max-width: 600px;
+    min-width: 250px;	
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(50px, 60px) 1fr;
+    grid-template: 
+        "info"
+        "chart";
+    border-radius: 30px;
+}
+
+.btc {
+    box-shadow: 10px 10px 20px 1px rgba(247,147,26,.15);
+}
+
+.asset-info {
+    grid-area: info;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5% 0 5%;
+	max-height:100px;
+}
+
+.title {
+    display: inline-flex;
+}
+
+card h1 {
+    margin-left: 10px;
+}
+
+size {
+	max-height: 800px;
+	max-width:1750px;
+}
+
+
+/// Charts ///
+#btcChart {
+    grid-area: chart;
+    border-radius: 0px 0px 30px 30px;
+    margin-top: auto;
+
+}
+
+
+    </style>
+	</head>
+<body>
+
+<div class="topnav">
+  <a class="active" href="Finances.html">Financias</a>
+  <a href="Cidadania.html">Cidadania</a>
+  <a href="Index.html">Corona Data</a>    
+</div>
+
+
+<table id="mytable4" class="styled-table"> 
+
+</table>
+<hr>
+ <cards class="cards">
+        <bitcoin style="width: 50%" class="btc">
+            <card class="asset-info">
+                <div class="details">
+                    <h2 class="asset-price size" id="btcPrice"></h2>
+                </div>
+            </card>
+            <canvas id="btcChart"></canvas>
+        </bitcoin>                    
+    </cards>
+	
+	
+<script>
+
+		var TOTValorComprado = 0.00;
+			var TOTBitcoinsTotal = 0;
+			var TOTPercentualTaxaVenda = 0;
+			var TOTValorAtualBitCoin = 0;
+			var TOTValorQuandoComprado = 0;
+			var TOTValorQuandoCompradoTax = 0;
+			var TOTValorVenda = 0;
+			var TOTValorTaxavenda = 0;
+			var TOTValorFinal = 0;
+			var TOTDiferenca = 0;
+			var TOTDiferencaPercentual = 0;
+			
+
+// Create our number formatter.
+var formatterP = new Intl.NumberFormat('en-US', {
+  style: 'percent',
+  
+  // These options are needed to round to whole numbers if that's what you want.
+  minimumFractionDigits: 3, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+  maximumFractionDigits: 3 // (causes 2500.99 to be printed as $2,501)
+});
+
+var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD'
+
+  // These options are needed to round to whole numbers if that's what you want.
+  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+});
+
+var formatterEURO = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'EUR'
+
+  // These options are needed to round to whole numbers if that's what you want.
+  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+});
+
+
+var API1 = "bf72a07f8c7d511933ea74e428347d10";
+var API2 = "2b621d662d8a06448775afe4bf63cf81";
+
+
+async function getFromURL(url)
+{
+
+let response = await fetch(url+API1);
+let data = await response.json();
+
+var a = JSON.stringify(data);
+
+var b = a.search("Limit Reach");
+
+if (b > -1) 
+{
+
+  response = await fetch(url+API2);
+  data = await response.json();  
+}
+
+
+
+
+return data;
+
+
+}
+
+var API1CC = "0646cc7b8a4d4b54926c74e0b20253b57fd4ee406df79b3d57d5439874960146";
+var API2CC = "b79df96143451f55a5c9e1dbbc270fd57508c41148e7794dd98f7a7c7ea18b88";
+
+
+
+async function getFromURLCryptoCompare(url)
+{
+
+let response = await fetch(url+API1CC);
+let data = await response.json();
+
+console.log("reposssstaaaa");
+
+console.log(data);
+
+var a = JSON.stringify(data);
+
+var b = a.search("Limit Reach");
+
+if (b > -1) 
+{
+
+  response = await fetch(url+API2CC);
+  data = await response.json();  
+}
+
+
+
+
+return data;
+
+
+}
+
+
+  async function getBitCoinValue() {
+//let response = await fetch("https://blockchain.info/ticker");
+//let data = await response.json();
+//return data;
+   return getFromURL("https://financialmodelingprep.com/api/v3/quote/BTCUSD?apikey=");
+
+}
+
+async function getStagValue() {
+   return getFromURL("https://financialmodelingprep.com/api/v3/profile/STAG?apikey=");
+}
+
+  async function getOValue() {
+  return getFromURL("https://financialmodelingprep.com/api/v3/profile/O?apikey=");
+}
+
+  async function getTeslaValue() {
+  return getFromURL("https://financialmodelingprep.com/api/v3/profile/TSLA?apikey=");
+
+}
+
+  async function getMCDValue() {
+  return getFromURL("https://financialmodelingprep.com/api/v3/profile/MCD?apikey=");
+
+}
+
+
+  async function getPetroValue() {
+  return getFromURL("https://financialmodelingprep.com/api/v3/profile/PBR?apikey=");
+
+}
+
+  async function getEuroXDollar() {
+   return getFromURL("https://financialmodelingprep.com/api/v3/quote/USDEUR?apikey=");
+}
+
+  async function getEteriumValue() {
+  return getFromURL("https://financialmodelingprep.com/api/v3/quote/ETHUSD?apikey=");
+
+}
+
+
+  async function getMIOTAValue() {
+  
+  
+let response = await fetch("https://min-api.cryptocompare.com/data/price?fsym=MIOTA&tsyms=BTC,USD");
+let data = await response.json();
+
+console.log("resposta atual");
+console.log(data);
+
+return data;
+  
+  //return getFromURLCryptoCompare("https://min-api.cryptocompare.com/data/v2/histoday?fsym=MIOTA&tsym=USD&limit=20&api_key=");
+
+}
+
+
+
+function ZeraTotais(){
+	        TOTValorComprado = 0.00;
+			TOTBitcoinsTotal = 0;
+			TOTPercentualTaxaVenda = 0;
+			TOTValorAtualBitCoin = 0;
+			TOTValorQuandoComprado = 0;
+			TOTValorQuandoCompradoTax = 0;
+			TOTValorVenda = 0;
+			TOTValorTaxavenda = 0;
+			TOTValorFinal = 0;
+			TOTDiferenca = 0;
+			TOTDiferencaPercentual = 0;
+}
+
+   function getFinancesRevolut() {
+     var myList = new Array();
+	 //myList.push(JSON.parse('{"BitCoinsComprado":0.00036898,"ValorComprado":15.0,"PercentualRevolut":2.5,"ValuesToReturn":null,"BitCoinsFee":9.59E-06}'));
+	 //myList.push(JSON.parse('{"BitCoinsComprado":0.00287298,"ValorComprado":116.61,"PercentualRevolut":2.5,"ValuesToReturn":null,"BitCoinsFee":7.375E-05}'));
+//	 myList.push(JSON.parse('{"BitCoinsComprado":0.01079702,"ValorComprado":465.00,"PercentualRevolut":2.5,"ValuesToReturn":null,"BitCoinsFee":0.00027695}'));
+	 //myList.push(JSON.parse('{"BitCoinsComprado":0.0127012,"ValorComprado":550.00,"PercentualRevolut":3,"ValuesToReturn":null,"BitCoinsFee":0.00034342}'));	 				 				
+	 return myList;
+	 
+}
+
+   function getFinancesNovo() {
+     var myList = new Array();
+	 
+       //myList.push(JSON.parse('{"BitCoinsComprado":0.00315700,"ValorComprado":178.45,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0.0000547213}'));;	 				 				
+	   //myList.push(JSON.parse('{"BitCoinsComprado":0.00315700,"ValorComprado":154.92,"PercentualRevolut":0,"ValuesToReturn":null,"BitCoinsFee":0.00,"valorbitcoin":49071.90}'));;	 				
+	 return myList;
+	 
+		 
+}
+
+
+   function getFinancesETORO() {
+     var myList = new Array();
+	 
+	 //Binance one
+	 //myList.push(JSON.parse('{"BitCoinsComprado":0.003454,"ValorComprado":181.99,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0}'));
+	   //Vendido
+	 
+
+	 //Unificando 3 , para mostrar mais bonito  
+	 //myList.push(JSON.parse('{"Nome":"BTC","BitCoinsComprado":0.025355,"ValorComprado":1485.04,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0}'));
+	 //myList.push(JSON.parse('{"Nome":"BTC","BitCoinsComprado":0.003199,"ValorComprado":181.09,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0}'));	 
+	 //myList.push(JSON.parse('{"Nome":"BTC","BitCoinsComprado":0.000464,"ValorComprado":27.35,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0}'));	   
+        //myList.push(JSON.parse('{"Nome":"BTC","BitCoinsComprado":0.000664,"ValorComprado":35.21,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0}'));	   
+         
+	   myList.push(JSON.parse('{"Nome":"BTC","BitCoinsComprado":0.029682,"ValorComprado":1728.69,"PercentualRevolut":1,"ValuesToReturn":null,"BitCoinsFee":0}'));
+	 				 				
+	 return myList;
+	 
+}
+
+
+function roundTo(num,num2) {    
+    return +(Math.round(num + "e+"+num2)  + "e-" + num2);
+}
+
+
+   function CalculaTudo(finances,bitcoin)
+   {
+   
+   		var TOTValorComprado = 0.00;
+			var TOTBitcoinsTotal = 0;
+			var TOTPercentualTaxaVenda = 0;
+			var TOTValorAtualBitCoin = 0;
+			var TOTValorQuandoComprado = 0;
+			var TOTValorQuandoCompradoTax = 0;
+			var TOTValorVenda = 0;
+			var TOTValorTaxavenda = 0;
+			var TOTValorFinal = 0;
+			var TOTDiferenca = 0;
+			var TOTDiferencaPercentual = 0;
+			
+   
+       var myList2 = new Array();
+	  
+	    finances.forEach(e => {		
+		
+		  
+          var ValorBitCoinUsarCalculo = bitcoin;
+		  
+		  
+		  if (e.valorbitcoin != undefined) {
+		    
+		   ValorBitCoinUsarCalculo = e.valorbitcoin;
+		  }
+
+          
+		  
+		
+		  var valorvendaTU = (e.BitCoinsComprado * ValorBitCoinUsarCalculo);
+		  var valortaxa = ((valorvendaTU * e.PercentualRevolut) / 100);
+		  var valorfinalTU = valorvendaTU - valortaxa;
+		    
+		  var valorPreciso1 = e.ValorComprado/e.BitCoinsComprado;
+		  var taxafinal = roundTo((e.ValorComprado * e.PercentualRevolut / 100),2,2); //aqui q vai ter q colocar
+		  
+		  
+		  
+		  var valorTaxaAdd = taxafinal / e.BitCoinsComprado;
+		  
+		    
+		  
+		  var valorFinalEquivalar = valorPreciso1 + valorTaxaAdd;
+		  
+
+		  
+		  
+	
+		  var objetoNovo = {  
+		    Nome: e.Nome,
+            ValorComprado: e.ValorComprado,
+            BitcoinsTotal: e.BitCoinsComprado,			
+			PercentualTaxaVenda: e.PercentualRevolut/100,
+			ValorAtualBitCoin: ValorBitCoinUsarCalculo,
+			ValorQuandoComprado: (e.ValorComprado / (e.BitCoinsComprado + e.BitCoinsFee)),
+			ValorQuandoCompradoTax: (e.ValorComprado / (e.BitCoinsComprado )),
+			ValorVenda: valorvendaTU,
+			ValorTaxavenda: valortaxa,
+			ValorFinal: valorfinalTU,
+			Diferenca: valorfinalTU - e.ValorComprado,
+			DiferencaPercentual: (((valorfinalTU / e.ValorComprado) - 1)),
+			ValorEquivalar: valorFinalEquivalar
+};
+		  
+		  
+		   
+			 
+			 
+		     myList2.push(objetoNovo);
+		})
+	   
+	   
+	   
+	   return myList2.sort((a, b) => (a.DiferencaPercentual < b.DiferencaPercentual) ? 1 : -1 );
+	  
+	  
+   };
+   
+   
+  function preencheTabela(onlyTotal,finances,bitcoin,tablename,exchangerate) {
+        ZeraTotais();
+		
+		
+		var objetoCompleto = CalculaTudo(finances,bitcoin);		
+						
+		
+		
+	    var retorno = ``;
+		
+
+		retorno += `<thead>
+        <tr>
+            <th>Nome</th>
+			<th>Valor Comprado</th>
+            <th>Bit coins Total</th>
+			<th>Percentual Taxa Venda</th>
+			<th>Valor Atual Bit Coin</th>
+			<th>Valor Quando Comprado</th>
+			<th>Valor Venda</th>
+			<th>Valor Taxa venda</th>
+			<th>Valor Final</th>
+			<th>Diferenca</th>
+			<th>Diferenca Percentual</th>
+			<th>Valor Equivalar</th>
+        </tr>
+        </thead>
+		    <tbody>`;
+			
+	        var partial = "";
+			
+			objetoCompleto.forEach(element => {
+			
+			
+			
+					partial += `     
+					<tr class="active-row">
+            <th>${element.Nome}</th>       
+			
+			<th>${formatter.format(element.ValorComprado)}</th>       
+ 			
+			<th>${element.BitcoinsTotal}</th>
+			
+			<th>${formatterP.format(element.PercentualTaxaVenda)}</th>
+			
+			<th>${formatter.format(element.ValorAtualBitCoin)}</th>
+			
+			<th>${formatter.format(element.ValorQuandoComprado)}</th>
+					
+			<th>${formatter.format(element.ValorVenda)}</th>
+			
+			<th>${formatter.format(element.ValorTaxavenda)}</th>
+			
+			<th>${formatter.format(element.ValorFinal)}</th>
+			
+			`;
+			
+			if (element.Diferenca >= 0 )  {
+			   partial += `<th><font color="blue">${formatter.format(element.Diferenca)}</font></th>` ;
+			
+			}
+			else {
+						   partial += `<th><font color="red">${formatter.format(element.Diferenca)}</font></th>` ;
+			}
+			
+			
+			
+			
+			partial += `
+			
+			
+			<th>${formatterP.format(element.DiferencaPercentual)}</th>                    
+			
+			<th>${formatter.format(element.ValorEquivalar)}</th>                    
+			
+                    </tr>`;
+					
+					
+					
+					TOTValorComprado += element.ValorComprado;
+                    TOTBitcoinsTotal += element.BitcoinsTotal;
+                    TOTPercentualTaxaVenda += element.PercentualTaxaVenda;
+                    TOTValorAtualBitCoin += element.ValorAtualBitCoin;
+                    TOTValorQuandoComprado += element.ValorQuandoComprado;
+                    TOTValorQuandoCompradoTax += element.ValorQuandoCompradoTax;
+                    TOTValorVenda += element.ValorVenda;
+                    TOTValorTaxavenda += element.ValorTaxavenda;
+                    TOTValorFinal += element.ValorFinal;
+                    TOTDiferenca += element.Diferenca;                    		
+					
+					
+			
+			
+
+					
+			
+			});
+			
+			
+			
+			TOTDiferencaPercentual += TOTValorFinal/TOTValorComprado - 1;
+			
+			partial += `<tr> </tr>`;	 		
+
+            
+			
+			var valorVendaNecessario = (TOTValorComprado / (1 - 2.5/100 ) )  / TOTBitcoinsTotal;
+			
+
+            if (!onlyTotal) 
+			{
+			   retorno += partial;
+			}
+
+			
+				retorno += `     
+					<tr class="active-row">
+            <th>Total Dollar</th>            
+			<th>${formatter.format(TOTValorComprado)}</th>            
+			<th>${ roundTo(TOTBitcoinsTotal,6,6)}</th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th>${formatter.format(TOTValorVenda)}</th>
+			<th>${formatter.format(TOTValorTaxavenda)}</th>
+			<th>${formatter.format(TOTValorFinal)}</th>`;
+			
+			if (TOTDiferenca >= 0) 
+			{
+			retorno += ` <th><font color="blue">${formatter.format(TOTDiferenca)}</font></th> `; 
+			}
+			else 
+			{
+			retorno += ` <th><font color="red">${formatter.format(TOTDiferenca)}</font></th> `; 
+			}
+			
+			retorno += `			
+			<th>${formatterP.format(TOTDiferencaPercentual)}</th>                    
+			<th>${formatter.format(valorVendaNecessario)}</th>                    
+            </tr>`;
+
+
+
+			
+			if (onlyTotal)
+			{
+							retorno += `     
+					<tr class="active-row">
+            <th>Total Euro:</th>            
+			<th></th>            
+			<th></th>
+			<th></th>
+			<th></th>
+			
+			<th></th>
+			<th></th>
+			<th>Euro: </th>
+			<th>${formatterEURO.format(TOTValorFinal * exchangerate)}</th>
+			
+			
+			`;
+			
+			var value = TOTDiferenca* exchangerate;
+			
+			if (value >= 0)
+			{
+						
+			retorno += `		
+			
+			<th><font color="blue">${formatterEURO.format(value)}</font></th>
+			
+			`;
+
+			}
+			else 
+			{
+			
+						
+			retorno += `		
+			
+			<th><font color="red">${formatterEURO.format(value)}</font></th>
+			
+			`;
+
+
+			}
+			
+			
+			
+			
+			
+			retorno += `<th></th>
+			<th></th>                    
+            </tr>`;
+
+			
+			
+			
+			}
+			
+			
+		
+			
+		retorno += `</tbody>`;
+		
+		
+      
+	           const mytable = document.querySelector("#" + tablename);
+                mytable.innerHTML = retorno;
+   
+             
+  }
+  
+  function preencheAcoes(listCompras,valorAtual,tablename,exchangerate) {
+        
+		
+		
+		var onlyTotal = false;
+       //ZeraTotais();
+		
+		var objetoCompleto = CalculaTudo(listCompras,valorAtual);						
+		
+	    var retorno = ``;
+				
+
+		retorno += `<thead>
+        <tr>
+		    <th>Nome</th>
+            <th>Valor Comprado</th>
+            <th>Acoes no Total</th>
+			<th>Percentual Taxa Venda</th>
+			<th>Valor Atual Das acoes</th>
+			<th>Valor Quando Comprado</th>			
+			<th>Valor Venda</th>
+			<th>Valor Taxa venda</th>
+			<th>Valor Final</th>
+			<th>Diferenca</th>
+			<th>Diferenca Percentual</th>
+			<th>Valor Equivalar</th>
+        </tr>
+        </thead>
+		    <tbody>`;
+			
+	        var partial = "";
+			
+			objetoCompleto.forEach(element => {
+			
+			
+			
+					partial += `     
+					<tr class="active-row">
+            <th>${element.Nome}</th>       
+			
+			<th>${formatter.format(element.ValorComprado)}</th>       
+ 			
+			<th>${element.BitcoinsTotal}</th>
+			
+			<th>${formatterP.format(element.PercentualTaxaVenda)}</th>
+			
+			<th>${formatter.format(element.ValorAtualBitCoin)}</th>
+			
+			<th>${formatter.format(element.ValorQuandoComprado)}</th>
+			
+			<th>${formatter.format(element.ValorVenda)}</th>
+			
+			<th>${formatter.format(element.ValorTaxavenda)}</th>
+			
+			<th>${formatter.format(element.ValorFinal)}</th>`;
+			
+			if (element.Diferenca >= 0 )  {
+			   partial += `<th><font color="blue">${formatter.format(element.Diferenca)}</font></th>` ;
+			
+			}
+			else {
+						   partial += `<th><font color="red">${formatter.format(element.Diferenca)}</font></th>` ;
+			}
+			
+			
+			
+			
+			partial += `
+			<th>${formatterP.format(element.DiferencaPercentual)}</th>                    
+			
+			<th>${formatter.format(element.ValorEquivalar)}</th>                    
+			
+                    </tr>`;
+					TOTValorComprado += element.ValorComprado;
+                    //TOTBitcoinsTotal += element.BitcoinsTotal;
+                    TOTPercentualTaxaVenda += element.PercentualTaxaVenda;
+                    TOTValorAtualBitCoin += element.ValorAtualBitCoin;
+                    TOTValorQuandoComprado += element.ValorQuandoComprado;
+                    TOTValorQuandoCompradoTax += element.ValorQuandoCompradoTax;
+                    TOTValorVenda += element.ValorVenda;
+                    TOTValorTaxavenda += element.ValorTaxavenda;
+                    TOTValorFinal += element.ValorFinal;
+                    TOTDiferenca += element.Diferenca;                    		
+			
+			});
+			
+			
+			TOTDiferencaPercentual += TOTValorFinal/TOTValorComprado - 1;
+			
+			partial += `<tr> </tr>`;	 		
+
+            
+			
+			var valorVendaNecessario = (TOTValorComprado / (1 - 2.5/100 ) )  / TOTBitcoinsTotal;
+			
+
+            if (!onlyTotal) 
+			{
+			   retorno += partial;
+			}
+
+			
+				retorno += `     
+					<tr class="active-row">
+            <th>Total Dollar</th>            
+			<th>${formatter.format(TOTValorComprado)}</th>            
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th>${formatter.format(TOTValorVenda)}</th>
+			<th>${formatter.format(TOTValorTaxavenda)}</th>
+			<th>${formatter.format(TOTValorFinal)}</th>`;
+			
+			if (TOTDiferenca >= 0) 
+			{
+			retorno += ` <th><font color="blue">${formatter.format(TOTDiferenca)}</font></th> `; 
+			}
+			else 
+			{
+			retorno += ` <th><font color="red">${formatter.format(TOTDiferenca)}</font></th> `; 
+			}
+			
+			retorno += `			
+			<th>${formatterP.format(TOTDiferencaPercentual)}</th>                    
+			<th></th>                    
+            </tr>`;
+
+
+			
+			
+							retorno += `     
+					<tr class="active-row">
+					<th>Total Euro:</th>            
+                 <th>${formatterEURO.format(TOTValorComprado*exchangerate)}</th>     
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			
+			<th>Euro:</th> 
+			<th>${formatterEURO.format(TOTValorFinal*exchangerate)}</th>
+			`;
+			
+			var value = TOTDiferenca* exchangerate;
+			
+			if (value >= 0)
+			{
+						
+			retorno += `		
+			
+			<th><font color="blue">${formatterEURO.format(value)}</font></th>
+			
+			`;
+
+			}
+			else 
+			{
+			
+						
+			retorno += `		
+			
+			<th><font color="red">${formatterEURO.format(value)}</font></th>
+			
+			`;
+
+			}
+			
+			
+			
+			
+			
+			retorno += `
+			<th></th>                    
+			<th></th>                    
+            </tr>`;
+
+			
+			
+			
+			
+			
+			
+		
+			
+		retorno += `</tbody>`;
+		
+		
+      
+	           const mytable = document.querySelector("#" + tablename);
+                mytable.innerHTML = retorno;
+   
+             
+  }
+  
+  
+ 
+  
+    getBitCoinValue().then(data => 
+	{  		
+	    //preencheTabela(false,getFinancesETORO(),data[0].price,"myTable2");
+		return data; //returning the btc proce
+			
+	}).then((btPrice) => 	
+	{ 
+	   console.log("btPrice:"); 
+	   console.log(btPrice);
+	  	  	       
+        getEuroXDollar().then( vlr => 
+		{
+     
+            //preencheTabela(true,getFinancesETORO().concat(getFinancesNovo()),btPrice[0].price,"myTable3",vlr[0].price);
+	  
+	        //acoes
+	  
+	        getStagValue().then( AcaoStag => 
+			{
+	    
+	            getOValue().then( AcaoO => 
+				{
+	   	      	   
+	                getTeslaValue().then( AcaoTesla => 
+				    {	
+                        getEteriumValue().then( Eterium => 
+				        {	
+						
+					        getMIOTAValue().then( Miota => 
+				            {	
+							    getMCDValue().then( MCD => 
+				                {	
+								   getPetroValue().then( petro => 
+				                   {	
+                                      preencheAcoes(getFinancesSTAG(AcaoStag,AcaoO,AcaoTesla,btPrice,Eterium,Miota,MCD,petro),0,"myTable4",vlr[0].price);
+				 
+				                      updateBitcoinPrice(vlr[0].price);
+                 
+				                      printBtcChart();
+									});
+							    });
+							});
+					    });
+				 
+				    });
+
+                });
+            });	  
+	    });     
+    });
+  
+  
+  
+  
+  
+
+
+
+//https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=20&api_key=0646cc7b8a4d4b54926c74e0b20253b57fd4ee406df79b3d57d5439874960146');
+
+///  Calling API and modeling data for each chart ///
+const btcData = async () => {
+  const response = await fetch('https://min-api.cryptocompare.com/data/v2/histoday?fsym=ETH&tsym=USD&limit=20&api_key=b79df96143451f55a5c9e1dbbc270fd57508c41148e7794dd98f7a7c7ea18b88');
+  
+  const json = await response.json();
+  const data = json.Data.Data
+
+
+  
+  const times = data.map(obj => new Date(obj.time * 1000).getDate()  + "-" + (new Date(obj.time * 1000).getMonth()+1) + "-" + new Date(obj.time * 1000).getFullYear() + " " +
+new Date(obj.time * 1000).getHours() + ":" + new Date(obj.time * 1000).getMinutes())
+  
+  const percrevolut = 1;
+  
+  
+  //const prices = data.map(obj => (((TOTBitcoinsTotal * obj.close) - roundTo(((TOTBitcoinsTotal * obj.close) * percrevolut / 100) ,2 ))  -TOTValorComprado ))
+  const prices = data.map(obj => obj.close  )
+  return {
+    times,
+    prices
+  }
+
+}
+
+
+/// Error handling ///
+function checkStatus(response) {
+  if (response.ok) {
+    return Promise.resolve(response);
+  } else {
+    return Promise.reject(new Error(response.statusText));
+  }
+}
+
+
+
+/// Charts ///
+let createBtcChart
+
+async function printBtcChart() {
+  let { times, prices } = await btcData()
+
+  let btcChart = document.getElementById('btcChart').getContext('2d');
+
+  let gradient = btcChart.createLinearGradient(0, 0, 0, 400);
+
+
+  gradient.addColorStop(0, 'rgba(247,147,26,.5)');
+  gradient.addColorStop(.425, 'rgba(255,193,119,0)');
+
+  Chart.defaults.global.defaultFontFamily = 'Red Hat Text';
+  Chart.defaults.global.defaultFontSize = 12;
+
+  createBtcChart = new Chart(btcChart, {
+    type: 'line',
+    data: {
+      labels: times,
+      datasets: [{
+        label: '€',
+        data: prices,
+        backgroundColor: gradient,
+        borderColor: 'rgba(247,147,26,1)',
+        borderJoinStyle: 'round',
+        borderCapStyle: 'round',
+        borderWidth: 3,
+        pointRadius: 0,
+        pointHitRadius: 10,
+        lineTension: .2,
+      }]
+    },
+
+    options: {
+      title: {
+        display: false,
+        text: 'Heckin Chart!',
+        fontSize: 35
+      },
+
+      legend: {
+        display: false
+      },
+
+      layout: {
+        padding: {
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0
+        }
+      },
+
+      scales: {
+        xAxes: [{
+          display: true,
+          gridLines: {}
+        }],
+        yAxes: [{
+          display: false,
+          gridLines: {}
+        }]
+      },
+
+      tooltips: {
+        callbacks: {
+          //This removes the tooltip title
+          title: function() {}
+       },
+        //this removes legend color
+        displayColors: false,
+        yPadding: 10,
+        xPadding: 10,
+        position: 'nearest',
+        caretSize: 10,
+        backgroundColor: 'rgba(255,255,255,.9)',
+        bodyFontSize: 15,
+        bodyFontColor: '#303030' 
+      }
+    }
+  });
+}
+
+async function updateBitcoinPrice(dolarDiff) {
+  let { times, prices } = await btcData()
+  let currentPrice = prices[prices.length-1].toFixed(2);
+    
+  let exchange = dolarDiff;  
+
+  document.getElementById("btcPrice").innerHTML = formatter.format(currentPrice) + " / " + formatterEURO.format(exchange * currentPrice) ;
+}
+
+
+
+</script>
+</body>
+</html>

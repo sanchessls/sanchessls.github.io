@@ -331,9 +331,11 @@ data = String(data).replaceAll("Oxford, ", "Oxford");
 data = String(data).replaceAll("AstraZeneca, ", "AstraZeneca");
 
 data = String(data).replaceAll("Covaxin, ", "Covaxin");
-data = String(data).replaceAll("inopharm/Beijing, ", "inopharm/Beijing");
+data = String(data).replaceAll("Beijing, ", "Beijing");
+data = String(data).replaceAll("inopharm, ", "inopharm");
+data = String(data).replaceAll("Sinopharm, ", "Sinopharm");
 
-data = String(data).replaceAll("Sinopharm/Wuhan, ", "Sinopharm/Wuhan");
+data = String(data).replaceAll("Wuhan, ", "Wuhan");
 
 
 

@@ -8,7 +8,7 @@ var formatterNumber = new Intl.NumberFormat('en-UK', {
 });
 
 //Dias Rodar
-var diasRodar = [ 1,2,3,4,5,6,7,10,20,30];
+var diasRodar = [ 1,2,3,4,5,6,7,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
 
 function GetMaxDias()
 {
@@ -329,6 +329,13 @@ data = String(data).replaceAll("Beijing, ", "Beijing");
 data = String(data).replaceAll("Sinopharm, ", "Sinopharm");
 data = String(data).replaceAll("Oxford, ", "Oxford");
 data = String(data).replaceAll("AstraZeneca, ", "AstraZeneca");
+
+data = String(data).replaceAll("Covaxin, ", "Covaxin");
+data = String(data).replaceAll("inopharm/Beijing, ", "inopharm/Beijing");
+
+data = String(data).replaceAll("Sinopharm/Wuhan, ", "Sinopharm/Wuhan");
+
+
 
 
 var arr = String(data).split('\n');

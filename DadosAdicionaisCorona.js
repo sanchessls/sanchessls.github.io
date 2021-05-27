@@ -75,7 +75,35 @@
  myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-10","vaccine":"","source_url":"","total_vaccinations":1882635,"people_vaccinated":1376583,"people_fully_vaccinated":506052}'));	 
 
  myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-11","vaccine":"","source_url":"","total_vaccinations":1922913,"people_vaccinated":1408105,"people_fully_vaccinated":514808}'));	 
+ 
 //FIM AUTOMATICOS	  	 
+
+
+//Fake Data Due the lack of information from 12/05/2021 to 23/05/2021
+
+//on the 11/05/2021 we had a total of 1,922,913
+//On the 23/05/2021 was reported a total of 2349207 TOTAAL VACC
+//and 1408655 -> 1734234 of People vacinated
+
+
+//the difference was split to the lacking to days as a median 
+//do the calculation by yourself if you want to proof it xD
+
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-12","vaccine":"","source_url":"","total_vaccinations":1958437,"people_vaccinated":1435236.58,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-13","vaccine":"","source_url":"","total_vaccinations":1993962,"people_vaccinated":1462368.16,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-14","vaccine":"","source_url":"","total_vaccinations":2029486,"people_vaccinated":1489499.74,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-15","vaccine":"","source_url":"","total_vaccinations":2065011,"people_vaccinated":1516631.32,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-16","vaccine":"","source_url":"","total_vaccinations":2100535,"people_vaccinated":1543762.90,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-17","vaccine":"","source_url":"","total_vaccinations":2136060,"people_vaccinated":1570894.48,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-18","vaccine":"","source_url":"","total_vaccinations":2171584,"people_vaccinated":1598026.06,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-19","vaccine":"","source_url":"","total_vaccinations":2207109,"people_vaccinated":1625157.64,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-20","vaccine":"","source_url":"","total_vaccinations":2242633,"people_vaccinated":1652289.22,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-21","vaccine":"","source_url":"","total_vaccinations":2278158,"people_vaccinated":1679420.80,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-22","vaccine":"","source_url":"","total_vaccinations":2313682,"people_vaccinated":1706552.38,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-23","vaccine":"","source_url":"","total_vaccinations":2349207,"people_vaccinated":1733683.96,"people_fully_vaccinated":0}'));	 
+
+
+
 	 
 	}
 	else {console.log("Nao");}
@@ -105,9 +133,50 @@
 		 
 		 
 	 });
+	
 	 	 
-	 var listaFinal = objeto.sort((a, b) => a.date.localeCompare(b.date));
-	  
+     
+	 var listaFinal = objeto.sort((a, b) => a.date.toLocaleString().localeCompare(b.date));
+	 
+	 
+	 
+	 
+ if (true)  //Param to auto calculate People FULLY Vacinated
+	 {
+		   listaFinal.forEach( (element) => {
+			   
+			   console.log("element INICIO ********");
+			   console.log(element.total_vaccinations);
+			   console.log(element.people_vaccinated);
+			   console.log(element.people_fully_vaccinated);
+			   console.log(element);
+			   
+			   var value2 = element.total_vaccinations - element.people_vaccinated;
+			   
+			   if (value2 != element.people_fully_vaccinated) 
+			   {
+				   console.log("Fully adjusted From : " + element.people_fully_vaccinated + " TO " + value2);
+				
+                   console.log("ANTES : " + element.people_fully_vaccinated);
+				   console.log(element.people_fully_vaccinated);
+     				element.people_fully_vaccinated = value2;
+					console.log(element.people_fully_vaccinated);
+					  console.log("DEPOIS : " + element.people_fully_vaccinated);
+			   }
+			   else 
+			   {
+				   console.log("Fully is Correct");
+			   }
+			   
+			   console.log("element FIM ********");
+			   
+			   			   
+		   });	
+	 }	 
+	 
+	 
+
+	 
 	 return JSON.stringify(listaFinal);
 	 
   }

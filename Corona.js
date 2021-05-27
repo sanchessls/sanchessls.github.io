@@ -171,6 +171,7 @@ function GetDiaPesquisa(data)
 
 function ProcessaRetorono(data,PopulationFinal,GeneralObjectList,TotalPerc)
 {  	   	   
+
 	  var jsonObj = [];		  
 	  
 	  var DiaPesquisa = GetDiaPesquisa(data);
@@ -297,21 +298,12 @@ function f_get_media(dias,data, type,objvalor,GeneralObjectList)
 	var valor = (ValorParaUltimoObjeto) - (ValorParaUltimoSelecaoMenos1);
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	valor = valor/dias;
 	
 	
 	
 	
-	
-
+    //if (valor < 0){valor = 0;}
 	
 	return valor;
 }

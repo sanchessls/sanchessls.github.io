@@ -1,4 +1,5 @@
 function F_CIDADANIA(width,height,sizePerc,newDataInicial,newDataFinal,AditionalText){
+	
 	var datainciial = new Date(2020,5,9,1,0,0);		
 	var dataFinal = new Date(2025,5,9,1,0,0);
 	
@@ -76,6 +77,7 @@ function F_CIDADANIA(width,height,sizePerc,newDataInicial,newDataFinal,Aditional
 }
 
 function P_ATUALIZA(componente,width,height,sizePerc,data1,data2,AditionalText){
+	
 	  componente.innerHTML = F_CIDADANIA(width,height,sizePerc,data1,data2,AditionalText);
 }
 

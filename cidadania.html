@@ -27,10 +27,20 @@
   <a href="index.html">Corona Data</a>  
 </div>
 
-<div id="test"</div>
+<div id="test2"></div>
+
+<div id="test"></div>
+
+
 
 
 <script> 	
+
+	  var datainciial = new Date(2021,5,2,0,0,0);		
+	  var dataFinal = f_calcula_data();
+	  
+	  
+
 
      setInterval(function(){ 
 	 
@@ -39,13 +49,60 @@
 	 }, 300);
 
     function atualiza(){
-	var w = $(window).width();
-	const mytable = document.querySelector("#test");			
-	P_ATUALIZA(mytable,w-30,500,500);
+	
+	
+	  var w = $(window).width();
+	  const mytable = document.querySelector("#test");			
+	  P_ATUALIZA(mytable,w-30,500,500,null,null,"");
+	  
+	  
+	  
+	  const mytable2 = document.querySelector("#test2");			
+	  P_ATUALIZA(mytable2,w-30,500,500,datainciial,dataFinal,dataFinal.toLocaleString());
+	
+	
+	
 	}
 
 
+	 function f_calcula_data()
+	 {
+	    //
+	
+	    var p1 = new Date(2021,4,24,0,0,0);//24 May 2021;
+	
+		var p2 =  new Date(2021,3,12,0,0,0);//12 April 2021;
+		
+		
+		var JaPassou = DayDiff(p1,new Date()).toFixed(); // 9 
+		
+					
+		var DiasQueFaltamProMeu = DayDiff(p2,new Date()) ;  										
+		
+		
+		
+		
+		var DiasReaisApartirDeHoje = DiasQueFaltamProMeu - JaPassou;
+		
+		
+		
+		var retorno = addDays(new Date(),DiasReaisApartirDeHoje);
+		
+		
+		
+		
+		
+		return retorno;
+		
+		
 	 
+	 }
+	 
+	 function addDays(date, days) {
+  var result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
 
  
 </script> 

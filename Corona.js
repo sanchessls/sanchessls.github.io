@@ -303,7 +303,7 @@ function f_get_media(dias,data, type,objvalor,GeneralObjectList)
 	
 	
 	
-    //if (valor < 0){valor = 0;}
+    if (valor < 0){valor = 0;}
 	
 	return valor;
 }

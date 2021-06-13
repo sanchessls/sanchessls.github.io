@@ -226,9 +226,7 @@ function addDays(date, days) {
 function f_get_media(dias,data, type,objvalor,GeneralObjectList)
 {
 	
-	var objeto =  JSON.parse(data);
-	
-	
+	var objeto =  JSON.parse(data);	
 	
 	var total = objeto.length;	
 	
@@ -299,9 +297,7 @@ function f_get_media(dias,data, type,objvalor,GeneralObjectList)
 	
 	
 	valor = valor/dias;
-	
-	
-	
+	     
 	
     if (valor < 0){valor = 0;}
 	
@@ -343,8 +339,6 @@ for(var i = 1; i < arr.length; i++) {
 
   var data2 = arr[i].split(',');  
 
-  console.log(arr[i]);
-  console.log(data2);
     
   var obj = {};
   for(var j = 0; j < data2.length; j++) {

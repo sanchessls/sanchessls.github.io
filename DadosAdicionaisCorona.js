@@ -104,6 +104,28 @@ myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-23","vaccine":"","
 
 
 
+//Fake Data Due the lack of information from 24/05/2021 to 09/06/2021
+
+
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-24","vaccine":"","source_url":"","total_vaccinations":2393371.294,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-25","vaccine":"","source_url":"","total_vaccinations":2437535.588,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-26","vaccine":"","source_url":"","total_vaccinations":2481699.882,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-27","vaccine":"","source_url":"","total_vaccinations":2525864.176,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-28","vaccine":"","source_url":"","total_vaccinations":2570028.471,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-29","vaccine":"","source_url":"","total_vaccinations":2614192.765,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-30","vaccine":"","source_url":"","total_vaccinations":2658357.059,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-31","vaccine":"","source_url":"","total_vaccinations":2702521.353,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-01","vaccine":"","source_url":"","total_vaccinations":2746685.647,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-02","vaccine":"","source_url":"","total_vaccinations":2790849.941,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-03","vaccine":"","source_url":"","total_vaccinations":2835014.235,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-04","vaccine":"","source_url":"","total_vaccinations":2879178.529,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-05","vaccine":"","source_url":"","total_vaccinations":2923342.824,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-06","vaccine":"","source_url":"","total_vaccinations":2967507.118,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-07","vaccine":"","source_url":"","total_vaccinations":3011671.412,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-08","vaccine":"","source_url":"","total_vaccinations":3055835.706,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
+myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-09","vaccine":"","source_url":"","total_vaccinations":3100000,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
+
+
 	 
 	}
 	else {console.log("Nao");}

@@ -44,18 +44,13 @@
 	  toShow.valueOf = "a";
 	  var dataFinal = f_calcula_data(toShow);
 	  
-	  console.log("final");
-	  console.log(dataFinal);
 	  
-	  getCurrentProcessingDate((resulting) => {
 	  
-	  console.log("andre Sanches 001");
 	  
-	  console.log(resulting);
+	  //getCurrentProcessingDate((resulting) => {
+		 
 	  
-	  console.log("andre Sanches 002");
-	  
-	  });
+	  //});
 	  
 	  
 
@@ -123,7 +118,7 @@
 		var retorno = addDays(new Date(),DiasReaisApartirDeHoje);
 		
 		
-		console.log(JaPassou);
+		
 		objtexto.valueOf = addDays(p2,JaPassou).toLocaleString(); // supostamente ta olhando hoje do dia:
 		
 		retorno.setHours(00, 00, 00);
@@ -137,17 +132,14 @@
 	 function addDays(date, days) {
   var result = new Date(date);
   
-  console.log("Data Antes");
-  console.log(result);
   
-  console.log("Vai add dias :");
-  console.log(days);
+  
+
   
   result.setDate(result.getDate() + parseFloat(days));
   
   
-  console.log("Data Depois");
-  console.log(result);
+
     
   
   

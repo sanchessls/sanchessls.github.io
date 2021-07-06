@@ -80,59 +80,6 @@
  myList.push(JSON.parse('{"location":"Ireland","date":"2021-07-05","vaccine":"","source_url":"","total_vaccinations":4423158,"people_vaccinated":2599957,"people_fully_vaccinated":1823201}'));	 
 //FIM AUTOMATICOS	  	 
 
-
-//Fake Data Due the lack of information from 12/05/2021 to 23/05/2021
-
-//on the 11/05/2021 we had a total of 1,922,913
-//On the 23/05/2021 was reported a total of 2349207 TOTAAL VACC
-//and 1408655 -> 1734234 of People vacinated
-
-
-//the difference was split to the lacking to days as a median 
-//do the calculation by yourself if you want to proof it xD
-
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-12","vaccine":"","source_url":"","total_vaccinations":1958437,"people_vaccinated":1435236.58,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-13","vaccine":"","source_url":"","total_vaccinations":1993962,"people_vaccinated":1462368.16,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-14","vaccine":"","source_url":"","total_vaccinations":2029486,"people_vaccinated":1489499.74,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-15","vaccine":"","source_url":"","total_vaccinations":2065011,"people_vaccinated":1516631.32,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-16","vaccine":"","source_url":"","total_vaccinations":2100535,"people_vaccinated":1543762.90,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-17","vaccine":"","source_url":"","total_vaccinations":2136060,"people_vaccinated":1570894.48,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-18","vaccine":"","source_url":"","total_vaccinations":2171584,"people_vaccinated":1598026.06,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-19","vaccine":"","source_url":"","total_vaccinations":2207109,"people_vaccinated":1625157.64,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-20","vaccine":"","source_url":"","total_vaccinations":2242633,"people_vaccinated":1652289.22,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-21","vaccine":"","source_url":"","total_vaccinations":2278158,"people_vaccinated":1679420.80,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-22","vaccine":"","source_url":"","total_vaccinations":2313682,"people_vaccinated":1706552.38,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-23","vaccine":"","source_url":"","total_vaccinations":2349207,"people_vaccinated":1733683.96,"people_fully_vaccinated":0}'));	 
-
-
-
-//Fake Data Due the lack of information from 24/05/2021 to 30/05/2021
-
-
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-24","vaccine":"","source_url":"","total_vaccinations":2354655.714,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-25","vaccine":"","source_url":"","total_vaccinations":2360104.429,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-26","vaccine":"","source_url":"","total_vaccinations":2365553.143,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-27","vaccine":"","source_url":"","total_vaccinations":2371001.857,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-28","vaccine":"","source_url":"","total_vaccinations":2376450.571,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-29","vaccine":"","source_url":"","total_vaccinations":2381899.286,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-30","vaccine":"","source_url":"","total_vaccinations":2387348,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
-
-
-
-////Fake Data Due the lack of information from 30/05/2021 to 09/06/2021
-
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-31","vaccine":"","source_url":"","total_vaccinations":2458613.2,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-01","vaccine":"","source_url":"","total_vaccinations":2529878.4,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-02","vaccine":"","source_url":"","total_vaccinations":2601143.6,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-03","vaccine":"","source_url":"","total_vaccinations":2672408.8,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-04","vaccine":"","source_url":"","total_vaccinations":2743674,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-05","vaccine":"","source_url":"","total_vaccinations":2814939.2,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-06","vaccine":"","source_url":"","total_vaccinations":2886204.4,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-07","vaccine":"","source_url":"","total_vaccinations":2957469.6,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-08","vaccine":"","source_url":"","total_vaccinations":3028734.8,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
-myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-09","vaccine":"","source_url":"","total_vaccinations":3100000,"people_vaccinated":0,"people_fully_vaccinated":0}'));	 
-
-
 	 
 	}
 	else {console.log("Nao");}
@@ -207,8 +154,7 @@ myList.push(JSON.parse('{"location":"Ireland","date":"2021-06-09","vaccine":"","
 	 
 	 
 
-	 console.log("final da final ");
-	 console.log(listaFinal);
+
 	 return JSON.stringify(listaFinal);
 	 
   }
@@ -223,12 +169,12 @@ function f_preenche_lacunas(obj)
 	var myList = new Array();
 	
 	
-    console.log("sanches");
-	console.log(obj);
+
+
 	
 	var totalItems = Math.max(obj.length);
 	
-	console.log("Total Items: " + totalItems);
+
 	
 	var ObjDataInicial = obj[totalItems-1];
 	
@@ -238,21 +184,20 @@ function f_preenche_lacunas(obj)
 		
 	    var DataDiffDias = DayDiff(new Date(ObjAtual.date),new Date(ObjDataInicial.date)) -1 ; 
 		
-		console.log("DataDiffDias1" + new Date(ObjAtual.date));
-		console.log("DataDiffDias2" + new Date(ObjDataInicial.date));
+
+
 		
 		
-		console.log("DataDiffDias" + DataDiffDias);
+
 		
 		if (DataDiffDias > 0) 
 		{
-			console.log("Lets do it ");
+
 			
-			console.log("ObjDataInicial");
-			console.log(ObjDataInicial);
+
+
 			
-			console.log("ObjAtual");
-			console.log(ObjAtual);
+
 			
 			var QuantidadeVacinadaNessesDias1 = ObjDataInicial.total_vaccinations - ObjAtual.total_vaccinations;
 			var QuantidadeDia1 = QuantidadeVacinadaNessesDias1 / (DataDiffDias+1);
@@ -261,24 +206,21 @@ function f_preenche_lacunas(obj)
 			var QuantidadeVacinadaNessesDias2 = ObjDataInicial.people_vaccinated - ObjAtual.people_vaccinated;			
 			var QuantidadeDia2 = QuantidadeVacinadaNessesDias2 / (DataDiffDias+1);
 			
-			console.log(QuantidadeVacinadaNessesDias1);
-			console.log(QuantidadeDia1);
-			console.log(QuantidadeVacinadaNessesDias2);
-			console.log(QuantidadeDia2);
+
 			
 			
-			console.log("LOOP NOVO");
+
 			
 			var total1Antigo = parseFloat(ObjAtual.total_vaccinations);
 			var total2Antigo = parseFloat(ObjAtual.people_vaccinated);			
 			
 			for (x = 0; x < DataDiffDias; x++) 
         	{		        	
-		        console.log("montando lista nova item " + x);
+
 				
 				var DataNova = addDays(ObjAtual.date,x+1);
 				
-				console.log(DataNova);
+
 				
 				var newobj =  JSON.parse('{"location":"","date":"","vaccine":"","source_url":"AutoGenerated","total_vaccinations":0,"people_vaccinated":0,"people_fully_vaccinated":0}');
 				
@@ -291,8 +233,8 @@ function f_preenche_lacunas(obj)
 				newobj.people_vaccinated = total2Antigo + QuantidadeDia2;				
 				total2Antigo = total2Antigo + QuantidadeDia2;				
 				
-				console.log("NOVO OBJ");
-				console.log(newobj);
+
+
 								
 								
 								
@@ -309,7 +251,7 @@ function f_preenche_lacunas(obj)
 		{
 					
 	        ObjDataInicial = ObjAtual;
-			console.log("DataIgual, Nada a fazer");
+
 		}
 		
 	
@@ -319,8 +261,8 @@ function f_preenche_lacunas(obj)
 	}
 	
 		
-		console.log("retorno");
-		console.log(myList);
+
+
 return myList;
 	
 	
@@ -329,12 +271,12 @@ return myList;
 
 
 function F_DataParaString(dataRecebida){
-	console.log("DATA RECEBIDA");
-	// console.log(dataRecebida);
+
+
 	//yyyy-mm-dd
 	var finalr = dataRecebida.getFullYear() + "-" + ("0" + (dataRecebida.getMonth() + 1)).slice(-2) +"-" +("0" + (dataRecebida.getDate() )).slice(-2);
-	console.log("DATA FINAL");
-	console.log(finalr);
+
+
 	
 	return finalr;
 	

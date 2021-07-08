@@ -82,13 +82,6 @@ function P_ATUALIZA(componente,width,height,sizePerc,data1,data2,AditionalText){
 }
 
 
-function DayDiff(day1,day2)
-{		
-	var Difference_In_Time = day2.getTime() - day1.getTime();   
-    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-	return Difference_In_Days;
-
-}
 
 
 function roundTo(num,num2) {    

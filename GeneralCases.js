@@ -84,21 +84,3 @@ function GetCasesDay(objData,GeneralObjectList)
 	return result;
 
 }
-function dateTimeless(datess) 
-{
-   return datess.getYear() + " - " + datess.getMonth() + datess.getDay();
-}	
-
-function CheckData(d1,d2) 
-{
-	if (dateTimeless(d1) === dateTimeless(d2)) {
-		
-		return true;
-		}
-	else {
-		
-		return false;
-	}
-	
-	
-}

@@ -77,9 +77,11 @@
  myList.push(JSON.parse('{"location":"Ireland","date":"2021-05-11","vaccine":"","source_url":"","total_vaccinations":1922913,"people_vaccinated":1408105,"people_fully_vaccinated":514808}'));	 
  
 
- myList.push(JSON.parse('{"location":"Ireland","date":"2021-07-05","vaccine":"","source_url":"","total_vaccinations":4423158,"people_vaccinated":2599957,"people_fully_vaccinated":1823201}'));	 
+ myList.push(JSON.parse('{"location":"Ireland","date":"2021-07-04","vaccine":"","source_url":"","total_vaccinations":0,"people_vaccinated":0,"people_fully_vaccinated":0,"REMOVER":"SIM"}'));	 
+ 
+ myList.push(JSON.parse('{"location":"Ireland","date":"2021-07-05","vaccine":"","source_url":"","total_vaccinations":4423158,"people_vaccinated":2599957,"people_fully_vaccinated":1823201,"MelhorQueAtual":"SIM"}'));	 
 
- myList.push(JSON.parse('{"location":"Ireland","date":"2021-07-06","vaccine":"","source_url":"","total_vaccinations":4486999,"people_vaccinated":2613558,"people_fully_vaccinated":1873441}'));	 
+ myList.push(JSON.parse('{"location":"Ireland","date":"2021-07-06","vaccine":"","source_url":"","total_vaccinations":4486999,"people_vaccinated":2613558,"people_fully_vaccinated":1873441,"MelhorQueAtual":"SIM"}'));	 
 
  myList.push(JSON.parse('{"location":"Ireland","date":"2021-07-07","vaccine":"","source_url":"","total_vaccinations":4555032,"people_vaccinated":2634270,"people_fully_vaccinated":1920762}'));	 
 //FIM AUTOMATICOS	  	 
@@ -103,6 +105,22 @@
 		 
 		 if (found)
 		 {
+			 console.log(element.MelhorQueAtual);
+			 if (element.MelhorQueAtual == "SIM")
+			 {
+				 console.log("Ficar com o dia :" + element.date + " do Manual " );
+				 objeto.splice(i, 1);
+				 objeto.push(element);
+			 }
+			 
+			  if (element.REMOVER == "SIM")
+			 {
+				 console.log("Remover o dia :" + element.date + " do Manual " );
+				 objeto.splice(i, 1);
+
+			 }
+			 
+			 
 			 console.log("MANUAL , POREM JA VEIO NO AUTOMATICO " + element.date);
 		 }
 		 else 
@@ -141,7 +159,7 @@
 			   {
 				   
 				                  				  
-     				element.people_fully_vaccinated = value2;
+     				element.people_fully_vaccinated = value2.toString();
 					
 					  
 			   }
@@ -156,6 +174,7 @@
 		   });	
 	 }	 
 	 
+	 console.log(listaFinal);
 	 
 
 

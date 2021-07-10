@@ -118,12 +118,10 @@
 		
 		var JaPassou = DayDiff(p1,new Date()).toFixed(); 
 		
-					
-		var DiasQueFaltamProMeu = DayDiff(p2,new Date()) ;  										
-		
-		
-		
-		
+		//Em Relacao a hoje ja passaram 8 dias
+										
+		var DiasQueFaltamProMeu = DayDiff(addDays(p1,JaPassou), new Date(2021,7,02,0,0,0)) ;  										
+							
 		var DiasReaisApartirDeHoje = (DiasQueFaltamProMeu - JaPassou);
 		
 		

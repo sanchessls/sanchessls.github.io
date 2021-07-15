@@ -323,8 +323,10 @@ data = String(data).replaceAll("Covaxin, ", "Covaxin");
 data = String(data).replaceAll("Beijing, ", "Beijing");
 data = String(data).replaceAll("inopharm, ", "inopharm");
 data = String(data).replaceAll("Sinopharm, ", "Sinopharm");
-
 data = String(data).replaceAll("Wuhan, ", "Wuhan");
+data = String(data).replaceAll("CanSino, ", "CanSino");
+data = String(data).replaceAll("Sinovac, ", "Sinovac");
+
 
 
 

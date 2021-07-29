@@ -72,7 +72,7 @@
 	  
 	  
 	  const mytable2 = document.querySelector("#test2");			
-	  P_ATUALIZA(mytable2,w-30,500,500,datainciial,dataFinal,"<br> Data Estimada Final :  " + dataFinal.toLocaleString() + " <br>  Analyzing today: " + toShow.valueOf);
+	  P_ATUALIZA(mytable2,w-30,500,500,datainciial,dataFinal,"<br> Data Estimada Final :  " + dataFinal.toLocaleString("en-GB") + " <br>  Analyzing today: " + toShow.valueOf);
 	
 	
 	
@@ -132,21 +132,44 @@
 		var p1 = new Date(2021,6,29,0,0,0);//23 july 2021;	
 	    var p2 =  new Date(2021,4,18,0,0,0);//13 May 2021;				
 
-		var JaPassou = DayDiff(p1,new Date()).toFixed(); 
+                
+               var DiasEntreDatas = DayDiff(p2,p1);
+              console.log("Diferenca entre datas");
+              console.log(DiasEntreDatas );
+
+               var indiceR = 30 / DiasEntreDatas ;
+
+              console.log("Diferenca ");
+              console.log(indiceR );
+               
+
+               var DiasRestantes1PorDia = DayDiff(p2,new Date(2021,5,03,0,0,0));
+
+              console.log("DiasRestantes1PorDia ");
+              console.log(DiasRestantes1PorDia );
+
+               var TotalDias = DiasRestantes1PorDia  + (DiasRestantes1PorDia * indiceR);
+
+              console.log("TotalDias ");
+              console.log(TotalDias );
+            
+               var retorno = addDays(new Date(),TotalDias);
+
+               console.log("retorno ");
+               console.log( retorno  );
+									
 		
-		//Em Relacao a hoje ja passaram x dias
-										
-		var DiasQueFaltamProMeu = DayDiff(addDays(p1,JaPassou), new Date(2021,7,03,0,0,0)) ;  										
-							
-		var DiasReaisApartirDeHoje = (DiasQueFaltamProMeu - JaPassou);
-		
-		
-		
-		var retorno = addDays(new Date(),DiasReaisApartirDeHoje);
-		
-		
-		
-		objtexto.valueOf = addDays(p2,JaPassou).toLocaleString(); // supostamente ta olhando hoje do dia:
+               var QuantosDiasSePassaramAposDataAtualziacaoSite = DayDiff(p1,new Date());
+
+               console.log("QuantosDiasSePassaramAposDataAtualziacaoSite ");
+               console.log( QuantosDiasSePassaramAposDataAtualziacaoSite );
+
+                var diaSomarDiaUltimoSite = QuantosDiasSePassaramAposDataAtualziacaoSite * indiceR;
+
+                console.log("diaSomarDiaUltimoSite");
+               console.log( diaSomarDiaUltimoSite );
+
+		objtexto.valueOf = addDays(p2,diaSomarDiaUltimoSite ).toLocaleString("en-GB"); // supostamente ta olhando hoje do dia:
 		
 		retorno.setHours(00, 00, 00);
 		

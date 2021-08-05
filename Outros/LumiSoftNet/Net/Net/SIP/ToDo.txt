@@ -1,3 +1,0 @@
-
-
-*) If B2BUA gets PRACK SDP offer, we need to gererate UPDATE/REINVITE othersied of B2BUA.

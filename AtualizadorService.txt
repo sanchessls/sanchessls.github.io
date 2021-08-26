@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <item>
-  <version>1.0.0.4</version>
+  <version>1.0.0.5</version>
   <url>https://github.com/sanchessls/PersonalSanches2/raw/master/ServiceExecuter/FormBaseServiceExecuter/ServiceExecuter/Installing/ServiceExecuter.msi</url>
   <mandatory>true</mandatory>
 </item>

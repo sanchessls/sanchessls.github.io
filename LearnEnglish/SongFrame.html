@@ -1,0 +1,43 @@
+<!doctype html>
+	<head>
+		<title>Song: </title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="script.js"></script>
+	<script src="game.js"></script>
+	<body>
+	    <h2>Jogo da Musica</h2>
+		<div><input type="text" id="text-to-speech" placeholder="Enter text to speak..."/></div>
+        <div><button type="button" onclick="NewGame('Song1')">Speak</button></div>
+        <br/>
+        <div><small><b>NOTE:</b> Enter text and click on speak button.</small></div>
+	</body>
+	<script>					
+			console.log("Iniciou Pagina SongFrame");
+
+			param = window.location.search.substr(1);
+
+			console.log("Musica Escolhida FOi: " + param)
+
+			const selectElement = document.getElementById('text-to-speech');			
+			selectElement.addEventListener('input', (event) => {
+	  			clear = Game.CheckWord(selectElement.value)			
+				if (clear){
+					selectElement.value = "";
+				}
+			}); 
+
+
+			GetSongWords(param).then((listWords) => {
+
+				let Game = new LearningGame(listWords);
+        	    Game.StartGame()   	 
+
+			});
+
+			
+
+		
+			
+	</script>
+</html>

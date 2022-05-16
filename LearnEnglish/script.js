@@ -21,23 +21,16 @@ function textToAudio(text) {
     console.log("textToAudio()END" );
 }
 
-async function GetSongWords(songName)
+function GetSongWords(songName)
 {
     console.log("GetSongWords(songName)" + songName);
-    return await fetch('SongDatabase.json').then((lyrinc) => 
-    {
-        
-      console.log(lyrinc)
-
-      var obj = JSON.parse( lyrinc);
-
-      console.log(obj)
-
-     return ["andre","sanches","lima","da","silva"]
-
-    });
-    
 
 
+    var SongObj = GetSongObj(GetSongDatabaseObj(),songName)
 
+    console.log(SongObj)
+
+    return GetWordListFromSongObj(SongObj);
 }
+
+

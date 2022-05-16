@@ -5,39 +5,78 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="script.js"></script>
 	<script src="game.js"></script>
+	<script src="SongDatabase.js"></script>
 	<body>
 	    <h2>Jogo da Musica</h2>
 		<div><input type="text" id="text-to-speech" placeholder="Enter text to speak..."/></div>
-        <div><button type="button" onclick="NewGame('Song1')">Speak</button></div>
+        <div><button type="button" onclick="Game.NextWord()">Next</button></div>
+		<div id="LastWord"></div>
+		<div><button type="button" onclick="Game.SpeakActualWord()">Speak</button></div>
+		<div id="Summary"></div>
+		<div><button type="button" onclick="location.href = 'ChooseSong.html'">New Game</button></div>
         <br/>
-        <div><small><b>NOTE:</b> Enter text and click on speak button.</small></div>
+        <div id="CountingLabel"></div>		
+
 	</body>
-	<script>					
+	<script>		  
+			function GameOver(theGame)
+			{
+				//Buttons Off
+				//Edit Off				
+				console.log("The Game Is Over");
+				document.getElementById("Summary").innerText = theGame.ReportDiv();
+			}
+
+	        function LabelUpdate(index,total,Lword)
+			{
+				document.getElementById("CountingLabel").innerText = "Word " + index + " from " + total;
+				
+				if (Lword != "")
+				{
+				   document.getElementById("LastWord").innerText = "Last Word: " + Lword;
+			    }
+				else 
+				{
+					document.getElementById("LastWord").innerText = "";
+				}
+				console.log("labelUpdatePlz");
+			}
+
+
+		    let Game;
 			console.log("Iniciou Pagina SongFrame");
 
 			param = window.location.search.substr(1);
 
 			console.log("Musica Escolhida FOi: " + param)
 
-			const selectElement = document.getElementById('text-to-speech');			
-			selectElement.addEventListener('input', (event) => {
-	  			clear = Game.CheckWord(selectElement.value)			
-				if (clear){
-					selectElement.value = "";
-				}
-			}); 
+	    	listWords = GetSongWords(param);
 
+			if ((listWords.lenght) == 0)
+			{
+				console.log("Deu Ruim")				
 
-			GetSongWords(param).then((listWords) => {
+			}
+			else {
 
-				let Game = new LearningGame(listWords);
-        	    Game.StartGame()   	 
+		    	Game = new LearningGame(listWords,LabelUpdate,GameOver);
 
-			});
+				const selectElement = document.getElementById('text-to-speech');			
+			    selectElement.addEventListener('keyup', (event) => 
+				{
+						if (event.key === "Enter") {
+    	  				let right = Game.CheckWord(selectElement.value)			
+				    	if (right){
+	    					selectElement.value = "";
+				    	}
+						else 
+						{
+                            Game.WrongSound();
+						}
+					}
+			    }); 
 
-			
-
-		
-			
+             	Game.StartGame()   	 				
+	    	}
 	</script>
 </html>

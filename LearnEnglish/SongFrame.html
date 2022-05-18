@@ -1,19 +1,20 @@
 <!doctype html>
 	<head>
-		<title>Song: </title>
+		<title>English Songs Learning</title>
 	</head>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="script.js"></script>
 	<script src="game.js"></script>
 	<script src="SongDatabase.js"></script>
 	<body>
-	    <h2>Jogo da Musica</h2>
+	    <div id="headerTitle"></div>
 		<div><input type="text" id="text-to-speech" placeholder="Enter text to speak..."/></div>
         <div><button type="button" onclick="Game.NextWord()">Next</button></div>
 		<div id="LastWord"></div>
 		<div><button type="button" onclick="Game.SpeakActualWord()">Speak</button></div>
 		<div id="Summary"></div>
 		<div><button type="button" onclick="location.href = 'ChooseSong.html'">New Game</button></div>
+		<div><button type="button" onclick="Game.EndGame()">End Game</button></div>
         <br/>
         <div id="CountingLabel"></div>		
 
@@ -49,6 +50,8 @@
 			param = window.location.search.substr(1);
 
 			console.log("Musica Escolhida FOi: " + param)
+
+			document.getElementById("headerTitle").outerHTML = "<h2>Song: "+param+"</h2>"
 
 	    	listWords = GetSongWords(param);
 

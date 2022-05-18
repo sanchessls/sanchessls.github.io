@@ -40,6 +40,11 @@ class LearningGame {
 
     }
 
+    EndGame()
+    {
+        GameOver(this);
+    }
+
     NextWord()
     {
         console.log(this.WordIndex);
@@ -82,11 +87,16 @@ class LearningGame {
     {
         let report = "";
 
-        report += "Song: " + this.SongName + "\n";
+        report += "Song: " + this.SongName + "\n" +  "\n";
 
-        report += "Words: " + "\n";
-        this.WordList.forEach(element => {
+        report += "Wrong Words: " + "\n";
+        this.WordList.forEach(element => {            
             report += element + "\n";
+        });
+
+        report += "Right Words: " + "\n";
+        this.WordList.forEach(element => {
+            report += element + " , ";
         });
 
         return report;

@@ -25,7 +25,6 @@ function GetSongWords(songName)
 {
     console.log("GetSongWords(songName)" + songName);
 
-
     var SongObj = GetSongObj(GetSongDatabaseObj(),songName)
 
     console.log(SongObj)

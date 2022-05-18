@@ -25,6 +25,18 @@ function GetSongDatabaseObj()
     return JSON.parse(songDatabaseSTR);
 }
 
+function GetSongsList()
+{
+    console.log("GetSongsList");
+    ret = [];
+  
+    GetSongDatabaseObj().Songs.forEach(element => {
+        ret.push(element.SongName);
+    });
+
+    return ret;
+}
+
 function GetSongObj(database,song)
 {
     valueToReturn = null;

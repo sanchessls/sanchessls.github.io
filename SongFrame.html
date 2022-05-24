@@ -3,9 +3,6 @@
 		<title>English Songs Learning</title>
 	</head>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<script src="script.js"></script>
-	<script src="game.js"></script>
-	<script src="SongDatabase.js"></script>
 	<body>
 	    <div id="headerTitle"></div>
 		<div><input type="text" id="text-to-speech" placeholder="Type the spoken word" autofocus/></div>
@@ -17,8 +14,14 @@
 		<div><button type="button" onclick="location.href = 'index.html'">New Game</button></div>		
         <br/>
         <div id="CountingLabel"></div>		
+		<div id = "version" class="footer">		
+			<p></p>	
+		</div>
 
 	</body>
+	<script src="script.js"></script>
+	<script src="game.js"></script>
+	<script src="SongDatabase.js"></script>
 	<script>		  
 			function GameOver(theGame)
 			{

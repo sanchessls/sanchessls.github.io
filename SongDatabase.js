@@ -66,7 +66,7 @@ function GetWordListFromSongObj(song)
     while((result = regexObj.exec(song.SongLyrics)) !== null) {
        console.log(result)
        console.log(result[0])       
-       ret.push(result[0]);
+       ret.push(result[0].toLowerCase());
     }
     
     console.log(ret)

@@ -205,3 +205,14 @@
   .reportItem{
     text-align: center;
   }
+
+  .footer {
+    position: fixed;
+    padding-left: 10px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(214, 209, 209);
+    color: white;
+    text-align: left;
+  }

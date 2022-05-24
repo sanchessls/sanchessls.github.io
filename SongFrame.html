@@ -6,11 +6,11 @@
 	<body>
 	    <div id="headerTitle"></div>
 		<div><input type="text" id="text-to-speech" placeholder="Type the spoken word" autofocus/></div>
-        <div><button type="button" onclick="Game.NextWord()">Next</button></div>
+        <div><button id = "nextbt" type="button" onclick="Game.NextWord()">Next</button></div>
 		<div id="LastWord"></div>
-		<div><button type="button" onclick="Game.SpeakActualWord()">Speak</button></div>
-		<div id="Summary"></div>
-		<!-- <div id="SummaryTest"></div> -->
+		<div><button id = "speakbt" type="button" onclick="Game.SpeakActualWord()">Speak</button></div>
+		<div id="Summary"></div>		
+  		<div id="SummaryTest"></div>
 		<div><button type="button" onclick="location.href = 'index.html'">New Game</button></div>		
         <br/>
         <div id="CountingLabel"></div>		
@@ -29,6 +29,30 @@
 				//Edit Off				
 				console.log("The Game Is Over");
 				document.getElementById("Summary").outerHTML = theGame.ReportDiv();
+				
+				console.log("sanches00232")			
+				var coll = document.getElementsByClassName("collapsible");
+				var i;
+
+				for (i = 0; i < coll.length; i++) {
+				coll[i].addEventListener("click", function() {
+					console.log("sanches003")
+					this.classList.toggle("active");
+					var content = this.nextElementSibling;
+					if (content.style.display === "block") {
+						console.log("sanches004")
+					content.style.display = "none";
+					} else {
+						console.log("sanches005")
+					content.style.display = "block";
+					}
+				});
+				}
+
+
+				document.getElementById("text-to-speech").style.display = "none";
+				document.getElementById("nextbt").style.display = "none";
+				document.getElementById("speakbt").style.display = "none";
 			}
 
 	        function LabelUpdate(index,total,Lword)
@@ -93,7 +117,30 @@
 
                 				
 
-				// document.getElementById("SummaryTest").outerHTML = GetSummaryTest();
+// 				 document.getElementById("SummaryTest").outerHTML = GetSummaryTest();
+// 				 console.log("sanches00232")			
+// var coll = document.getElementsByClassName("collapsible");
+// var i;
+
+// for (i = 0; i < coll.length; i++) {
+//   coll[i].addEventListener("click", function() {
+//     console.log("sanches003")
+//     this.classList.toggle("active");
+//     var content = this.nextElementSibling;
+//     if (content.style.display === "block") {
+//         console.log("sanches004")
+//       content.style.display = "none";
+//     } else {
+//         console.log("sanches005")
+//       content.style.display = "block";
+//     }
+//   });
+// }
+
+
+// document.getElementById("text-to-speech").style.display = "none";
+// 				document.getElementById("nextbt").style.display = "none";
+// 				document.getElementById("speakbt").style.display = "none";
 			
 	</script>
 </html>

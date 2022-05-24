@@ -176,7 +176,9 @@ class LearningGame {
 
         report += "<div class = 'reportTitle'>Total Wrong Words: " + WrongOnes+"</div>";        
         report += "</div>";
-        report += "<div class='reportGroup'>";
+
+        report += "  <button type='button' class='collapsible'>Click here to see the Right Words</button>";
+        report += "<div class='content reportGroup'>";
         report += "<div class = 'reportTitle'>Right Words: " + "</div>";        
 
         this.WordList.forEach(element => {
@@ -186,7 +188,7 @@ class LearningGame {
                 report += element.reportItemDiv() + "<br>";
             }
         });
-
+        
         report += "<div class = 'reportTitle'>Total Right Words: " + rightOnes+"</div>";
         report += "</div>";
         var perc = rightOnes/total * 100;

@@ -38,7 +38,7 @@ function GetSongWords(songName)
 }
 
 function GetVersion(){
-   return "Version: 1.1.002 - Beta";
+   return "Version: 1.1.003 - Beta";
 }
 
 console.log("sanches001")

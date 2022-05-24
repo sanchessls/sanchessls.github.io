@@ -9,19 +9,22 @@ class WordGame{
        this.WordOfGame = theWord;
     }
 
-    report(ShowListOfErrors)
+    reportItemDiv(ShowListOfErrors)
     {
-        var retn =  this.WordOfGame + " Attempts: " + this.attepmts + "\n"
+        
+        var retn = "<div class='reportItem'>" + this.WordOfGame + " Attempts: " + this.attepmts;
         if (ShowListOfErrors)
         {
-            retn += "Attempts: " + "\n"
-            this.WordsAttempted.forEach(element => {
-                retn += element + "\n"
-            });
-            retn += "\n"
+            if (this.WordsAttempted.length > 0 ){
+                    retn += "Attempts: " + "<br>"
+                    this.WordsAttempted.forEach(element => {
+                        retn += element + "<br>"
+                    });
+                    retn += "<br>"
+              }        
         }
         
-        return retn;
+        return retn + '</div>';
     }
 }
 
@@ -30,11 +33,13 @@ class LearningGame {
     WordIndex = -1
     LabelUpdate;
     GameOver;
+    SongTitle;
 
-    constructor(GameWordList,labelUpdate,gameOver)
+    constructor(GameWordList,songName,labelUpdate,gameOver)
     {
-        LabelUpdate = labelUpdate
-        GameOver = gameOver
+        this.SongTitle = songName
+        this.LabelUpdate = labelUpdate
+        this.GameOver = gameOver
         console.log("constructor(GameWordList)");
 
         GameWordList.forEach(element => {
@@ -67,7 +72,9 @@ class LearningGame {
         console.log("CheckWord()2");
         this.AddAttempt();
         let actualWord = this.GetActualWord()
-        if (wordToCheck.toLowerCase() == actualWord.toLowerCase())
+        console.log("/" + wordToCheck.toLowerCase().trim() +"\\")
+        console.log("/" + actualWord.toLowerCase().trim() +"\\")
+        if (wordToCheck.toLowerCase().trim() == actualWord.toLowerCase().trim())
         {
            this.SetRight();
            console.log("MesmaPalavra");
@@ -120,7 +127,8 @@ class LearningGame {
 
     WrongSound(){
         console.log("Wrong word noise");
-    }
+        beep();
+    }   
 
     SpeakActualWord(){
         textToAudio(this.GetActualWord());  
@@ -145,29 +153,58 @@ class LearningGame {
 
     ReportDiv()
     {
-        let report = "";
+        var rightOnes = 0;
+        var WrongOnes = 0;
+        var total = this.WordList.length;
 
-        report += "Song: " + this.SongName + "\n" +  "\n";
+        let report = "<div id='Summary' class='report'>";
 
-        report += "Wrong Words: " + "\n";
+        report += "<div class='reportTitle'>" + this.SongTitle+ "</div>";
+        report += "<div class='reportGroup'>";
+        report += "<div class = 'reportTitle'>Wrong Words: " + "</div>";
+      
         this.WordList.forEach(element => {     
             if (!element.isRight)
             {       
-                report += element.report(true);
+                WrongOnes += 1;
+                const itemDiv = element.reportItemDiv(true);
+                console.log(itemDiv)
+                report += itemDiv;
+                
             }
         });
 
-        report += "Right Words: " + "\n";
+        report += "<div class = 'reportTitle'>Total Wrong Words: " + WrongOnes+"</div>";        
+        report += "</div>";
+        report += "<div class='reportGroup'>";
+        report += "<div class = 'reportTitle'>Right Words: " + "</div>";        
+
         this.WordList.forEach(element => {
             if (element.isRight)
             {       
-                report += element.report();
+                rightOnes += 1;
+                report += element.reportItemDiv() + "<br>";
             }
         });
+
+        report += "<div class = 'reportTitle'>Total Right Words: " + rightOnes+"</div>";
+        report += "</div>";
+        var perc = rightOnes/total * 100;
+        report += "<div class='reportScore'>";
+        report += "Score: " + perc.toFixed(2) + "%\n";
+
+        report += "</div>";
+        report += "</div>";
 
         return report;
 
     }
 
 
+}
+
+function GetSummaryTest()
+{
+    a = new LearningGame(["word1","word2","word3"],"songName",null,null);
+    return a.ReportDiv();
 }

@@ -12,6 +12,7 @@
         margin:10px 0px;
     }
     button {
+        width: 100px;
         padding:10px;
         background-color:#6a67ce;
         color: #FFFFFF;
@@ -175,4 +176,32 @@
   
   .remove-option::after {
     transform: translate(0, -50%) rotate(-45deg);
+  }
+
+  .report {      
+    border: #000000;
+    border-width: 1px;
+    border-style: solid;
+    padding: 5px;    
+  }
+
+  .reportGroup  {
+    border: #000000;
+    border-width: 1px;
+    border-style: solid;
+    padding: 5px;    
+  }
+
+  .reportTitle  {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .reportScore  {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .reportItem{
+    text-align: center;
   }

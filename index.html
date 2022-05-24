@@ -1,223 +1,46 @@
-<!DOCTYPE HTML> 
-<html> 
-
-<head> 
-    <title> "First Page" </title>     
-    <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script> 
-	<script src= "General.js"> </script> 	
-	<script src= "Corona.js"> </script> 
-	<script src= "Cidadania.js"> </script> 
-    <script src= "DadosAdicionaisCorona.js"> </script> 	
-	<script src= "population.js"> </script> 	
-	<script src= "GeneralCases.js"> </script> 	
+<!doctype html>
+	<head>
+		<title>English Words Learning</title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<script src="script.js"></script>
+	<script src="game.js"></script>
+	<script src="SongDatabase.js"></script>
 	
-	
-	 <link rel="stylesheet" href="base.css">
-	 <link rel="stylesheet" href="dropdownmenu.css">
+	<body>
+	    <h2>Choose the Song</h2>		
+		<div class="combo js-select">
+		<div aria-activedescendant=""
+			aria-autocomplete="none"
+			aria-controls="listbox1"
+			aria-expanded="false"
+			aria-haspopup="listbox"
+			aria-labelledby="combo1-label"
+			id="combo1"
+			class="combo-input"
+			role="combobox"
+			tabindex="0">
+		</div>
 
-</head> 
-
-<body> 
-
-<div class="topnav">    
-  <a class="active" href="index.html">Corona Data</a>    
-</div>
-
-<div class="dropdown">
-  <button id="bt1" onclick="myFunction()" class="dropbtn">Country Selection</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a onclick='SelectCountry("Ireland")'>Ireland</a>
-	<a onclick='SelectCountry("Brazil")'>Brazil</a>
-	<a onclick='SelectCountry("Israel")'>Israel</a>
-	<a onclick='SelectCountry("United Kingdom")'>United Kingdom</a>
-	<a onclick='SelectCountry("United States")'>United States</a>
-	<a onclick='SelectCountry("Australia")'>Australia</a>
-	<a onclick='SelectCountry("Argentina")'>Argentina</a>
-	<a onclick='SelectCountry("India")'>India</a>
-	<a onclick='SelectCountry("China")'>China</a>
-  </div>
-</div>
-
-<div class="dropdown">
-  <button id="bt2" onclick="myFunction2()" class="dropbtn">Percentual Selection</button>
-  <div id="myDropdown2" class="dropdown-content">
-    <a onclick='SelectPerc("60")'>60%</a>
-	<a onclick='SelectPerc("100")'>100%</a>	
-  </div>
-</div>
-
-
-<div id="loading"></div>
-
-<table id="test2" class="styled-table"> 
-
-<div id="testClock"</div>
-
-<table id="test" class="styled-table"> 
-
-<script> 
-
-     //dropdown menu/
-	 /* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-  
-	function myFunction2() {
-  document.getElementById("myDropdown2").classList.toggle("show");
-}
-
-function P_SET_LABEL(countryS,percS){
-    
-	document.getElementById("myDropdown").classList.remove("show");
-	document.getElementById("myDropdown2").classList.remove("show");
-	
-	document.getElementById("myDropdown").classList.toggle("hide");
-	document.getElementById("myDropdown2").classList.toggle("hide");
-	
-	
-	document.getElementById("bt1").innerHTML  = "Country Selection ("+countryS+")";
-	document.getElementById("bt2").innerHTML  = "Percentual Selection ("+percS+")";
-
-    //const mytable = document.querySelector("#countryLabel");
-	
-    //mytable.innerHTML = "<div class='announcment'>Country: "+countryS+" Percentage: "+percS+"%</div>";
-	
-}
-
-
-
-	var IntervalAtualToStop = null;
-         
-	
-    var SelectedCountry = "Ireland";
-	var PercentSelected = 100;
-	 
-	 
-	 function SelectCountry(c)
-	 {
-	   SelectedCountry = c;
-	   P_CARREGA_TELA();
-	 }
-	 
-	  function SelectPerc(c)
-	 {
-	   PercentSelected = c;
-	   P_CARREGA_TELA();
-	 }
-	 
-	 
-	 
-    P_CARREGA_TELA();
-
-	
-	function P_CARREGA_TELA()
-	{
-	    let contryy = SelectedCountry;
-		let TotalPerc = PercentSelected;
-		
-		P_SET_LABEL(contryy,TotalPerc);
-		
-	
-	    console.log("P_CARREGA_TELA " + contryy + " + " + TotalPerc);
-		
-		clearInterval(IntervalAtualToStop);
-		
-	    let CoronaCountry = contryy;
-	    let PopulationCountry = CoronaCountry;
-	
-	    //
-    const load = document.querySelector("#loading");  
-
-     SetLoading(load,true).then(() => {
-	 
-    
-	 
-	 console.log("selected Country: ");
-	 console.log(CoronaCountry);
-	 
-	 GetGenralCases(CoronaCountry,GetMaxDias()).then((GeneralCasesObj) => 
-	 {
-	 
-	 //let CoronaCountry = "Brazil";
-	 //let PopulationCountry = "Brazil";
-
-
-     let objmelhordata = {};
-	 
-	 objmelhordata.MelhorData = new Date(2070, 11, 24, 10, 33, 30);	 
-	 
-	 
-	 populacao(PopulationCountry).then((dataP) => {
-	 
-	 
-
-     var objetop =  JSON.parse(dataP);	 
-	 
-     F_TableCorona(objmelhordata,objetop.body.population,CoronaCountry,GeneralCasesObj,TotalPerc).then((data) => {
-
-    const mytable = document.querySelector("#test");
-	
-    mytable.innerHTML = data;
-	
-	
-	    const mytable2 = document.querySelector("#test2");
-	
-       mytable2.innerHTML = objmelhordata.Resumo;
-    
-	document.title = objmelhordata.MelhorData.toLocaleString();
-	
-	SetLoading(load,false);
-	
-	let DataInicial = new Date(2020,02,11,00,00,00);	
-	
-	
-	  //bar
-	 var intervalatual = setInterval(function(){ 
-	 
-	 atualiza();
-	 
-	 }, 300);
-	 
-	 IntervalAtualToStop = intervalatual;
-	 	 	 
-
-    function atualiza(){
-	var w = $(window).width();
-	const mytable = document.querySelector("#testClock");					
-    	P_ATUALIZA(mytable,w-30,50,200,DataInicial,objmelhordata.MelhorData,"<br> From "+DataInicial.toLocaleString()+"(Pandemic Starting day)     To     " + objmelhordata.MelhorData.toLocaleString());
-	}
-	
-	    
-    sortTable(mytable, 'desc', 1);
-	
+ 		<div class="combo-menu" role="listbox" id="listbox1"></div>
+		</div>
 		
 
-	
-	})
-	
-	
-	
-	});
-	
-	});
-	
-	
-	
-	});
-	
-	
-	}
-	
+        <div><button type="button" onclick="Continue()">Continue</button></div>
+        <br/>        
+	</body>
+	<script src="Function.js"></script>
+	<script>
+		console.log("Iniciou Pagina ChooseSong");		
+		function Continue()
+		{ 
+			console.log("Continue");		
+			var selected = document.getElementById("combo1").textContent;
+			console.log(selected)
 
 
-	
-
-
-
-</script> 
-</body> 
-
-</html> 
+			NewGame(selected);
+		}
+	</script>
+</html>

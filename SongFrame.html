@@ -8,13 +8,13 @@
 	<script src="SongDatabase.js"></script>
 	<body>
 	    <div id="headerTitle"></div>
-		<div><input type="text" id="text-to-speech" placeholder="Enter text to speak..."/></div>
+		<div><input type="text" id="text-to-speech" placeholder="Type the spoken word" autofocus/></div>
         <div><button type="button" onclick="Game.NextWord()">Next</button></div>
 		<div id="LastWord"></div>
 		<div><button type="button" onclick="Game.SpeakActualWord()">Speak</button></div>
 		<div id="Summary"></div>
-		<div><button type="button" onclick="location.href = 'ChooseSong.html'">New Game</button></div>
-		<div><button type="button" onclick="Game.EndGame()">End Game</button></div>
+		<!-- <div id="SummaryTest"></div> -->
+		<div><button type="button" onclick="location.href = 'index.html'">New Game</button></div>		
         <br/>
         <div id="CountingLabel"></div>		
 
@@ -25,7 +25,7 @@
 				//Buttons Off
 				//Edit Off				
 				console.log("The Game Is Over");
-				document.getElementById("Summary").innerText = theGame.ReportDiv();
+				document.getElementById("Summary").outerHTML = theGame.ReportDiv();
 			}
 
 	        function LabelUpdate(index,total,Lword)
@@ -47,13 +47,17 @@
 		    let Game;
 			console.log("Iniciou Pagina SongFrame");
 
-			param = window.location.search.substr(1);
+			param = window.location.search;
+			console.log(param);
+			const urlParams = new URLSearchParams(param);
+			console.log(urlParams);
+			const songChoose = urlParams.get('song')
+			
+			console.log(songChoose);
 
-			console.log("Musica Escolhida FOi: " + param)
+			document.getElementById("headerTitle").outerHTML = "<h2>Song: "+songChoose+"</h2>"
 
-			document.getElementById("headerTitle").outerHTML = "<h2>Song: "+param+"</h2>"
-
-	    	listWords = GetSongWords(param);
+	    	listWords = GetSongWords(songChoose);
 
 			if ((listWords.lenght) == 0)
 			{
@@ -62,7 +66,7 @@
 			}
 			else {
 
-		    	Game = new LearningGame(listWords,LabelUpdate,GameOver);
+		    	Game = new LearningGame(listWords,songChoose,LabelUpdate,GameOver);
 
 				const selectElement = document.getElementById('text-to-speech');			
 			    selectElement.addEventListener('keyup', (event) => 
@@ -81,5 +85,12 @@
 
              	Game.StartGame()   	 				
 	    	}
+
+
+
+                				
+
+				// document.getElementById("SummaryTest").outerHTML = GetSummaryTest();
+			
 	</script>
 </html>

@@ -19,10 +19,26 @@
 		</div>
 
 	</body>
-	<script src="script.js"></script>
+	<script src="version.js"></script>
+	<!-- <script src="script.js"></script>
 	<script src="game.js"></script>
-	<script src="SongDatabase.js"></script>
-	<script>		  
+	<script src="SongDatabase.js"></script> -->
+	<script>	
+
+let Game;
+
+
+	loadScripts([
+"script.js",
+  "game.js",
+  "SongDatabase.js"
+],function(){
+    StartGameJS();
+});
+
+
+			
+
 			function GameOver(theGame)
 			{
 				//Buttons Off
@@ -71,7 +87,9 @@
 			}
 
 
-		    let Game;
+			function StartGameJS(){
+				
+				
 			console.log("Iniciou Pagina SongFrame");
 
 			param = window.location.search;
@@ -112,6 +130,8 @@
 
              	Game.StartGame()   	 				
 	    	}
+
+			}
 
 
 

@@ -1,5 +1,5 @@
 //https://tools.knowledgewalls.com/online-multiline-to-single-line-converter
-
+console.log("songDatabaseCreiado")
 var songDatabaseSTR = 
 `{
     "Songs" : [
@@ -58,6 +58,12 @@ function GetWordListFromSongObj(song)
     console.log("GetWordListFromSongObj")
 
     regexExpression = `([A-Za-z']+)`;
+
+
+    //change 'cause to cause
+    //remove oh ohh ohhh
+    //remove yeah
+    //do not accept weird char on input [ ] #  things that mislead what i am writing
 
     console.log(regexExpression);
     regexObj = new RegExp(regexExpression, 'g');

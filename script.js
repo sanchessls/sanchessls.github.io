@@ -37,9 +37,7 @@ function GetSongWords(songName)
     return GetWordListFromSongObj(SongObj);
 }
 
-function GetVersion(){
-   return "Version: 1.1.004 - Beta";
-}
+
 
 console.log("sanches001")
 document.getElementById("version").innerHTML = "<p>" + GetVersion()+"</p>";

@@ -9,6 +9,8 @@
         <div><button id = "nextbt" type="button" onclick="Game.NextWord()">Next</button></div>
 		<div id="LastWord"></div>
 		<div><button id = "speakbt" type="button" onclick="Game.SpeakActualWord()">Speak</button></div>
+		<div><button id = "translatebt" type="button" onclick="Game.Translate()">Translate</button></div>
+		<div id="TranslatedWorld"></div>
 		<div id="Summary"></div>		
   		<div id="SummaryTest"></div>
 		
@@ -23,6 +25,7 @@
 
 	</body>
 	<script src="version.js"></script>
+	
 	<!-- <script src="script.js"></script>
 	<script src="game.js"></script>
 	<script src="SongDatabase.js"></script> -->
@@ -34,6 +37,7 @@ let Game;
 	loadScripts([
 "script.js",
   "game.js",
+  "API.js",
   "SongDatabase.js"
 ],function(){
     StartGameJS();

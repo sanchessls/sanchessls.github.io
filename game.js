@@ -133,6 +133,11 @@ class LearningGame {
     SpeakActualWord(){
         textToAudio(this.GetActualWord());  
     }
+	
+	Translate()
+	{
+		Who();
+	}
 
     GetActualWordObj()
     {

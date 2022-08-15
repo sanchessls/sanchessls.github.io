@@ -4,6 +4,7 @@ console.log("Entrou no who");
 
   const url = "http://learningenglish2.ddns.net:7777/Who";
     var headers = {}
+	headers.append('GET', 'POST', 'OPTIONS');
     
     fetch(url, {
         method : "GET",

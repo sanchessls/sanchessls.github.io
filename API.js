@@ -2,20 +2,32 @@ function  Who(song)
 {    
 console.log("Entrou no who");
 
-	const response =  fetch("http://learningenglish2.ddns.net:7777/Who");
-	console.log("response?")
-	console.log(response)
-	
-	
-	
-	const myJson = response.value(); //extract JSON from the http response
-	// do something with myJson	
-	console.log(myJson);
-	console.log("Saiu do Who");
+  const url = "http://learningenglish2.ddns.net:7777/Who";
+    var headers = {}
     
+    fetch(url, {
+        method : "GET",
+        mode: 'cors',
+        headers: headers
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(response.error)
+        }
+        return response.json();
+    })
+    .then(data => {
+		console.log("sanches1")
+		console.log(data.messages)
+        
+    })
+    .catch(function(error) {
+		console.log("sanches2")
+        console.log(error);
+    });
 	
 	console.log("final?")
-	console.log(userAction)
+	
 	
 }
 

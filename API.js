@@ -5,6 +5,8 @@ console.log("Entrou no who");
   const url = "http://learningenglish2.ddns.net:7777/Who";
     const myHeaders = new Headers();
 	myHeaders.append('GET', 'POST', 'OPTIONS');
+	myHeaders.append('Access-Control-Allow-Origin', 'http://learningenglish2.ddns.net:3333');
+    myHeaders.append('Access-Control-Allow-Credentials', 'true');
     
     fetch(url, {
         method : "GET",

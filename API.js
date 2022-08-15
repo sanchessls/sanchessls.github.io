@@ -3,13 +3,13 @@ function  Who(song)
 console.log("Entrou no who");
 
   const url = "http://learningenglish2.ddns.net:7777/Who";
-    var headers = {}
-	headers.append('GET', 'POST', 'OPTIONS');
+    const myHeaders = new Headers();
+	myHeaders.append('GET', 'POST', 'OPTIONS');
     
     fetch(url, {
         method : "GET",
         mode: 'cors',
-        headers: headers
+        headers: myHeaders
     })
     .then((response) => {
         if (!response.ok) {

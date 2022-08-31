@@ -254,6 +254,13 @@
        
        font-size: 80px;
   }
+  
+    span {
+	      
+	   font-weight: bold;
+       
+       font-size: 80px;
+  }
 .combo-menu {
     
     border: 1px solid rgba(0, 0, 0, 0.42);

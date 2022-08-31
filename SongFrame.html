@@ -7,15 +7,24 @@
 	    <div id="headerTitle"></div>
 		<div><input type="text" spellcheck="false" id="text-to-speech" placeholder="Type the spoken word" autofocus/></div>
         <div><button id = "nextbt" type="button" onclick="Game.NextWord()">Next</button></div>
-		<div id="LastWord"></div>
+		
+		<div>
+		<span id="LastWord"></span>
+		</div>					
 		<div><button id = "speakbt" type="button" onclick="Game.SpeakActualWord()">Speak</button></div>
-		<div><button id = "translatebt" type="button" onclick="Game.Translate()">Translate</button></div>
+		<div><button id = "translatebt" type="button" onclick="Game.Translate()">Translate</button></div>		
 		<div id="TranslatedWorld"></div>
-		<div id="Summary"></div>		
-  		<div id="SummaryTest"></div>
+	    <div>
+		<span id="Summary"></span>
+		</div>			
+  		<div>
+		<span id="SummaryTest"></span>
+		</div>
 		
         <br/>
-        <div id="CountingLabel"></div>		
+        <div>
+        		<span id="CountingLabel"></span>
+		</div>		
 		<div><button type="button" class="button2" onclick="location.href = 'index.html'">New Game</button></div>		
 		<div id = "version" class="footer">		
 			<p></p>	

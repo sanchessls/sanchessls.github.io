@@ -1,4 +1,4 @@
-const version = "1.2.007";
+const version = "1.2.008";
 
 function GetVersion(){
     return "Version: "+version+" - Beta";

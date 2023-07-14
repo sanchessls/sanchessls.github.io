@@ -1,7 +1,7 @@
-const version = "1.2.008";
+const version = "1.2.009";
 
 function GetVersion(){
-    return "Version: "+version+" - Beta";
+    return "Version: "+version+" - Alfa";
  }
 
  function GetVersionJS(){

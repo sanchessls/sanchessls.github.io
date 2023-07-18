@@ -22,7 +22,11 @@ var songDatabaseSTR =
     {
         "SongName":"NataliaWords",
         "SongLyrics":"on top of above at the in center middle corner bottom under beneath underneath below to left right depicts This is a picture shows image In this photograph background foreground front directly opposite exactly roughly close proximity just tall quickly beautiful carefully Today I would like to talk about am going describe explain tell regard first question Turning second final inclined believe From my point view perspective My impression far as concerned Returning After Although As Whether If Even though Because Even if Provided that Rather than Since Once Though Unless Until So that Whereas In order to To wrap this talk up summarize opinion quickly So why make long story short For instance A great example of is Let me share an from life that springs mind inclined believe From my point view perspective impression far as concerned The way I see it"
-    }      
+    }, 
+    {
+        "SongName":"BoulevardOfBrokenDreams",
+        "SongLyrics":"I walk a lonely road The only one that I have ever known know where it goes But its home to me and I walk alone this empty street On the Boulevard of Broken Dreams Where the city sleeps And I'm the only one and my shadow walks beside me My shallow heart's the only thing that's beating Sometimes I wish someone out there will find me 'Til then I walk alone Ah ah ah ah ah ah ah ah I'm walking down the line That divides me somewhere in my mind On the borderline Of the edge and where I walk alone Read between the lines What's fucked up and everything's alright Check my vital signs To know I'm still alive and I walk alone I walk this empty street On the Boulevard of Broken Dreams Where the city sleeps And I'm the only one and I walk alone My shadow's the only one that walks beside me My shallow heart's the only thing that's beating Sometimes I wish someone out there will find me 'Til then I walk alone"
+    }           
 ]
 }`;
 
